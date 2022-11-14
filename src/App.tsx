@@ -1,9 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import classes from './App.module.scss'
 
 function App() {
-
   return (
     <div>App</div>
   )
