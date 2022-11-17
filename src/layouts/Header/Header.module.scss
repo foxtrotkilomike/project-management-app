@@ -1,0 +1,18 @@
+@import "../../styles/constants";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: $padding-l;
+  background-color: $color-main-light;
+}
+
+.headerSticky {
+  position: sticky;
+  top: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: $gap-l;
+}
