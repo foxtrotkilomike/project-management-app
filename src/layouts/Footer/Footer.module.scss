@@ -11,6 +11,7 @@ $footer-break-point: 540px;
 
 .footerContent {
   @extend %flex-space-between;
+  align-items: center;
   column-gap: $gap-l;
   row-gap: $gap-xm;
 
