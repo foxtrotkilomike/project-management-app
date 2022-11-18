@@ -1,9 +1,11 @@
+import { Props as SelectProps } from '../commons/Select';
+
 const buttonsText = {
   signUp: 'sign up',
   signIn: 'sign in',
 };
 
-const selectData = [
+const selectData: SelectProps[] = [
   {
     ariaLabel: 'language',
     options: ['EN', 'RU'],

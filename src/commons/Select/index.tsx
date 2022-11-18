@@ -4,7 +4,7 @@ const Select = ({ ariaLabel, options }: Props): JSX.Element => {
   return <select aria-label={ariaLabel}>{renderOptions}</select>;
 };
 
-type Props = {
+export type Props = {
   ariaLabel?: string;
   options: string[];
 };
