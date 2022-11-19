@@ -12,4 +12,22 @@ const selectData: SelectProps[] = [
   },
 ];
 
-export { buttonsText, selectData };
+const footerData = {
+  year: '2022',
+  developers: [
+    {
+      name: 'Stanislav Kravchuk',
+      githubLink: 'https://github.com/kravchuk-st',
+    },
+    {
+      name: 'Philipp Khromov',
+      githubLink: 'https://github.com/foxtrotkilomike',
+    },
+    {
+      name: 'Alina Khasanova',
+      githubLink: 'https://github.com/malinka775',
+    },
+  ],
+};
+
+export { buttonsText, selectData, footerData };

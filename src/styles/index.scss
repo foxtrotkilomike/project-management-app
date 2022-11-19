@@ -7,10 +7,6 @@ html {
   box-sizing: border-box;
 }
 
-.wrapper {
-  min-height: 100%;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+#root {
+  height: 100%;
 }

@@ -1,0 +1,8 @@
+@import '../../styles/constants';
+
+.centered {
+  margin: 0 auto;
+  padding: 0 $padding-xxl;
+  width: 100%;
+  max-width: $desktop;
+}

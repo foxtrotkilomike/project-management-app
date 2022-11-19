@@ -1,0 +1,51 @@
+@import '../../styles/constants';
+@import '../../styles/templates';
+
+$footer-break-point: 540px;
+
+.footer {
+  padding: $padding-xl 0;
+  font-size: $font-size-m;
+  background-color: $color-bg-footer;
+}
+
+.footerContent {
+  @extend %flex-space-between;
+  align-items: center;
+  column-gap: $gap-l;
+  row-gap: $gap-xm;
+
+  @media (max-width: $footer-break-point) {
+    flex-wrap: wrap;
+  }
+}
+
+.footerYear {
+  flex-shrink: 0;
+}
+
+.footerAuthors {
+  @extend %flex-center;
+  column-gap: $gap-xm;
+  font-weight: $font-weight-bold;
+
+  @media (max-width: $footer-break-point) {
+    margin: 0 auto;
+    width: 100%;
+    order: -1;
+  }
+}
+
+.authorItem {
+  color: $color-text;
+  text-align: center;
+  transition: color $transition-duration-m ease;
+
+  &:hover {
+    color: lighten($color-text, 40%);
+  }
+
+  &:active {
+    color: lighten($color-text, 30%);
+  }
+}
