@@ -1,0 +1,21 @@
+@import "../../styles/constants";
+@import "../../styles/templates";
+
+.root {
+  background-color: $color-main-light;
+}
+
+.headerSticky {
+  position: sticky;
+  top: 0;
+}
+
+.headerContent {
+  @extend %flex-space-between;
+  padding: $padding-l;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: $gap-l;
+}

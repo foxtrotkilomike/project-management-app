@@ -1,0 +1,29 @@
+@import '../../styles/constants';
+
+.root {
+  min-height: 25px;
+  padding: $padding-s $padding-m;
+  cursor: pointer;
+  border-radius: $border-radius-s;
+  transition: $transition-duration-m ease-out;
+  -webkit-border-radius: $border-radius-s;
+  -moz-border-radius: $border-radius-s;
+}
+
+.filled {
+  background-color: $color-main;
+  color: $color-text-light;
+
+  &:hover {
+    background-color: $color-main-light;
+  }
+}
+
+.contour {
+  border: $border-width-s solid $color-border-main;
+
+  &:hover {
+    border: $border-width-s solid $color-border-main-light;
+    color: $color-border-main-light;
+  }
+}
