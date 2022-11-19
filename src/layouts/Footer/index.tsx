@@ -1,8 +1,8 @@
 import classes from './Footer.module.scss';
 import rsSchoolLogo from '../../assets/svg/rs_school.svg';
-import CenteredContainer from '../../commons/CenteredContainer';
+import Container from '../../commons/Container';
 import { footerData } from '../../config/data';
-import { deleteLastMember } from '../../helpers/deleteLastMember';
+import { deleteLastArrayItem } from '../../helpers/deleteLastArrayItem';
 
 const Footer = (): JSX.Element => {
   const renderFooterLinks = () => {
@@ -21,14 +21,14 @@ const Footer = (): JSX.Element => {
       );
       linkElements.push(<span key={developer.githubLink}>|</span>);
     });
-    return deleteLastMember(linkElements);
+    return deleteLastArrayItem(linkElements);
   };
 
   return (
     <footer className={classes.footer}>
-      <CenteredContainer>
+      <Container>
         <div className={classes.footerContent}>
-          <p className={classes.footerYear}>{footerData.year}</p>
+          <p className={classes.footerYear}>&#169; {footerData.year}</p>
           <div className={classes.footerAuthors}>{renderFooterLinks()}</div>
           <a
             href="https://rs.school/js/"
@@ -36,10 +36,10 @@ const Footer = (): JSX.Element => {
             target="_blank"
             rel="noreferrer"
           >
-            <img src={rsSchoolLogo} alt="Rolling Scopes School link" />
+            <img src={rsSchoolLogo} alt="Rolling Scopes School" />
           </a>
         </div>
-      </CenteredContainer>
+      </Container>
     </footer>
   );
 };

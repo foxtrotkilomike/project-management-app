@@ -3,7 +3,7 @@ import { buttonsText, selectData } from '../../config/data';
 import Button from '../../commons/Button';
 import Select from '../../commons/Select';
 import Logo from '../../commons/Logo';
-import CenteredContainer from '../../commons/CenteredContainer';
+import Container from '../../commons/Container';
 
 const Header = ({ sticky }: Props): JSX.Element => {
   const headerClassName = sticky ? `${classes.header} ${classes.headerSticky}` : classes.header;
@@ -11,7 +11,7 @@ const Header = ({ sticky }: Props): JSX.Element => {
 
   return (
     <header className={headerClassName}>
-      <CenteredContainer>
+      <Container>
         <div className={classes.headerContent}>
           <Logo />
           <div className={classes.buttonsContainer}>
@@ -24,7 +24,7 @@ const Header = ({ sticky }: Props): JSX.Element => {
             <Select {...languageSelectData} />
           </div>
         </div>
-      </CenteredContainer>
+      </Container>
     </header>
   );
 };

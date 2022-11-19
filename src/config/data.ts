@@ -13,7 +13,7 @@ const selectData: SelectProps[] = [
 ];
 
 const footerData = {
-  year: '© 2022',
+  year: '2022',
   developers: [
     {
       name: 'Stanislav Kravchuk',
