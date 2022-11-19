@@ -1,4 +1,4 @@
-import { Props as SelectProps } from '../commons/Select';
+import { SelectProps } from '../commons/Select';
 
 const buttonsText = {
   signUp: 'sign up',

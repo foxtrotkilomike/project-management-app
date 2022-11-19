@@ -1,10 +1,10 @@
-const Select = ({ ariaLabel, options }: Props): JSX.Element => {
+const Select = ({ ariaLabel, options }: SelectProps): JSX.Element => {
   const renderOptions = options.map((option) => <option key={option}>{option}</option>);
 
   return <select aria-label={ariaLabel}>{renderOptions}</select>;
 };
 
-export type Props = {
+export type SelectProps = {
   ariaLabel?: string;
   options: string[];
 };
