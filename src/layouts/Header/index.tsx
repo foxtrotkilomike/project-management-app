@@ -6,13 +6,12 @@ import Logo from '../../commons/Logo';
 import Container from '../../commons/Container';
 import classNames from 'classnames';
 
-import GlobeIcon from '../../assets/svg/globe2.svg';
-
 const Header = (props: Props): JSX.Element => {
   const { sticky } = props;
   const headerClassName = classNames(classes.root, {
     [classes.headerSticky]: sticky,
   });
+  const languageSelectData = selectData[0];
 
   return (
     <header className={headerClassName}>
@@ -26,13 +25,7 @@ const Header = (props: Props): JSX.Element => {
             <Button contour onClick={() => {}}>
               {buttonsText.signIn}
             </Button>
-            <Select
-              labelType="icon"
-              options={selectData[0].options}
-              activeOptionIndex={0}
-              ariaLabel={'Lang'}
-              icon={GlobeIcon}
-            />
+            <Select {...languageSelectData} activeOptionIndex={0} />
           </div>
         </div>
       </Container>
