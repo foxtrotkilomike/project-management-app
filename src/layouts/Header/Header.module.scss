@@ -12,10 +12,10 @@
 
 .headerContent {
   @extend %flex-space-between;
-  padding: $padding-l;
+  padding: $padding-lg;
 }
 
 .buttonsContainer {
   display: flex;
-  gap: $gap-l;
+  gap: $gap-lg;
 }
