@@ -2,15 +2,14 @@ import classes from './Select.module.scss';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const Select = (props: SelectProps): JSX.Element => {
-  const { labelType, options, activeOptionIndex } = props;
-  let icon, ariaLabel, label;
-
-  if (labelType === 'icon') {
-    icon = props.icon;
-    ariaLabel = props.ariaLabel;
-  } else {
-    label = props.label;
-  }
+  const {
+    labelType,
+    options,
+    activeOptionIndex,
+    label = options[0],
+    icon = '',
+    ariaLabel = '',
+  } = props;
 
   const renderOptions = options.map((option, index) => {
     const isActive = activeOptionIndex === index;
@@ -32,7 +31,7 @@ const Select = (props: SelectProps): JSX.Element => {
         {labelType === 'text' ? (
           label
         ) : (
-          <img src={icon} className={classes.toggleButtonIcon} alt={ariaLabel || ''} />
+          <img src={icon} className={classes.toggleButtonIcon} alt={ariaLabel} />
         )}
       </Dropdown.Toggle>
       <Dropdown.Menu>{renderOptions}</Dropdown.Menu>
@@ -40,22 +39,13 @@ const Select = (props: SelectProps): JSX.Element => {
   );
 };
 
-export type SelectProps =
-  | ({ labelType: 'icon' } & SelectIconProps)
-  | ({ labelType: 'text' } & SelectTextProps);
-
-type SelectGeneralProps = {
+export type SelectProps = {
+  labelType: 'icon' | 'text';
   options: string[];
   activeOptionIndex: number;
+  icon?: string;
+  ariaLabel?: string;
+  label?: string;
 };
-
-type SelectIconProps = {
-  icon: string;
-  ariaLabel: string;
-} & SelectGeneralProps;
-
-type SelectTextProps = {
-  label: string;
-} & SelectGeneralProps;
 
 export default Select;
