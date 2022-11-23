@@ -2,12 +2,12 @@
 
 .root {
   min-height: 25px;
-  padding: $padding-s $padding-m;
+  padding: $padding-xs $padding-sm;
   cursor: pointer;
-  border-radius: $border-radius-s;
-  transition: $transition-duration-m ease-out;
-  -webkit-border-radius: $border-radius-s;
-  -moz-border-radius: $border-radius-s;
+  border-radius: $border-radius-sm;
+  transition: $transition-duration-md ease-out;
+  -webkit-border-radius: $border-radius-sm;
+  -moz-border-radius: $border-radius-sm;
 }
 
 .filled {
@@ -20,10 +20,10 @@
 }
 
 .contour {
-  border: $border-width-s solid $color-border-main;
+  border: $border-width-sm solid $color-border-main;
 
   &:hover {
-    border: $border-width-s solid $color-border-main-light;
+    border: $border-width-sm solid $color-border-main-light;
     color: $color-border-main-light;
   }
 }

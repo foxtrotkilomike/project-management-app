@@ -1,0 +1,14 @@
+// Bootstrap custom component variants
+
+.btn-outline-main {
+  @include button-outline-variant($color-border-main, $color-border-main-light, transparent, $color-border-main-light);
+  border-width: $border-width-sm;
+}
+
+.dropdown-toggle::after {
+  @include caret-down;
+}
+
+.dropdown-item.active {
+  font-weight: $font-weight-bold;
+}

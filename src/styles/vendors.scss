@@ -1,0 +1,28 @@
+@import "constants";
+
+// bootstrap requirements
+@import "~bootstrap/scss/functions";
+
+/* Override default Bootstrap variables
+(the order of import matters) */
+// button
+$btn-border-radius: $border-radius-sm;
+
+// dropdown
+$caret-width: 0;
+$dropdown-min-width: 0;
+$dropdown-link-active-color: $color-text;
+$dropdown-link-active-bg: none;
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/dropdown";
+
+// Add custom Bootstrap variants
+@import "bootstrap-custom";

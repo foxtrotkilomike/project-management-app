@@ -25,7 +25,7 @@ const Header = (props: Props): JSX.Element => {
             <Button contour onClick={() => {}}>
               {buttonsText.signIn}
             </Button>
-            <Select {...languageSelectData} />
+            <Select {...languageSelectData} activeOptionIndex={0} />
           </div>
         </div>
       </Container>
