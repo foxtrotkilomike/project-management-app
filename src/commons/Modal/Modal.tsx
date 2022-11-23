@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { ModalBody, ModalHeader } from 'react-bootstrap';
 import BootstrapModal from 'react-bootstrap/Modal';
 import classes from './Modal.module.scss';
