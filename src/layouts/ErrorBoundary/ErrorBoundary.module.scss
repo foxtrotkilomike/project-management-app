@@ -1,0 +1,19 @@
+@import "../../styles/constants";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.errorCaption {
+  font-style: italic;
+  color: $color-shadow;
+}
