@@ -1,12 +1,51 @@
-const Select = ({ ariaLabel, options }: SelectProps): JSX.Element => {
-  const renderOptions = options.map((option) => <option key={option}>{option}</option>);
+import classes from './Select.module.scss';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-  return <select aria-label={ariaLabel}>{renderOptions}</select>;
+const Select = (props: SelectProps): JSX.Element => {
+  const {
+    labelType,
+    options,
+    activeOptionIndex,
+    label = options[0],
+    icon = '',
+    ariaLabel = '',
+  } = props;
+
+  const renderOptions = options.map((option, index) => {
+    const isActive = activeOptionIndex === index;
+    const isLastElement = index === options.length - 1;
+
+    return (
+      <>
+        <Dropdown.Item active={isActive} eventKey={index} key={option}>
+          {option}
+        </Dropdown.Item>
+        {!isLastElement && <Dropdown.Divider />}
+      </>
+    );
+  });
+
+  return (
+    <Dropdown>
+      <Dropdown.Toggle className={classes.toggleButton} variant="outline-main">
+        {labelType === 'text' ? (
+          label
+        ) : (
+          <img src={icon} className={classes.toggleButtonIcon} alt={ariaLabel} />
+        )}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>{renderOptions}</Dropdown.Menu>
+    </Dropdown>
+  );
 };
 
 export type SelectProps = {
-  ariaLabel?: string;
+  labelType: 'icon' | 'text';
   options: string[];
+  activeOptionIndex: number;
+  icon?: string;
+  ariaLabel?: string;
+  label?: string;
 };
 
 export default Select;

@@ -1,4 +1,5 @@
 import { SelectProps } from '../commons/Select';
+import GlobeIcon from '../assets/svg/globe2.svg';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -7,8 +8,11 @@ const buttonsText = {
 
 const selectData: SelectProps[] = [
   {
-    ariaLabel: 'language',
+    labelType: 'icon',
+    ariaLabel: 'Language',
     options: ['EN', 'RU'],
+    activeOptionIndex: 0,
+    icon: GlobeIcon,
   },
 ];
 

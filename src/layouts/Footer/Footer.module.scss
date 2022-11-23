@@ -1,19 +1,17 @@
 @import '../../styles/constants';
 @import '../../styles/templates';
 
-$footer-break-point: 540px;
-
 .footer {
   padding: $padding-xl 0;
-  font-size: $font-size-m;
+  font-size: $font-size-sm;
   background-color: $color-bg-footer;
 }
 
 .footerContent {
   @extend %flex-space-between;
   align-items: center;
-  column-gap: $gap-l;
-  row-gap: $gap-xm;
+  column-gap: $gap-lg;
+  row-gap: $gap-md;
 
   @media (max-width: $footer-break-point) {
     flex-wrap: wrap;
@@ -22,11 +20,12 @@ $footer-break-point: 540px;
 
 .footerYear {
   flex-shrink: 0;
+  margin: 0;
 }
 
 .footerAuthors {
   @extend %flex-center;
-  column-gap: $gap-xm;
+  column-gap: $gap-md;
   font-weight: $font-weight-bold;
 
   @media (max-width: $footer-break-point) {
@@ -39,7 +38,7 @@ $footer-break-point: 540px;
 .authorItem {
   color: $color-text;
   text-align: center;
-  transition: color $transition-duration-m ease;
+  transition: color $transition-duration-md ease;
 
   &:hover {
     color: lighten($color-text, 40%);

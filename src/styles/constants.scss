@@ -6,20 +6,21 @@ $color-secondary: #d54216;
 $color-disabled: #d6d6d6;
 $color-shadow: #939393;
 $color-text: #000000;
-$color-border-main: #000000;
-$color-border-main-light: #00000040;
 $color-text-light: #fffaf8;
+$color-border-main: #000000;
+$color-border-main-light: #bebebe;
 $color-bg-footer: #ffffff;
+$color-hover: #ffffff;
 $color-overlay: #3333338c;
 
 $font-family-primary: 'Nunito Sans', sans-serif;
 
-$font-size-s: 12px;
-$font-size-xs: 14px;
-$font-size-m: 16px;
-$font-size-xm: 20px;
-$font-size-l: 24px;
-$font-size-xl: 32px;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2rem;
 
 $font-weight-regular: 400;
 $font-weight-bold: 600;
@@ -29,26 +30,33 @@ $mobile-m: 425px;
 $tablet: 768px;
 $desktop: 1280px;
 
-$padding-s: 5px;
-$padding-m: 10px;
-$padding-l: 15px;
-$padding-xl: 20px;
-$padding-xxl: 30px;
+$padding-xs: 0.325rem;
+$padding-sm: 0.65rem;
+$padding-md: 1rem;
+$padding-lg: 1.25rem;
+$padding-xl: 2rem;
+$padding-xxl: 3rem;
 
-$margin-s: 5px;
-$margin-m: 10px;
-$margin-l: 20px;
+$margin-xs: 0.325rem;
+$margin-sm: 0.65rem;
+$margin-md: 1.25rem;
+$margin-lg: 2rem;
 
-$gap-s: 5px;
-$gap-m: 10px;
-$gap-xm: 15px;
-$gap-l: 20px;
-$gap-xl: 30px;
+$gap-xs: 0.325rem;
+$gap-sm: 0.65rem;
+$gap-md: 1.25rem;
+$gap-lg: 2rem;
+$gap-xl: 2.5rem;
 
-$border-radius-s: 5px;
-$border-radius-m: 10px;
+$border-radius-sm: 5px;
+$border-radius-md: 10px;
 
-$border-width-s: 1px;
-$border-width-m: 2px;
+$border-width-sm: 1px;
+$border-width-md: 2px;
 
-$transition-duration-m: 0.3s;
+$transition-duration-sm: 0.15s;
+$transition-duration-md: 0.3s;
+
+$filter-hover-gray: invert(80%) sepia(0%) saturate(411%) hue-rotate(152deg) brightness(94%) contrast(96%);
+
+$footer-break-point: 540px;
