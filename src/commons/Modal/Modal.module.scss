@@ -1,5 +1,6 @@
 @import '../../styles/constants.scss';
-.modalHeader{
+
+.modalHeader {
   text-align: center;
   display: block!important;
   border: none!important;
@@ -10,7 +11,8 @@
   font-weight: $font-weight-bold;
   font-size: $font-size-lg;
 }
-.modalContent{
+
+.modalContent {
   padding: $padding-md!important;
   background-color: lighten($color-main, 45)!important;
   border-radius: $border-radius-sm!important;
@@ -18,11 +20,7 @@
   box-shadow: 0 0 20px $color-shadow!important;
 }
 
-.modalBody{
-  display: flex;
-}
-
-.modalIcon{
+.modalIcon {
   position: absolute;
   width: fit-content;
   top: $padding-md;
@@ -32,6 +30,6 @@
   }
 }
 
-.overlay{
+.overlay {
   background-color: $color-overlay!important;
 }
