@@ -1,7 +1,6 @@
 @import "constants";
 
 // bootstrap requirements
-@import "~bootstrap/scss/bootstrap";
 @import "~bootstrap/scss/functions";
 
 /* Override default Bootstrap variables
@@ -23,7 +22,8 @@ $dropdown-link-active-bg: none;
 @import "~bootstrap/scss/reboot";
 
 @import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
 @import "~bootstrap/scss/dropdown";
-
+@import "~bootstrap/scss/modal";
 // Add custom Bootstrap variants
 @import "bootstrap-custom";
