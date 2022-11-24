@@ -3,9 +3,9 @@
 .boardCard {
   font-family: $font-family-primary;
   width: calc((100% - 2rem) / 2);
-  border: $color-border-active solid $border-width-md!important;
+  border: $color-border-active solid $border-width-md;
   margin-bottom: 2rem;
-  color: $color-text!important;
+  color: $color-text;
   @media screen and (max-width: $board-cards-break-point){
     width: 100%;
   }
@@ -22,8 +22,8 @@
     text-overflow: ellipsis;
   }
   &__content {
-    padding: $padding-lg!important;
-    padding-bottom: $padding-xl!important;
+    padding: $padding-lg;
+    padding-bottom: $padding-xl;
   }
   &__info {
     margin-left: $margin-md;
@@ -31,33 +31,13 @@
 }
 
 .button {
-  background-color: rgba($color-danger, .1)!important;
-  color: $color-text!important;
+  background-color: rgba($color-danger, .1);
+  color: $color-text;
   margin-left: $margin-md;
   &:active {
     color: $color-text-light!important;
   }
   &:hover {
-    background-color: rgba($color-danger, .4)!important;
-  }
-  @media screen and (max-width: $mobile-m){
-    display: none!important;
-  }
-}
-
-.deleteIcon {
-  display: none!important;
-  @media screen and (max-width: $mobile-m){
-    display: inline-block!important;
-    >img {
-      width: 1rem;
-      height: auto;
-      &:hover {
-        filter: invert(60%);
-      }
-      &:active {
-        filter: invert(100%);
-      }
-    }
+    background-color: rgba($color-danger, .4);
   }
 }

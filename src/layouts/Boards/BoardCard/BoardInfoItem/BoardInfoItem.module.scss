@@ -15,8 +15,8 @@
       width: 4px;
       height: 4px;
       top: 50%;
-      transform: translateY(-50%);
       left: calc(-1.5rem / 2);
+      transform: translate(-50%, -50%);
       border-radius: 100%;
       background-color: $color-shadow;
     }
