@@ -2,18 +2,20 @@
 
 .boardCard {
   font-family: $font-family-primary;
-  min-width: 280px!important;
-  width: 48%;
+  width: calc((100% - 2rem) / 2);
   border: $color-border-active solid $border-width-md!important;
   margin-bottom: 2rem;
   color: $color-text!important;
+  @media screen and (max-width: $board-cards-break-point){
+    width: 100%;
+  }
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   &__title {
-    font-size: $font-size-xxl;
+    font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     white-space: nowrap;
     overflow: hidden;
@@ -29,9 +31,33 @@
 }
 
 .button {
-  background-color: rgba(red, .1)!important;
+  background-color: rgba($color-danger, .1)!important;
   color: $color-text!important;
+  margin-left: $margin-md;
+  &:active {
+    color: $color-text-light!important;
+  }
   &:hover {
-    background-color: rgba(red, .4)!important;
+    background-color: rgba($color-danger, .4)!important;
+  }
+  @media screen and (max-width: $mobile-m){
+    display: none!important;
+  }
+}
+
+.deleteIcon {
+  display: none!important;
+  @media screen and (max-width: $mobile-m){
+    display: inline-block!important;
+    >img {
+      width: 1rem;
+      height: auto;
+      &:hover {
+        filter: invert(60%);
+      }
+      &:active {
+        filter: invert(100%);
+      }
+    }
   }
 }
