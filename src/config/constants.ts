@@ -3,4 +3,11 @@ enum ResponseStatus {
   'UNHANDLED_REJECTION' = 503,
 }
 
-export { ResponseStatus };
+enum BreakPoints {
+  'MOBILE_S' = 320,
+  'MOBILE_M' = 425,
+  'TABLET' = 768,
+  'DESKTOP' = 1280,
+}
+
+export { ResponseStatus, BreakPoints };
