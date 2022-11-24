@@ -1,10 +1,12 @@
 @import '../../../styles/constants.scss';
 
 .boardCard {
-  min-width: 300px;
-  max-width: 48%;
+  font-family: $font-family-primary;
+  min-width: 280px!important;
+  width: 48%;
   border: $color-border-active solid $border-width-md!important;
   margin-bottom: 2rem;
+  color: $color-text!important;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -13,9 +15,23 @@
   &__title {
     font-size: $font-size-xxl;
     font-weight: $font-weight-bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__content {
     padding: $padding-lg!important;
     padding-bottom: $padding-xl!important;
+  }
+  &__info {
+    margin-left: $margin-md;
+  }
+}
+
+.button {
+  background-color: rgba(red, .1)!important;
+  color: $color-text!important;
+  &:hover {
+    background-color: rgba(red, .4)!important;
   }
 }
