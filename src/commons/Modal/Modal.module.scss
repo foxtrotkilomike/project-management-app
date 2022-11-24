@@ -1,0 +1,35 @@
+@import '../../styles/constants.scss';
+
+.modalHeader {
+  text-align: center;
+  display: block!important;
+  border: none!important;
+  margin-bottom: 0;
+  position: relative;
+  font-family: $font-family-primary;
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+}
+
+.modalContent {
+  padding: $padding-md!important;
+  background-color: lighten($color-main, 45)!important;
+  border-radius: $border-radius-sm!important;
+  width: fit-content;
+  box-shadow: 0 0 20px $color-shadow!important;
+}
+
+.modalIcon {
+  position: absolute;
+  width: fit-content;
+  top: $padding-md;
+  right: $padding-md;
+  >div{
+    height: 1.75rem;
+  }
+}
+
+.overlay {
+  background-color: $color-overlay!important;
+}
