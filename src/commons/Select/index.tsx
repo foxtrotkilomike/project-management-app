@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './Select.module.scss';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -16,12 +17,12 @@ const Select = (props: SelectProps): JSX.Element => {
     const isLastElement = index === options.length - 1;
 
     return (
-      <>
-        <Dropdown.Item active={isActive} eventKey={index} key={option}>
+      <React.Fragment key={option}>
+        <Dropdown.Item active={isActive} eventKey={index}>
           {option}
         </Dropdown.Item>
         {!isLastElement && <Dropdown.Divider />}
-      </>
+      </React.Fragment>
     );
   });
 
