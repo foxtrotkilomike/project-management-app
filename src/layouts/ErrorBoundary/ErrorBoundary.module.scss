@@ -1,4 +1,5 @@
-@import "../../styles/constants";
+@import '../../styles/constants';
+@import '../../styles/templates';
 
 .root {
   display: flex;
@@ -14,6 +15,5 @@
 }
 
 .errorCaption {
-  font-style: italic;
-  color: $color-shadow;
+  @extend %font-caption-italic;
 }
