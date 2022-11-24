@@ -1,0 +1,21 @@
+@import '../../../styles/constants.scss';
+
+.boardCard {
+  min-width: 300px;
+  max-width: 48%;
+  border: $color-border-active solid $border-width-md!important;
+  margin-bottom: 2rem;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-bold;
+  }
+  &__content {
+    padding: $padding-lg!important;
+    padding-bottom: $padding-xl!important;
+  }
+}

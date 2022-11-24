@@ -13,6 +13,7 @@ $caret-width: 0;
 $dropdown-min-width: 0;
 $dropdown-link-active-color: $color-text;
 $dropdown-link-active-bg: none;
+$danger: #ff4545;
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/maps";
@@ -23,6 +24,7 @@ $dropdown-link-active-bg: none;
 
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/card";
 
 // Add custom Bootstrap variants
 @import "bootstrap-custom";
