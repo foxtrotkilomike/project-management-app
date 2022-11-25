@@ -1,0 +1,17 @@
+@import "../../styles/constants";
+
+.logIn__wrapper {
+  display: flex;
+  flex: 1 0 auto;
+  margin: $margin-xxl 0;
+
+  & main {
+    flex-grow: 1;
+  }
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+    gap: $gap-sm;
+    margin: $margin-md 0;
+  }
+}
