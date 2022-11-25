@@ -1,0 +1,6 @@
+@import '../../../styles/templates';
+
+.wrapper {
+  @extend %flex-space-between;
+  flex-wrap: wrap;
+}

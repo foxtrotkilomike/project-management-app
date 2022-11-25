@@ -5,6 +5,7 @@ $color-main-light: #ff7a001d;
 $color-secondary: #d54216;
 $color-disabled: #d6d6d6;
 $color-shadow: #939393;
+$color-danger: #ff0000;
 $color-text: #000000;
 $color-text-light: #fffaf8;
 $color-border-main: #000000;
@@ -13,6 +14,7 @@ $color-bg-light: #ffffff;
 $color-bg-footer: $color-bg-light;
 $color-hover: #ffffff;
 $color-overlay: #3333338c;
+$color-border-active: #e69163;
 
 $font-family-primary: 'Nunito Sans', sans-serif;
 
@@ -64,6 +66,6 @@ $transition-duration-md: 0.3s;
 $filter-hover-gray: invert(80%) sepia(0%) saturate(411%) hue-rotate(152deg) brightness(94%) contrast(96%);
 
 $footer-break-point: 540px;
-
+$board-cards-break-point: 640px;
 
 $width-column: 290px;
