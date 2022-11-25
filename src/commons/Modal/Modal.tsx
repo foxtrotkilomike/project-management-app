@@ -15,7 +15,7 @@ export const Modal = (props: ModalProps): JSX.Element => {
     >
       <ModalHeader className={classes.modalHeader}>
         {icon && <div className={classes.modalIcon}>{icon}</div>}
-        <h4>{title}</h4>
+        {title && <h4>{title}</h4>}
       </ModalHeader>
       <ModalBody>{children}</ModalBody>
     </BootstrapModal>
@@ -23,7 +23,7 @@ export const Modal = (props: ModalProps): JSX.Element => {
 };
 
 export type ModalProps = {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   icon?: React.ReactNode;
   isActive: boolean;
