@@ -12,12 +12,18 @@ import { loginHeading } from '../../config/data';
 
 const LogIn = ({ type }: LogInProps): JSX.Element => {
   return (
-    <Container centered main grow>
+    <Container centered main growing>
       <div className={classes.logIn__wrapper}>
         <aside>
-          <NavigationButton to={routes.MAIN} size="lg" icon={ArrowLeftIcon} text="Back" />
+          <NavigationButton
+            location={routes.MAIN}
+            size="lg"
+            icon={ArrowLeftIcon}
+            text="Back"
+            ariaLabel="Navigate back"
+          />
         </aside>
-        <main>
+        <main className={classes.mainContent}>
           <Container centered>
             <h1>{loginHeading[type]}</h1>
             <LoginForm type={type} />

@@ -7,7 +7,13 @@ import { loginFormData } from '../../config/data';
 
 const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
-  const onSubmit = type === 'signUp' ? () => console.log('signUp') : () => console.log('signIn');
+  //TODO: add signUp function
+  const signUp = () => {};
+
+  //TODO: add signIn function
+  const signIn = () => {};
+
+  const onSubmit = type === 'signUp' ? signUp : signIn;
 
   const {
     register,
@@ -17,16 +23,14 @@ const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     clearErrors,
   } = useForm<LoginFormInputs>();
 
-  return (
-    <Form onSubmit={onSubmit} className={classes.loginForm}>
-      {type === 'signUp' && (
-        <Form.Control
-          type="text"
-          placeholder={(formTextData as SignUpForm).userName}
-          aria-label={(formTextData as SignUpForm).userName}
-          className={classes.formControl}
-        />
-      )}
+  const renderSignUpForm = () => (
+    <>
+      <Form.Control
+        type="text"
+        placeholder={(formTextData as SignUpForm).userName}
+        aria-label={(formTextData as SignUpForm).userName}
+        className={classes.formControl}
+      />
       <Form.Control
         type="text"
         placeholder={formTextData.login}
@@ -39,14 +43,35 @@ const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
         aria-label={formTextData.password}
         className={classes.formControl}
       />
-      {type === 'signUp' && (
-        <Form.Control
-          type="password"
-          placeholder={(formTextData as SignUpForm).passwordRepeat}
-          aria-label={(formTextData as SignUpForm).passwordRepeat}
-          className={classes.formControl}
-        />
-      )}
+      <Form.Control
+        type="password"
+        placeholder={(formTextData as SignUpForm).repeatedPassword}
+        aria-label={(formTextData as SignUpForm).repeatedPassword}
+        className={classes.formControl}
+      />
+    </>
+  );
+
+  const renderSignInForm = () => (
+    <>
+      <Form.Control
+        type="text"
+        placeholder={formTextData.login}
+        aria-label={formTextData.login}
+        className={classes.formControl}
+      />
+      <Form.Control
+        type="password"
+        placeholder={formTextData.password}
+        aria-label={formTextData.password}
+        className={classes.formControl}
+      />
+    </>
+  );
+
+  return (
+    <Form onSubmit={onSubmit} className={classes.loginForm}>
+      {type === 'signUp' ? renderSignUpForm() : renderSignInForm()}
       <Button variant="primary" type="submit" className={classes.submitButton}>
         {formTextData.submitButton}
       </Button>

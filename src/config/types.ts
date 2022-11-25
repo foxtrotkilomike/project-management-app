@@ -10,7 +10,7 @@ type SignUpForm = {
   userName: string;
   login: string;
   password: string;
-  passwordRepeat: string;
+  repeatedPassword: string;
   submitButton: string;
   errors: {
     userExists: string;
