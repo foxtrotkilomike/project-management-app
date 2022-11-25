@@ -9,7 +9,8 @@ $color-text: #000000;
 $color-text-light: #fffaf8;
 $color-border-main: #000000;
 $color-border-main-light: #bebebe;
-$color-bg-footer: #ffffff;
+$color-bg-light: #ffffff;
+$color-bg-footer: $color-bg-light;
 $color-hover: #ffffff;
 $color-overlay: #3333338c;
 
@@ -22,8 +23,11 @@ $font-size-lg: 1.25rem;
 $font-size-xl: 1.5rem;
 $font-size-xxl: 2rem;
 
+$font-weight-light: 300;
 $font-weight-regular: 400;
-$font-weight-bold: 600;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
 
 $mobile-s: 320px;
 $mobile-m: 425px;
