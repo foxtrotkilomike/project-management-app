@@ -9,7 +9,7 @@ export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
   const [isModalActive, setIsModalActive] = useState(false);
   const { title, tasks } = props;
 
-  const taskCards = tasks.map((item) => <Task key={item.id} {...item} />);
+  const renderTasks = tasks.map((item) => <Task key={item.id} {...item} />);
 
   const openModal = () => {
     setIsModalActive(true);
@@ -27,7 +27,7 @@ export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
         <h4>{title}</h4>
         <div className={classes.badge}>{tasks.length}</div>
       </div>
-      <ul className={classes.tasksWrapper}>{taskCards}</ul>
+      <ul className={classes.tasksWrapper}>{renderTasks}</ul>
       <div className={classes.footer}>
         <Button className={classes.add} variant="primary" onClick={openModal}>
           + Add task

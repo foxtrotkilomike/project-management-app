@@ -7,12 +7,12 @@ import BoardColumnsWrapper from './BoardColumnsWrapper';
 export const Board = (props: BoardProps): JSX.Element => {
   const { title, columns } = props;
 
-  const columnElements = columns.map((column) => <BoardColumn {...column} />)
+  const renderColumns = columns.map((column) => <BoardColumn key={column.title} {...column} />);
   return (
     <div className={classes.root}>
       <h1>{title}</h1>
       <BoardColumnsWrapper>
-        {columnElements}
+        {renderColumns}
       </BoardColumnsWrapper>
     </div>
   );
