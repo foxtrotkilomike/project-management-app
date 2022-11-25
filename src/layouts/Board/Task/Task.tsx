@@ -25,7 +25,7 @@ export const Task = (props: ITask): JSX.Element => {
   };
 
   return (
-    <>
+    <li>
       <div
         className={classes.task}
         onClick={(e) => openModal(e)}
@@ -40,7 +40,7 @@ export const Task = (props: ITask): JSX.Element => {
           <p> {description}</p>
         </Modal>
       )}
-    </>
+    </li>
   );
 };
 
