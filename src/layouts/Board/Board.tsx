@@ -10,7 +10,7 @@ export const Board = (props: BoardProps): JSX.Element => {
   const renderColumns = columns.map((column) => <BoardColumn key={column.title} {...column} />);
   return (
     <div className={classes.root}>
-      <h1>{title}</h1>
+      <h1 className={classes.title}>{title}</h1>
       <BoardColumnsWrapper>
         {renderColumns}
       </BoardColumnsWrapper>
