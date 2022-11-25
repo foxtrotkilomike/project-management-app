@@ -1,10 +1,10 @@
 import classes from './Header.module.scss';
 import { buttonsText, selectData } from '../../config/data';
-import Button from '../../commons/Button';
 import Select from '../../commons/Select';
 import Logo from '../../commons/Logo';
 import Container from '../../commons/Container';
 import classNames from 'classnames';
+import { Button } from 'react-bootstrap';
 
 const Header = (props: Props): JSX.Element => {
   const { sticky } = props;
@@ -19,10 +19,10 @@ const Header = (props: Props): JSX.Element => {
         <div className={classes.headerContent}>
           <Logo />
           <div className={classes.buttonsContainer}>
-            <Button filled onClick={() => {}}>
+            <Button variant="primary" onClick={() => {}}>
               {buttonsText.signUp}
             </Button>
-            <Button contour onClick={() => {}}>
+            <Button variant="outline-secondary" onClick={() => {}}>
               {buttonsText.signIn}
             </Button>
             <Select {...languageSelectData} activeOptionIndex={0} />
