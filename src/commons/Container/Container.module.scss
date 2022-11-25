@@ -2,7 +2,24 @@
 
 .centered {
   margin: 0 auto;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.main {
   padding: 0 $padding-xl;
   width: 100%;
   max-width: $desktop;
+
+  @media (max-width: $tablet) {
+    padding: 0 $padding-lg;
+  }
+
+  @media (max-width: $mobile-m) {
+    padding: 0 $padding-sm;
+  }
+}
+
+.grow {
+  flex: 1 0 auto;
 }

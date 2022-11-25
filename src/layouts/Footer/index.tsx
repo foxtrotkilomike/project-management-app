@@ -26,7 +26,7 @@ const Footer = (): JSX.Element => {
 
   return (
     <footer className={classes.footer}>
-      <Container centered>
+      <Container centered main>
         <div className={classes.footerContent}>
           <p className={classes.footerYear}>&#169; {footerData.year}</p>
           <div className={classes.footerAuthors}>{renderFooterLinks()}</div>
