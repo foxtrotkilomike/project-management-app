@@ -1,0 +1,24 @@
+@import '../../styles/constants';
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-md;
+  width: 18.75rem;
+  max-width: 100%;
+}
+
+.formControl:focus {
+  border-color: $color-main;
+  box-shadow: none;
+}
+
+.submitButton {
+  align-self: flex-end;
+  margin-top: $margin-lg;
+  margin-right: $margin-sm;
+
+  @media (max-width: $mobile-m) {
+    margin-top: $margin-sm;
+  }
+}
