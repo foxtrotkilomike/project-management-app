@@ -17,7 +17,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
     return () => window.removeEventListener('resize', () => setIsMobile(isLargeMobile()));
   });
 
-  const description = metaData.map((item) => (
+  const renderDescription = metaData.map((item) => (
     <BoardInfoItem key={item.name} name={item.name} value={item.value} />
   ));
 
@@ -39,7 +39,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
           )}
         </div>
         <Card.Text as="div" className={classes.boardCard__info}>
-          {description}
+          {renderDescription}
         </Card.Text>
       </Card.Body>
     </Card>
