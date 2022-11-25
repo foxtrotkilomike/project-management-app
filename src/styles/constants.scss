@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
 
-$color-main: #ff7a00;
-$color-main-light: #ff7a001d;
+$color-main: #ec7b3c;
+$color-main-hover: lighten($color-main, 10%);
+$color-main-light: lighten($color-main, 35%);
 $color-secondary: #d54216;
 $color-disabled: #d6d6d6;
 $color-shadow: #939393;
@@ -13,7 +14,7 @@ $color-bg-footer: #ffffff;
 $color-hover: #ffffff;
 $color-overlay: #3333338c;
 
-$font-family-primary: 'Nunito Sans', sans-serif;
+$font-family-primary: 'Nunito', sans-serif;
 
 $font-size-xs: 0.75rem;
 $font-size-sm: 0.875rem;
@@ -22,31 +23,36 @@ $font-size-lg: 1.25rem;
 $font-size-xl: 1.5rem;
 $font-size-xxl: 2rem;
 
+$font-weight-light: 300;
 $font-weight-regular: 400;
-$font-weight-bold: 600;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
 
-$mobile-s: 320px;
-$mobile-m: 425px;
-$tablet: 768px;
-$desktop: 1280px;
+$mobile-s: 23.375em;
+$mobile-m: 26.5em;
+$tablet: 48em;
+$desktop: 80em;
 
-$padding-xs: 0.325rem;
-$padding-sm: 0.65rem;
-$padding-md: 1rem;
-$padding-lg: 1.25rem;
-$padding-xl: 2rem;
-$padding-xxl: 3rem;
+$padding-xs: 0.325em;
+$padding-sm: 0.65em;
+$padding-md: 1em;
+$padding-lg: 1.25em;
+$padding-xl: 2em;
+$padding-xxl: 3em;
 
-$margin-xs: 0.325rem;
-$margin-sm: 0.65rem;
-$margin-md: 1.25rem;
-$margin-lg: 2rem;
+$margin-xs: 0.325em;
+$margin-sm: 0.65em;
+$margin-md: 1em;
+$margin-lg: 1.25em;
+$margin-xl: 2em;
+$margin-xxl: 3em;
 
-$gap-xs: 0.325rem;
-$gap-sm: 0.65rem;
-$gap-md: 1.25rem;
-$gap-lg: 2rem;
-$gap-xl: 2.5rem;
+$gap-xs: 0.325em;
+$gap-sm: 0.65em;
+$gap-md: 1.25em;
+$gap-lg: 2em;
+$gap-xl: 2.5em;
 
 $border-radius-sm: 5px;
 $border-radius-md: 10px;
@@ -59,4 +65,4 @@ $transition-duration-md: 0.3s;
 
 $filter-hover-gray: invert(80%) sepia(0%) saturate(411%) hue-rotate(152deg) brightness(94%) contrast(96%);
 
-$footer-break-point: 540px;
+$footer-break-point: 33.75em;
