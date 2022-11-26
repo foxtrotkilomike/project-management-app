@@ -15,7 +15,7 @@ const Header = (props: Props): JSX.Element => {
 
   return (
     <header className={headerClassName}>
-      <Container centered>
+      <Container centered main>
         <div className={classes.headerContent}>
           <Logo />
           <div className={classes.buttonsContainer}>

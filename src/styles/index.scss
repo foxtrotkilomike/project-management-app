@@ -1,13 +1,18 @@
 @import "./base";
 @import "vendors";
+@import "constants";
 
 body,
 html {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
+  font-family: $font-family-primary;
 }
 
 #root {
   height: 100%;
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: $margin-lg;
+  font-weight: $font-weight-bold;
 }

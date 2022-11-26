@@ -1,0 +1,14 @@
+@import '../../styles/templates';
+@import '../../styles/constants';
+
+.loginPrompt {
+  margin-top: $margin-xl;
+  text-align: center;
+  font-size: $font-size-md;
+  color: $color-shadow;
+
+  &__link {
+    color: $color-main;
+    text-decoration: underline;
+  }
+}
