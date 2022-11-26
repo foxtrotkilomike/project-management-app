@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import classes from './Container.module.scss';
 
 export const Container = (props: ContainerProps): JSX.Element => {
-  const { centered, main, grow, children } = props;
+  const { centered, main, growing, children } = props;
   const className = classNames({
     [classes.centered]: centered,
     [classes.main]: main,
-    [classes.grow]: grow,
+    [classes.growing]: growing,
   });
 
   return <div className={className}>{children}</div>;
@@ -17,6 +17,6 @@ export const Container = (props: ContainerProps): JSX.Element => {
 type ContainerProps = {
   centered?: boolean;
   main?: boolean;
-  grow?: boolean;
+  growing?: boolean;
   children: React.ReactNode;
 };

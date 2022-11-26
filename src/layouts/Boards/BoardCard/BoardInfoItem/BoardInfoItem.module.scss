@@ -1,0 +1,24 @@
+@import '../../../../styles/constants.scss';
+
+.infoItem {
+  color: $color-shadow;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+
+  &__quantity {
+    display: inline-block;
+    margin-left: 1.5rem;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      top: 50%;
+      left: calc(-1.5rem / 2);
+      transform: translate(-50%, -50%);
+      border-radius: 100%;
+      background-color: $color-shadow;
+    }
+  }
+}

@@ -3,11 +3,11 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const NavigationButton = (props: NavigationButtonProps): JSX.Element => {
-  const { to, size, icon, text } = props;
+  const { location, size, icon, text, ariaLabel } = props;
 
   return (
-    <Link to={to}>
-      <Button variant="nav" size={size} className={classes.navButton}>
+    <Link to={location}>
+      <Button variant="nav" size={size} className={classes.navButton} aria-label={ariaLabel}>
         {icon && <img src={icon} className={classes.navButton__icon} alt="" />}
         {text}
       </Button>
@@ -16,8 +16,9 @@ export const NavigationButton = (props: NavigationButtonProps): JSX.Element => {
 };
 
 type NavigationButtonProps = {
-  to: string;
+  location: string;
   size?: 'sm' | 'lg';
   text?: string;
   icon?: string;
+  ariaLabel: string;
 };
