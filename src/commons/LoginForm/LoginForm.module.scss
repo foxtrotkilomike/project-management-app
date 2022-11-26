@@ -3,9 +3,13 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  gap: $gap-md;
+  //gap: $gap-md;
   width: 18.75rem;
   max-width: 100%;
+
+  & >*:not(:last-child) {
+    margin-bottom: $margin-md;
+  }
 }
 
 .formControl:focus {

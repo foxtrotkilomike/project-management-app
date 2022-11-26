@@ -1,6 +1,7 @@
 import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
-import { LoginForm, LoginPrompt } from './types';
+import { LoginForm, LoginFormInputs, LoginPrompt } from './types';
+import { RegisterOptions } from 'react-hook-form';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -30,7 +31,7 @@ const loginFormData: LoginForm = {
     userName: 'Name',
     login: 'Login',
     password: 'Password',
-    passwordRepeat: 'Repeat password',
+    repeatedPassword: 'Repeat password',
     submitButton: 'Sign up',
     errors: {
       userExists: 'User with such login already exists',
@@ -47,7 +48,8 @@ const loginFormData: LoginForm = {
     },
   },
   validationErrors: {
-    userNameRequired: 'User name is a required field',
+    userNameRequired: 'Name is a required field',
+    loginRequired: 'Login is a required field',
     passwordRequired: 'Password is a required field',
     passwordLength: 'Password must be at least 8 characters long',
   },
@@ -69,6 +71,25 @@ const loginPromptData: LoginPrompt = {
   },
 };
 
+const { validationErrors } = loginFormData;
+
+const signUpFormResisterOptions: Record<keyof LoginFormInputs, RegisterOptions> = {
+  userName: {
+    required: { value: true, message: validationErrors.userNameRequired },
+  },
+  login: {
+    required: { value: true, message: validationErrors.loginRequired },
+  },
+  password: {
+    required: { value: true, message: validationErrors.passwordRequired },
+    minLength: { value: 8, message: validationErrors.passwordLength },
+  },
+  repeatedPassword: {
+    required: { value: true, message: validationErrors.passwordRequired },
+    minLength: { value: 8, message: validationErrors.passwordLength },
+  },
+};
+
 const selectData: SelectProps[] = [
   {
     labelType: 'icon',
@@ -79,4 +100,12 @@ const selectData: SelectProps[] = [
   },
 ];
 
-export { buttonsText, footerData, loginFormData, loginHeading, loginPromptData, selectData };
+export {
+  buttonsText,
+  footerData,
+  loginFormData,
+  loginHeading,
+  loginPromptData,
+  selectData,
+  signUpFormResisterOptions,
+};
