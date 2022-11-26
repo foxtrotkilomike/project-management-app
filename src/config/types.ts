@@ -1,35 +1,31 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 
-type LoginFormInputs = {
-  id: number;
-  userName: string;
-  password: string;
-};
-
-type SignUpForm = {
+interface LoginFormInputs {
   userName: string;
   login: string;
   password: string;
   repeatedPassword: string;
+}
+
+interface SignUpForm extends LoginFormInputs {
   submitButton: string;
   errors: {
     userExists: string;
     passwordMismatch: string;
   };
-};
+}
 
-type SignInForm = {
-  login: string;
-  password: string;
+interface SignInForm extends Omit<LoginFormInputs, 'userName' | 'repeatedPassword'> {
   submitButton: string;
   errors: {
     userDoesNotExists: string;
     incorrectPassword: string;
   };
-};
+}
 
 type FormValidationErrors = {
   userNameRequired: string;
+  loginRequired: string;
   passwordRequired: string;
   passwordLength: string;
 };
