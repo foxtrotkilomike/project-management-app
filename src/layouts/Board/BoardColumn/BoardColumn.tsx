@@ -19,8 +19,6 @@ export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
     setIsModalActive(false);
   };
 
-  // TODO: ADD FORM FOR ADDING A NEW TASK
-
   return (
     <li className={classes.column}>
       <div className={classes.header}>
@@ -34,7 +32,7 @@ export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
         </Button>
       </div>
       <Modal title="Add new task" icon={<TaskIcon />} onHide={closeModal} isActive={isModalActive}>
-        Task adding form
+        {/* TODO ADD FORM FOR ADDING A NEW TASK */}
       </Modal>
     </li>
   );
