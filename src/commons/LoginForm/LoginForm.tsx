@@ -1,29 +1,35 @@
 import classes from './LoginForm.module.scss';
 import { LoginFormInputs, LoginFormType } from '../../config/types';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
-import { loginFormData } from '../../config/data';
 import Container from '../Container';
+import ErrorMessage from '../ErrorMessage';
 import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
 import { handleSignUpErrors, postSignUpData } from '../../services/authService';
+import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
-import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
+  const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
 
   const signUp = async (data: LoginFormInputs) => {
+    setSubmissionError('');
+    // TODO add spinner for data loading process
     checkPasswordMatch(data, setError, formTextData);
     const signUpData = retrieveSignUpData(data);
 
-    const response = await postSignUpData(signUpData).catch(handleSignUpErrors);
-    console.log('response ', response);
+    const response = await postSignUpData(signUpData).catch((error) =>
+      handleSignUpErrors(error, setError, setSubmissionError, formTextData)
+    );
     if (response) navigate(routes.BOARDS);
   };
 
-  //TODO: add signIn function
+  //TODO: implement signIn function
   const signIn = (data: LoginFormInputs) => {};
 
   const onSubmit = type === 'signUp' ? signUp : signIn;
@@ -33,7 +39,6 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     handleSubmit,
     formState: { errors },
     setError,
-    clearErrors,
   } = useForm<LoginFormInputs>();
 
   const renderFormInputs = () => {
@@ -60,6 +65,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   return (
     <Form onSubmit={handleSubmit((data) => onSubmit(data))} className={classes.loginForm}>
       {renderFormInputs()}
+      {submissionError && <ErrorMessage message={submissionError} />}
       <Button variant="primary" type="submit" className={classes.submitButton}>
         {formTextData.submitButtonText}
       </Button>

@@ -16,7 +16,6 @@ export const checkPasswordMatch = (
     setError('repeatedPassword', {
       message: (formTextData as SignUpForm).submitErrors.passwordMismatch,
     });
-    return;
   }
 };
 
