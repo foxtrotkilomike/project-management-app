@@ -100,8 +100,8 @@ export const Board = (): JSX.Element => {
   useEffect(() => {
     getBoard(id).then((board) => setBoard(board));
     getColumns(id).then(async (columns) => {
-      const columnsModels = await Promise.all(columns.map(async (column) => normalizeColumn(column)));
-      setColumns(columnsModels);
+      const columnModels = await Promise.all(columns.map(async (column) => normalizeColumn(column)));
+      setColumns(columnModels);
     });
   }, []);
 
