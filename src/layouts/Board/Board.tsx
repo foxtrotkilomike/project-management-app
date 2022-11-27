@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import Container from '../../commons/Container';
+import { usePathnameEnding } from '../../hooks/usePathnameEnding';
 import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
@@ -83,7 +83,7 @@ const getBoard = (id: string) => Promise.resolve({json: () => (MOCK_BOARD)}).the
 const getColumns = (id: string) =>  Promise.resolve({json: () => (MOCK_COLUMNS)}).then((res) => res.json());  //TODO: implement getting columns by board id;
 const getTasks = (id: string) => Promise.resolve({json: () => (MOCK_TASKS[id])}).then((res) => res.json()); //TODO: implement getting tasks by board id;
 
-const normalizeColumn = async (column: ColumnResponseType): Promise<ColumnModel> => {
+const fillColumnWithTasks = async (column: ColumnResponseType): Promise<ColumnModel> => {
   const tasks = await getTasks(column._id);
   return {
     ...column,
@@ -92,15 +92,14 @@ const normalizeColumn = async (column: ColumnResponseType): Promise<ColumnModel>
 };
 
 export const Board = (): JSX.Element => {
-  const location = useLocation();
-  const id = location.pathname.split('/').pop() as string;
+  const boardId = usePathnameEnding();
   const [board, setBoard] = useState<BoardType | null>(null);
   const [columns, setColumns] = useState<ColumnModel[]>([]);
 
   useEffect(() => {
-    getBoard(id).then((board) => setBoard(board));
-    getColumns(id).then(async (columns) => {
-      const columnModels = await Promise.all(columns.map(async (column) => normalizeColumn(column)));
+    getBoard(boardId).then((board) => setBoard(board));
+    getColumns(boardId).then(async (columns) => {
+      const columnModels = await Promise.all(columns.map(async (column) => fillColumnWithTasks(column)));
       setColumns(columnModels);
     });
   }, []);
@@ -110,8 +109,8 @@ export const Board = (): JSX.Element => {
 
   return (
     <Container centered>
-      <div className={classes.root}>
-        <h1 className={classes.title}>{board?.title}</h1>
+      <div className={classes.board}>
+        <h1 className={classes.board__title}>{board?.title}</h1>
         <BoardColumnsWrapper>
           {renderColumns}
         </BoardColumnsWrapper>

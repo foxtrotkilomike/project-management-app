@@ -7,7 +7,7 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
   const children = props.children;
   const [isModalActive, setIsModalActive] = useState(false);
   const addColumn = () => {
-    //TODO implement add column
+    //TODO implement logic
     setIsModalActive(true);
   };
   const onHide = () => {
@@ -18,7 +18,7 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
     <ul className={classes.columnsWrapper}>
       {children}
       <li>
-        <button className={classes.add} onClick={addColumn}>
+        <button className={classes.columnsWrapper__add} onClick={addColumn}>
           <img src={plusButton} alt="add column" />
         </button>
       </li>

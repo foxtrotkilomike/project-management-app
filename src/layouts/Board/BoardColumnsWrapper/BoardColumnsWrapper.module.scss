@@ -5,8 +5,7 @@
   overflow-x: scroll;
   align-items: flex-start;
   padding: 0;
-}
-
-.add {
-  background-color: $color-bg-light;
+  &__add {
+    background-color: $color-bg-light;
+  }
 }

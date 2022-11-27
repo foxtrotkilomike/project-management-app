@@ -7,28 +7,25 @@ import Task from '../Task';
 import classes from './BoardColumn.module.scss';
 
 export const BoardColumn = (props: ColumnModel): JSX.Element => {
-  const [isModalActive, setIsModalActive] = useState(false);
   const { title, tasks } = props;
-
+  const [isModalActive, setIsModalActive] = useState(false);
   const renderTasks = tasks.map((item) => <Task key={item._id} {...item} />);
-
   const openModal = () => {
     setIsModalActive(true);
   };
-
   const closeModal = () => {
     setIsModalActive(false);
   };
 
   return (
     <li className={classes.column}>
-      <div className={classes.header}>
-        <h4>{title}</h4>
-        <div className={classes.badge}>{tasks.length}</div>
+      <div className={classes.column__header}>
+        <h4 className={classes.column__title}>{title}</h4>
+        <div className={classes.column__badge}>{tasks.length}</div>
       </div>
-      <ul className={classes.tasksWrapper}>{renderTasks}</ul>
-      <div className={classes.footer}>
-        <Button className={classes.add} variant="primary" onClick={openModal}>
+      <ul className={classes.column__tasksWrapper}>{renderTasks}</ul>
+      <div className={classes.column__footer}>
+        <Button className={classes.column__add} variant="primary" onClick={openModal}>
           + Add task
         </Button>
       </div>
