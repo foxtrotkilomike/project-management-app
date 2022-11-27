@@ -78,12 +78,12 @@ const MOCK_TASKS = {
 };
 
 // TODO: get rid of MOCKED FUNCTIONS
-const getBoard = (id: string) =>
+const getBoard = (boardId: string) =>
   Promise.resolve({ json: () => MOCK_BOARD }).then((res) => res.json()); //TODO: implement getting board by id;
-const getColumns = (id: string) =>
+const getColumns = (boardId: string) =>
   Promise.resolve({ json: () => MOCK_COLUMNS }).then((res) => res.json()); //TODO: implement getting columns by board id;
-const getTasks = (id: string) =>
-  Promise.resolve({ json: () => MOCK_TASKS[id] }).then((res) => res.json()); //TODO: implement getting tasks by board id;
+const getTasks = (columnId: string) =>
+  Promise.resolve({ json: () => MOCK_TASKS[columnId] }).then((res) => res.json()); //TODO: implement getting tasks by board id;
 
 const fillColumnWithTasks = async (column: ColumnResponseType): Promise<ColumnModel> => {
   const tasks = await getTasks(column._id);
