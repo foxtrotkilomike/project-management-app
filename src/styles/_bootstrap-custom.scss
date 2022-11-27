@@ -23,20 +23,6 @@
   font-weight: $font-weight-bold;
 }
 
-.btn-primary1 {
-  background-color: $color-main;
-  color: $color-text-light;
-  border: none;
-  &:hover {
-    background-color: lighten($color-main, 5%);
-    color: $color-text-light;
-  }
-  &:active {
-    background-color: lighten($color-main, 20%)!important;
-    color: $color-text-light;
-  }
-}
-
 a {
   text-decoration: none;
 }

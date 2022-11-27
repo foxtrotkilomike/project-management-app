@@ -111,7 +111,7 @@ export const Board = (): JSX.Element => {
   const renderColumns = columns.map((column) => <BoardColumn key={column._id} {...column} />);
 
   return (
-    <Container centered>
+    <Container centered main>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
         <BoardColumnsWrapper>{renderColumns}</BoardColumnsWrapper>
