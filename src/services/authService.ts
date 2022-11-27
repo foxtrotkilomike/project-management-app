@@ -20,25 +20,28 @@ const handleSignUpErrors = (
   setSubmissionError: React.Dispatch<React.SetStateAction<string>>,
   formTextData: SignUpForm | SignInForm
 ) => {
+  const { userExists, badRequest, unknownError, serverNotResponding } = (formTextData as SignUpForm)
+    .submitErrors;
+
   if (axios.isAxiosError(error)) {
     if (error.response) {
       switch (error.response.status) {
         case ResponseStatus.USER_EXIST:
-          setError('login', { message: (formTextData as SignUpForm).submitErrors.userExists });
+          setError('login', { message: userExists });
           break;
 
         case ResponseStatus.BAD_REQUEST:
-          setSubmissionError((formTextData as SignUpForm).submitErrors.badRequest);
+          setSubmissionError(badRequest);
           break;
 
         default:
-          setSubmissionError((formTextData as SignUpForm).submitErrors.unknownError);
+          setSubmissionError(unknownError);
           break;
       }
     } else if (error.request) {
-      setSubmissionError((formTextData as SignUpForm).submitErrors.serverNotResponding);
+      setSubmissionError(serverNotResponding);
     } else {
-      setSubmissionError((formTextData as SignUpForm).submitErrors.unknownError);
+      setSubmissionError(unknownError);
     }
   }
 };
