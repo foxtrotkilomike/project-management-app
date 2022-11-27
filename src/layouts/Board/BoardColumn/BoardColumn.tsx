@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
-import { ITask, Task } from '../Task/Task';
+import { ColumnModel } from '../Board';
+import Task from '../Task';
 import classes from './BoardColumn.module.scss';
 
-export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
+export const BoardColumn = (props: ColumnModel): JSX.Element => {
   const [isModalActive, setIsModalActive] = useState(false);
   const { title, tasks } = props;
 
-  const renderTasks = tasks.map((item) => <Task key={item.id} {...item} />);
+  const renderTasks = tasks.map((item) => <Task key={item._id} {...item} />);
 
   const openModal = () => {
     setIsModalActive(true);
@@ -36,9 +37,4 @@ export const BoardColumn = (props: BoardColumnProps): JSX.Element => {
       </Modal>
     </li>
   );
-};
-
-export type BoardColumnProps = {
-  title: string;
-  tasks: ITask[];
 };
