@@ -1,23 +1,35 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
+import { RegisterOptions } from 'react-hook-form';
 
-interface LoginFormInputs {
+type LoginFormInputs = {
   userName: string;
   login: string;
   password: string;
   repeatedPassword: string;
+};
+
+type FormInput = {
+  type: string;
+  name: keyof LoginFormInputs;
+  placeholder?: string;
+  autoComplete?: string;
+  registerOptions: RegisterOptions;
+};
+
+interface LoginFormControls {
+  inputs: FormInput[];
+  submitButtonText: string;
 }
 
-interface SignUpForm extends LoginFormInputs {
-  submitButton: string;
-  errors: {
+interface SignUpForm extends LoginFormControls {
+  submitErrors: {
     userExists: string;
     passwordMismatch: string;
   };
 }
 
-interface SignInForm extends Omit<LoginFormInputs, 'userName' | 'repeatedPassword'> {
-  submitButton: string;
-  errors: {
+interface SignInForm extends Omit<LoginFormControls, 'userName' | 'repeatedPassword'> {
+  submitErrors: {
     userDoesNotExists: string;
     incorrectPassword: string;
   };
@@ -33,7 +45,6 @@ type FormValidationErrors = {
 type LoginForm = {
   signUp: SignUpForm;
   signIn: SignInForm;
-  validationErrors: FormValidationErrors;
 };
 
 type LoginFormType = 'signUp' | 'signIn';

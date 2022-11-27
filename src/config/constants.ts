@@ -10,4 +10,6 @@ enum BreakPoints {
   'DESKTOP' = 1280,
 }
 
-export { ResponseStatus, BreakPoints };
+const MIN_PASSWORD_LENGTH = 8;
+
+export { ResponseStatus, BreakPoints, MIN_PASSWORD_LENGTH };
