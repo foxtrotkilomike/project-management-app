@@ -26,7 +26,7 @@ export const BoardColumn = (props: ColumnModel): JSX.Element => {
       <ul className={classes.column__tasksWrapper}>{renderTasks}</ul>
       <div className={classes.column__footer}>
         <Button className={classes.column__add} variant="primary" onClick={openModal}>
-          + Add task
+          + Add Task
         </Button>
       </div>
       <Modal title="Add new task" icon={<TaskIcon />} onHide={closeModal} isActive={isModalActive}>
