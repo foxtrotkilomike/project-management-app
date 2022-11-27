@@ -3,13 +3,9 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  //gap: $gap-md;
+  gap: $gap-xs;
   width: 18.75rem;
   max-width: 100%;
-
-  & >*:not(:last-child) {
-    margin-bottom: $margin-md;
-  }
 }
 
 .formControl:focus {
@@ -19,7 +15,7 @@
 
 .submitButton {
   align-self: flex-end;
-  margin-top: $margin-lg;
+  margin-top: $margin-sm;
   margin-right: $margin-sm;
 
   @media (max-width: $mobile-m) {
