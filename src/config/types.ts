@@ -21,18 +21,24 @@ interface LoginFormControls {
   submitButtonText: string;
 }
 
+interface ApiErrors {
+  serverNotResponding: string;
+  badRequest: string;
+  unknownError: string;
+}
+
 interface SignUpForm extends LoginFormControls {
   submitErrors: {
     userExists: string;
     passwordMismatch: string;
-  };
+  } & ApiErrors;
 }
 
 interface SignInForm extends Omit<LoginFormControls, 'userName' | 'repeatedPassword'> {
   submitErrors: {
     userDoesNotExists: string;
     incorrectPassword: string;
-  };
+  } & ApiErrors;
 }
 
 type FormValidationErrors = {
