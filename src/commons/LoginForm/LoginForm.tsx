@@ -5,12 +5,22 @@ import { useForm } from 'react-hook-form';
 import { Button, Form } from 'react-bootstrap';
 import { loginFormData } from '../../config/data';
 import Container from '../Container';
+import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
+import { handleSignUpErrors, postSignUpData } from '../../services/authService';
+import { routes } from '../../config/routes';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
-  //TODO: add signUp function
-  const signUp = (data: LoginFormInputs) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const signUp = async (data: LoginFormInputs) => {
+    checkPasswordMatch(data, setError, formTextData);
+    const signUpData = retrieveSignUpData(data);
+
+    const response = await postSignUpData(signUpData).catch(handleSignUpErrors);
+    console.log('response ', response);
+    if (response) navigate(routes.BOARDS);
   };
 
   //TODO: add signIn function
