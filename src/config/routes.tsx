@@ -4,11 +4,10 @@ import ErrorBoundary from '../layouts/ErrorBoundary';
 import Welcome from '../layouts/Welcome';
 import Boards from '../layouts/Boards';
 import Board from '../layouts/Board';
-import SignUp from '../layouts/SignUp';
-import SignIn from '../layouts/SignIn';
 import Profile from '../layouts/Profile';
+import LogIn from '../layouts/LogIn';
 
-export const routes: RouteObject[] = [
+export const routesConfig: RouteObject[] = [
   {
     path: '/',
     element: <App />,
@@ -36,11 +35,11 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'signup',
-            element: <SignUp />,
+            element: <LogIn type="signUp" />,
           },
           {
             path: 'signin',
-            element: <SignIn />,
+            element: <LogIn type="signIn" />,
           },
           {
             path: 'profile/edit',
@@ -55,3 +54,11 @@ export const routes: RouteObject[] = [
     ],
   },
 ];
+
+export const routes = {
+  MAIN: '/',
+  BOARDS: '/boards',
+  BOARD: '/boards/board/',
+  SIGN_UP: '/signup',
+  SIGN_IN: '/signin',
+};

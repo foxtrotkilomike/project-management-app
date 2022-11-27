@@ -1,8 +1,18 @@
 // Bootstrap custom component variants
+@import "constants";
 
 .btn-outline-main {
   @include button-outline-variant($color-border-main, $color-border-main-light, transparent, $color-border-main-light);
   border-width: $border-width-sm;
+}
+
+.btn-primary {
+  @include button-variant($color-main, $color-main, $color-text-light, $color-main-hover, $color-main-hover, $color-text-light);
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-nav {
+  @include button-variant(transparent, transparent, $color-text, $color-main-light, $color-main-light, $color-text);
 }
 
 .dropdown-toggle::after {
@@ -13,7 +23,7 @@
   font-weight: $font-weight-bold;
 }
 
-.btn-primary {
+.btn-primary1 {
   background-color: $color-main;
   color: $color-text-light;
   border: none;
@@ -25,4 +35,13 @@
     background-color: lighten($color-main, 20%)!important;
     color: $color-text-light;
   }
+}
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  --bs-link-color: #ec7b3c;
+  --bs-link-hover-color: #f09a6a;
 }

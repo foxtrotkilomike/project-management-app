@@ -1,5 +1,3 @@
-import classes from './Logo.module.scss';
-
-const Logo = (): JSX.Element => <div className={classes.logo} />;
+import { Logo } from './Logo';
 
 export default Logo;
