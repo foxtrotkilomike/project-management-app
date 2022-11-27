@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import Container from '../../commons/Container';
 import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
@@ -108,12 +109,14 @@ export const Board = (): JSX.Element => {
   const renderColumns = columns.map((column) => <BoardColumn key={column._id} {...column}/>)
 
   return (
-    <div className={classes.root}>
-      <h1 className={classes.title}>{board?.title}</h1>
-      <BoardColumnsWrapper>
-        {renderColumns}
-      </BoardColumnsWrapper>
-    </div>
+    <Container centered>
+      <div className={classes.root}>
+        <h1 className={classes.title}>{board?.title}</h1>
+        <BoardColumnsWrapper>
+          {renderColumns}
+        </BoardColumnsWrapper>
+      </div>
+    </Container>
   );
 };
 
