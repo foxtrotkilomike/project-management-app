@@ -77,7 +77,7 @@ const loginFormData: LoginForm = {
     submitButtonText: 'Sign up',
     submitErrors: {
       userExists: 'User with such login already exists',
-      passwordMismatch: "Passwords don't not match",
+      passwordMismatch: 'Passwords do not match',
     },
   },
   signIn: {

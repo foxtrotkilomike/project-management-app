@@ -54,6 +54,12 @@ type LoginPrompt = {
   signIn: LoginPromptData;
 };
 
+type SignUpData = {
+  name: string;
+  login: string;
+  password: string;
+};
+
 export type {
   LoginFormInputs,
   SignUpForm,
@@ -62,4 +68,5 @@ export type {
   LoginForm,
   LoginFormType,
   LoginPrompt,
+  SignUpData,
 };
