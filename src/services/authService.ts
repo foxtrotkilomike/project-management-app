@@ -1,12 +1,20 @@
 import React from 'react';
 import axios from 'axios';
 import axiosInstance, { Endpoints } from './api';
-import { LoginFormInputs, SignInForm, SignUpData, SignUpForm } from '../config/types';
+import {
+  LoginFormInputs,
+  LoginFormType,
+  SignInData,
+  SignInForm,
+  SignUpData,
+  SignUpForm,
+} from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 import { ResponseStatus } from '../config/constants';
 
-const postSignUpData = (data: SignUpData) => {
-  const url = `${Endpoints.auth.base}${Endpoints.auth.signUp}`;
+const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
+  const authEndpoint = type === 'signUp' ? Endpoints.auth.signUp : Endpoints.auth.signIn;
+  const url = `${Endpoints.auth.base}${authEndpoint}`;
   return axiosInstance.post(url, data);
 };
 
@@ -46,4 +54,4 @@ const handleSignUpErrors = (
   }
 };
 
-export { postSignUpData, handleSignUpErrors };
+export { postAuthData, handleSignUpErrors };

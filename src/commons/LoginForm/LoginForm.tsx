@@ -8,7 +8,7 @@ import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
 import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
-import { handleSignUpErrors, postSignUpData } from '../../services/authService';
+import { handleSignUpErrors, postAuthData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
 
@@ -23,7 +23,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     checkPasswordMatch(data, setError, formTextData);
     const signUpData = retrieveSignUpData(data);
 
-    const response = await postSignUpData(signUpData).catch((error) =>
+    const response = await postAuthData(signUpData, 'signUp').catch((error) =>
       handleSignUpErrors(error, setError, setSubmissionError, formTextData)
     );
     if (response) navigate(routes.BOARDS);
