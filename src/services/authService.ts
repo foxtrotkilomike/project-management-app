@@ -26,7 +26,7 @@ const handleSignUpErrors = (
   if (axios.isAxiosError(error)) {
     if (error.response) {
       switch (error.response.status) {
-        case ResponseStatus.USER_EXIST:
+        case ResponseStatus.USER_ALREADY_EXIST:
           setError('login', { message: userExists });
           break;
 

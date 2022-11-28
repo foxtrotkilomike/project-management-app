@@ -1,7 +1,7 @@
 enum ResponseStatus {
   'BAD_REQUEST' = 400,
   'NOT_AUTHORIZED' = 401,
-  'USER_EXIST' = 409,
+  'USER_ALREADY_EXIST' = 409,
   'UNHANDLED_REJECTION' = 503,
 }
 
