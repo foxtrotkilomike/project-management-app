@@ -1,7 +1,7 @@
 import { LoginFormInputs, SignInForm, SignUpForm } from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 
-export const checkPasswordMatch = (
+const checkPasswordMatch = (
   data: LoginFormInputs,
   setError: (
     name: FieldPath<LoginFormInputs>,
@@ -19,7 +19,14 @@ export const checkPasswordMatch = (
   }
 };
 
-export const retrieveSignUpData = (data: LoginFormInputs) => {
+const retrieveSignUpData = (data: LoginFormInputs) => {
   const { userName: name, login, password } = data;
   return { name, login, password };
 };
+
+const retrieveSignInData = (data: LoginFormInputs) => {
+  const { login, password } = data;
+  return { login, password };
+};
+
+export { checkPasswordMatch, retrieveSignUpData, retrieveSignInData };

@@ -7,8 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
-import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
-import { handleSignUpErrors, postAuthData } from '../../services/authService';
+import {
+  checkPasswordMatch,
+  retrieveSignInData,
+  retrieveSignUpData,
+} from '../../helpers/authentication';
+import { handleAuthErrors, postAuthData, setTokenValue } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
 
@@ -24,13 +28,22 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     const signUpData = retrieveSignUpData(data);
 
     const response = await postAuthData(signUpData, 'signUp').catch((error) =>
-      handleSignUpErrors(error, setError, setSubmissionError, formTextData)
+      handleAuthErrors(error, setError, setSubmissionError, formTextData)
     );
     if (response) navigate(routes.BOARDS);
   };
 
-  //TODO: implement signIn function
-  const signIn = (data: LoginFormInputs) => {};
+  const signIn = async (data: LoginFormInputs) => {
+    setSubmissionError('');
+    // TODO add spinner for data loading process
+    const signInData = retrieveSignInData(data);
+
+    const response = await postAuthData(signInData, 'signIn').catch((error) =>
+      handleAuthErrors(error, setError, setSubmissionError, formTextData)
+    );
+
+    if (response) setTokenValue(response.data.token);
+  };
 
   const onSubmit = type === 'signUp' ? signUp : signIn;
 
