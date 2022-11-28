@@ -9,10 +9,11 @@ import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
 import {
   checkPasswordMatch,
+  decodeToken,
   retrieveSignInData,
   retrieveSignUpData,
 } from '../../helpers/authentication';
-import { handleAuthErrors, postAuthData, setTokenValue } from '../../services/authService';
+import { handleAuthErrors, postAuthData, setAppData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
 
@@ -30,7 +31,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     const response = await postAuthData(signUpData, 'signUp').catch((error) =>
       handleAuthErrors(error, setError, setSubmissionError, formTextData)
     );
-    if (response) navigate(routes.BOARDS);
+    if (response) signIn(data);
   };
 
   const signIn = async (data: LoginFormInputs) => {
@@ -42,7 +43,13 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
       handleAuthErrors(error, setError, setSubmissionError, formTextData)
     );
 
-    if (response) setTokenValue(response.data.token);
+    if (response) {
+      if (!response.data.token) setSubmissionError('Invalid server response');
+
+      const { userId, login, expirationTime } = decodeToken(response.data.token);
+      setAppData({ token: response.data.token, userId, login, expirationTime });
+      navigate(routes.BOARDS);
+    }
   };
 
   const onSubmit = type === 'signUp' ? signUp : signIn;

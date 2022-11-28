@@ -89,6 +89,7 @@ const loginFormData: LoginForm = {
         type: 'text',
         name: 'login',
         placeholder: 'Login',
+        autoComplete: 'username',
         registerOptions: {
           required: { value: true, message: 'Login is a required field' },
         },

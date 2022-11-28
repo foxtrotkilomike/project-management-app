@@ -61,7 +61,11 @@ const handleAuthErrors = (
   }
 };
 
-const setTokenValue = (token: string) => window.localStorage.setItem('token', token);
-const getTokenValue = () => window.localStorage.getItem('token');
+const setAppData = (data: Record<string, string>) => {
+  for (const [key, value] of Object.entries(data)) {
+    window.localStorage.setItem(key, value);
+  }
+};
+const getAppData = (key: string) => window.localStorage.getItem(key);
 
-export { postAuthData, handleAuthErrors, setTokenValue, getTokenValue };
+export { postAuthData, handleAuthErrors, setAppData, getAppData };

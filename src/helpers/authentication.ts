@@ -1,5 +1,6 @@
-import { LoginFormInputs, SignInForm, SignUpForm } from '../config/types';
+import { JWTData, LoginFormInputs, SignInForm, SignUpForm } from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
+import jwtDecode from 'jwt-decode';
 
 const checkPasswordMatch = (
   data: LoginFormInputs,
@@ -29,4 +30,9 @@ const retrieveSignInData = (data: LoginFormInputs) => {
   return { login, password };
 };
 
-export { checkPasswordMatch, retrieveSignUpData, retrieveSignInData };
+const decodeToken = (token: string) => {
+  const { exp, iat, id, login } = jwtDecode(token) as JWTData;
+  return { expirationTime: exp, issuedAt: iat, userId: id, login };
+};
+
+export { checkPasswordMatch, retrieveSignUpData, retrieveSignInData, decodeToken };

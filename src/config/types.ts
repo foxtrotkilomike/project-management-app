@@ -70,14 +70,22 @@ type SignInData = {
   password: string;
 };
 
+type JWTData = {
+  exp: string;
+  iat: string;
+  id: string;
+  login: string;
+};
+
 export type {
-  LoginFormInputs,
-  SignUpForm,
-  SignInForm,
   FormValidationErrors,
+  JWTData,
   LoginForm,
+  LoginFormInputs,
   LoginFormType,
   LoginPrompt,
+  SignUpForm,
+  SignInForm,
   SignUpData,
   SignInData,
 };
