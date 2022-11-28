@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
-import { ColumnModel } from '../Board';
 import Task from '../Task';
+import { ITask } from '../Task/Task';
 import classes from './BoardColumn.module.scss';
 
-export const BoardColumn = (props: ColumnModel): JSX.Element => {
+export const BoardColumn = (props: IColumnProps): JSX.Element => {
   const { title, tasks } = props;
   const [isModalActive, setIsModalActive] = useState(false);
   const renderTasks = tasks.map((item) => <Task key={item._id} {...item} />);
@@ -35,3 +35,8 @@ export const BoardColumn = (props: ColumnModel): JSX.Element => {
     </li>
   );
 };
+
+export interface IColumnProps {
+  tasks: ITask[];
+  title: string;
+}

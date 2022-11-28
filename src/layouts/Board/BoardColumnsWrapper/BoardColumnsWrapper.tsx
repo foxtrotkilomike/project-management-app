@@ -2,6 +2,7 @@ import classes from './BoardColumnsWrapper.module.scss';
 import plusButton from '../../../assets/svg/plus.svg';
 import Modal from '../../../commons/Modal';
 import { useState } from 'react';
+import BoardColumn from '../BoardColumn';
 
 export const BoardColumnsWrapper = (props: wrapperProps) => {
   const children = props.children;
@@ -16,6 +17,7 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
   };
   return (
     <ul className={classes.columnsWrapper}>
+      {!children && <BoardColumn title="New column" tasks={[]} />}
       {children}
       <li>
         <button className={classes.columnsWrapper__add} onClick={addColumn}>

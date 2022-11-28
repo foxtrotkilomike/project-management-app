@@ -8,7 +8,7 @@ import BoardColumnsWrapper from './BoardColumnsWrapper';
 // TODO: get rid of MOCKED CONSTANTS
 
 const MOCK_BOARD = { title: 'Title', _id: 'board_id', owner: 'owner', users: ['user1', 'user2'] };
-const MOCK_COLUMNS = [
+const MOCK_COLUMNS: ColumnResponseType[] = [
   {
     _id: 'column 1',
     title: 'column 1',
@@ -28,7 +28,8 @@ const MOCK_COLUMNS = [
     boardId: 'board_id',
   },
 ];
-const MOCK_TASKS = {
+const MOCK_TASKS: Record<string, TaskResponseType[]> = {
+  // Just mocked data for simulating getting tasks by columnId
   'column 1': [
     {
       _id: 'task1 id',
@@ -95,7 +96,7 @@ const fillColumnWithTasks = async (column: ColumnResponseType): Promise<ColumnMo
 
 export const Board = (): JSX.Element => {
   const boardId = usePathnameEnding();
-  const [board, setBoard] = useState<BoardType | null>(null);
+  const [board, setBoard] = useState<BoardResponseType | null>(null);
   const [columns, setColumns] = useState<ColumnModel[]>([]);
 
   useEffect(() => {
@@ -109,18 +110,17 @@ export const Board = (): JSX.Element => {
   }, []);
 
   const renderColumns = columns.map((column) => <BoardColumn key={column._id} {...column} />);
-
   return (
     <Container centered main growing>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
-        <BoardColumnsWrapper>{renderColumns}</BoardColumnsWrapper>
+        <BoardColumnsWrapper>{renderColumns.length ? renderColumns : null}</BoardColumnsWrapper>
       </div>
     </Container>
   );
 };
 
-export type BoardType = {
+export type BoardResponseType = {
   _id: string;
   title: string;
   owner: string;
@@ -139,10 +139,10 @@ export type ColumnModel = {
   title: string;
   order: number;
   boardId: string;
-  tasks: TaskType[];
+  tasks: TaskResponseType[];
 };
 
-export type TaskType = {
+export type TaskResponseType = {
   _id: string;
   title: string;
   order: number;
