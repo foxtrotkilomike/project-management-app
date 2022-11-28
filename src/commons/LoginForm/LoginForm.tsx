@@ -23,13 +23,13 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
 
-  const signUp = async (data: LoginFormInputs) => {
+  const signUp = (data: LoginFormInputs) => {
     // TODO add spinner for data loading process
     checkPasswordMatch(data, setError);
     handleAuthorization('signUp', data);
   };
 
-  const signIn = async (data: LoginFormInputs) => {
+  const signIn = (data: LoginFormInputs) => {
     // TODO add spinner for data loading process
     handleAuthorization('signIn', data);
   };

@@ -8,8 +8,9 @@ import { ResponseStatus } from '../config/constants';
 import { loginFormData } from '../config/data';
 
 const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
-  const authEndpoint = type === 'signUp' ? Endpoints.auth.signUp : Endpoints.auth.signIn;
-  const url = `${Endpoints.auth.base}${authEndpoint}`;
+  const { base: baseUrl, signUp, signIn } = Endpoints.auth;
+  const authEndpoint = type === 'signUp' ? signUp : signIn;
+  const url = `${baseUrl}${authEndpoint}`;
   return axiosInstance.post(url, data);
 };
 
