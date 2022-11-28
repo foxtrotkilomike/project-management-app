@@ -105,8 +105,7 @@ const loginFormData: LoginForm = {
     ],
     submitButtonText: 'Sign in',
     submitErrors: {
-      userDoesNotExists: 'User with such login does not exist',
-      incorrectPassword: 'Password is incorrect',
+      notAuthorized: 'Login or password is incorrect',
       badRequest: 'An error occurred, check your data for correctness',
       serverNotResponding: 'Server is not responding, please try again later',
       unknownError: 'Sorry, something went wrong, please try again later',

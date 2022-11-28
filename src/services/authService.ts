@@ -18,7 +18,7 @@ const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
   return axiosInstance.post(url, data);
 };
 
-const handleSignUpErrors = (
+const handleAuthErrors = (
   error: unknown,
   setError: (
     name: FieldPath<LoginFormInputs>,
@@ -30,12 +30,19 @@ const handleSignUpErrors = (
 ) => {
   const { userExists, badRequest, unknownError, serverNotResponding } = (formTextData as SignUpForm)
     .submitErrors;
+  const { notAuthorized } = (formTextData as SignInForm).submitErrors;
 
   if (axios.isAxiosError(error)) {
     if (error.response) {
+      console.log(error.response.data);
+
       switch (error.response.status) {
         case ResponseStatus.USER_ALREADY_EXIST:
           setError('login', { message: userExists });
+          break;
+
+        case ResponseStatus.NOT_AUTHORIZED:
+          setSubmissionError(notAuthorized);
           break;
 
         case ResponseStatus.BAD_REQUEST:
@@ -54,4 +61,7 @@ const handleSignUpErrors = (
   }
 };
 
-export { postAuthData, handleSignUpErrors };
+const setTokenValue = (token: string) => window.localStorage.setItem('token', token);
+const getTokenValue = () => window.localStorage.getItem('token');
+
+export { postAuthData, handleAuthErrors, setTokenValue, getTokenValue };

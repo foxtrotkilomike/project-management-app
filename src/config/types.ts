@@ -36,8 +36,7 @@ interface SignUpForm extends LoginFormControls {
 
 interface SignInForm extends Omit<LoginFormControls, 'userName' | 'repeatedPassword'> {
   submitErrors: {
-    userDoesNotExists: string;
-    incorrectPassword: string;
+    notAuthorized: string;
   } & ApiErrors;
 }
 
@@ -66,6 +65,11 @@ type SignUpData = {
   password: string;
 };
 
+type SignInData = {
+  login: string;
+  password: string;
+};
+
 export type {
   LoginFormInputs,
   SignUpForm,
@@ -75,4 +79,5 @@ export type {
   LoginFormType,
   LoginPrompt,
   SignUpData,
+  SignInData,
 };
