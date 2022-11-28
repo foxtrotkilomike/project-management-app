@@ -1,16 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import axiosInstance, { Endpoints } from './api';
-import {
-  LoginFormInputs,
-  LoginFormType,
-  SignInData,
-  SignInForm,
-  SignUpData,
-  SignUpForm,
-} from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
+
+import axiosInstance, { Endpoints } from './api';
+import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
 import { ResponseStatus } from '../config/constants';
+import { loginFormData } from '../config/data';
 
 const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
   const authEndpoint = type === 'signUp' ? Endpoints.auth.signUp : Endpoints.auth.signIn;
@@ -25,17 +20,14 @@ const handleAuthErrors = (
     error: ErrorOption,
     options?: { shouldFocus: boolean }
   ) => void,
-  setSubmissionError: React.Dispatch<React.SetStateAction<string>>,
-  formTextData: SignUpForm | SignInForm
+  setSubmissionError: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  const { userExists, badRequest, unknownError, serverNotResponding } = (formTextData as SignUpForm)
-    .submitErrors;
-  const { notAuthorized } = (formTextData as SignInForm).submitErrors;
+  const { userExists } = loginFormData.signUp.submissionErrors;
+  const { notAuthorized } = loginFormData.signIn.submissionErrors;
+  const { badRequest, unknownError, serverNotResponding } = loginFormData.submissionErrors;
 
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      console.log(error.response.data);
-
       switch (error.response.status) {
         case ResponseStatus.USER_ALREADY_EXIST:
           setError('login', { message: userExists });

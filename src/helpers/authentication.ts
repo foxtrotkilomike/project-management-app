@@ -1,6 +1,7 @@
-import { JWTData, LoginFormInputs, SignInForm, SignUpForm } from '../config/types';
+import { JWTData, LoginFormInputs } from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 import jwtDecode from 'jwt-decode';
+import { loginFormData } from '../config/data';
 
 const checkPasswordMatch = (
   data: LoginFormInputs,
@@ -8,14 +9,13 @@ const checkPasswordMatch = (
     name: FieldPath<LoginFormInputs>,
     error: ErrorOption,
     options?: { shouldFocus: boolean }
-  ) => void,
-  formTextData: SignUpForm | SignInForm
+  ) => void
 ) => {
   const isPasswordMatch = data.password === data.repeatedPassword;
 
   if (!isPasswordMatch) {
     setError('repeatedPassword', {
-      message: (formTextData as SignUpForm).submitErrors.passwordMismatch,
+      message: loginFormData.signUp.submissionErrors.passwordMismatch,
     });
   }
 };
