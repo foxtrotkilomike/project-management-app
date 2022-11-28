@@ -4,6 +4,7 @@ import { LoginFormInputs, LoginFormType } from '../../config/types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
@@ -23,32 +24,48 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const navigate = useNavigate();
 
   const signUp = async (data: LoginFormInputs) => {
-    setSubmissionError('');
     // TODO add spinner for data loading process
-    checkPasswordMatch(data, setError, formTextData);
-    const signUpData = retrieveSignUpData(data);
-
-    const response = await postAuthData(signUpData, 'signUp').catch((error) =>
-      handleAuthErrors(error, setError, setSubmissionError, formTextData)
-    );
-    if (response) signIn(data);
+    checkPasswordMatch(data, setError);
+    handleAuthorization('signUp', data);
   };
 
   const signIn = async (data: LoginFormInputs) => {
-    setSubmissionError('');
     // TODO add spinner for data loading process
-    const signInData = retrieveSignInData(data);
+    handleAuthorization('signIn', data);
+  };
 
-    const response = await postAuthData(signInData, 'signIn').catch((error) =>
-      handleAuthErrors(error, setError, setSubmissionError, formTextData)
-    );
+  const handleAuthorization = (formType: LoginFormType, data: LoginFormInputs) => {
+    setSubmissionError('');
+    const formData = formType === 'signUp' ? retrieveSignUpData(data) : retrieveSignInData(data);
+    postAuthData(formData, formType)
+      .then((response) => handleResponse(response, 'signUp', data))
+      .catch((error) => handleAuthErrors(error, setError, setSubmissionError));
+  };
 
+  const handleResponse = (
+    response: AxiosResponse | void,
+    formType: LoginFormType,
+    data: LoginFormInputs
+  ) => {
     if (response) {
-      if (!response.data.token) setSubmissionError('Invalid server response');
+      switch (formType) {
+        case 'signUp':
+          signIn(data);
+          break;
 
-      const { userId, login, expirationTime } = decodeToken(response.data.token);
-      setAppData({ token: response.data.token, userId, login, expirationTime });
-      navigate(routes.BOARDS);
+        case 'signIn':
+          if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
+
+          const { userId, login, expirationTime } = decodeToken(response.data.token);
+          setAppData({ token: response.data.token, userId, login, expirationTime });
+          navigate(routes.BOARDS);
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      setSubmissionError(loginFormData.submissionErrors.serverNotResponding);
     }
   };
 
