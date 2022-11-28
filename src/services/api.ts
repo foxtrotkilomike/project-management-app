@@ -7,6 +7,7 @@ export const Endpoints = {
     signUp: '/signup',
     signIn: '/signin',
   },
+  users: '/users',
 };
 
 const AxiosConfig = {
