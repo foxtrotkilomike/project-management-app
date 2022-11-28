@@ -38,7 +38,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     setSubmissionError('');
     const formData = formType === 'signUp' ? retrieveSignUpData(data) : retrieveSignInData(data);
     postAuthData(formData, formType)
-      .then((response) => handleResponse(response, 'signUp', data))
+      .then((response) => handleResponse(response, formType, data))
       .catch((error) => handleAuthErrors(error, setError, setSubmissionError));
   };
 
