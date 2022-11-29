@@ -23,6 +23,12 @@ const getBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
     .then(({ data }) => data as BoardsResponse)
     .catch(handleApiErrors);
 
+const getBoardsByIds = (ids: string[]): Promise<BoardsResponse[] | ApiError> =>
+  axios
+    .get(endpoint.set, { params: { ids: ids.join(',') } })
+    .then(({ data }) => data as BoardsResponse[])
+    .catch(handleApiErrors);
+
 const deleteBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
   axios
     .delete(`${endpoint.base}/${id}`)
@@ -35,4 +41,11 @@ const updateBoardById = (id: string, board: Board): Promise<BoardsResponse | Api
     .then(({ data }) => data as BoardsResponse)
     .catch(handleApiErrors);
 
-export { getAllBoards, createBoard, getBoardById, deleteBoardById, updateBoardById };
+export {
+  getAllBoards,
+  createBoard,
+  getBoardById,
+  getBoardsByIds,
+  deleteBoardById,
+  updateBoardById,
+};
