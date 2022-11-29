@@ -6,16 +6,16 @@ import userServiceData from './data';
 
 const { endpoint, errors } = userServiceData;
 
-const getAllUsers = async () =>
+const getAllUsers = async (): Promise<UserResponseData[] | ApiServiceError> =>
   axios
     .get(endpoint)
-    .then(({ data }) => data)
+    .then(({ data }) => data as UserResponseData[])
     .catch(handleUserServiceErrors);
 
-const getUserById = async (id: string): Promise<UserResponseData[] | ApiServiceError> =>
+const getUserById = async (id: string): Promise<UserResponseData | ApiServiceError> =>
   axios
     .get(`${endpoint}/${id}`)
-    .then(({ data }) => data as UserResponseData[])
+    .then(({ data }) => data as UserResponseData)
     .catch(handleUserServiceErrors);
 
 const deleteUserById = async (id: string): Promise<UserResponseData | ApiServiceError> =>
