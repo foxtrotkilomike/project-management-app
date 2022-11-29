@@ -39,9 +39,12 @@
     overflow-y: auto;
     margin-bottom: 0;
   }
+  &__footer {
+    margin-top: $padding-md;
+  }
   &__add {
     width: 100%;
-    padding: 10px;
+    padding: $padding-sm;
     font-size: $font-size-md;
     font-weight: inherit;
   }
