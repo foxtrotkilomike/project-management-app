@@ -11,7 +11,7 @@ export const Endpoints = {
 };
 
 const AxiosConfig = {
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://pm-app-backend.onrender.com',
   timeout: 5000,
 };
 
