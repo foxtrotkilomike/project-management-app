@@ -16,3 +16,17 @@ h1 {
   margin-bottom: $margin-lg;
   font-weight: $font-weight-bold;
 }
+
+::-webkit-scrollbar {
+  width: $width-scrollbar;
+  height: $height-scrollbar;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba($color-shadow, .2);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: $border-radius-md;
+  background: rgba($color-shadow, .6);
+}

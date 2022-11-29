@@ -72,7 +72,9 @@ $footer-break-point: 33.75em;
 $board-cards-break-point: 40em;
 
 $width-column: 290px;
+$width-scrollbar: 6px;
 
+$height-scrollbar: 6px;
 $height-header: 78px;
 $height-footer: 57px;
 $height-main: calc(100vh - $height-header - $height-footer);
