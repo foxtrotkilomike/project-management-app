@@ -17,4 +17,10 @@ const createBoard = async (board: Board): Promise<BoardsResponse | ApiError> =>
     .then(({ data }) => data as BoardsResponse)
     .catch(handleApiErrors);
 
-export { getAllBoards, createBoard };
+const getBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
+  axios
+    .get(`${endpoint.base}/${id}`)
+    .then(({ data }) => data as BoardsResponse)
+    .catch(handleApiErrors);
+
+export { getAllBoards, createBoard, getBoardById };
