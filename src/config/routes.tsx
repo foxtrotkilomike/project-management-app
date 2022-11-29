@@ -22,16 +22,11 @@ export const routesConfig: RouteObject[] = [
           },
           {
             path: 'boards',
-            children: [
-              {
-                index: true,
-                element: <Boards />,
-              },
-              {
-                path: 'board/:boardId',
-                element: <Board />,
-              },
-            ],
+            element: <Boards />,
+          },
+          {
+            path: 'board/:boardId',
+            element: <Board />,
           },
           {
             path: 'signup',
@@ -58,7 +53,7 @@ export const routesConfig: RouteObject[] = [
 export const routes = {
   MAIN: '/',
   BOARDS: '/boards',
-  BOARD: '/boards/board/',
+  BOARD: '/board',
   SIGN_UP: '/signup',
   SIGN_IN: '/signin',
 };
