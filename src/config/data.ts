@@ -139,9 +139,9 @@ const selectData: SelectProps[] = [
 ];
 
 const apiErrors: Record<string, ApiError> = {
-  serverNotResponding: {
+  serverIsNotResponding: {
     code: ResponseStatus.UNKNOWN_ERROR,
-    message: 'Server not responding',
+    message: 'Server is not responding',
   },
   fallbackError: {
     code: ResponseStatus.UNKNOWN_ERROR,
