@@ -41,7 +41,7 @@ const deleteBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
     .then(({ data }) => data as BoardsResponse)
     .catch(handleApiErrors);
 
-const updateBoardById = (id: string, board: Board): Promise<BoardsResponse | ApiError> =>
+const updateBoardById = (board: Board, id: string): Promise<BoardsResponse | ApiError> =>
   axios
     .put(`${endpoint.base}/${id}`, board)
     .then(({ data }) => data as BoardsResponse)
