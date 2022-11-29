@@ -1,24 +1,24 @@
 import { AxiosError } from 'axios';
-import axios from '../api';
+import axios, { Endpoints } from '../api';
 import { UserData, UserResponseData } from './types';
-import { ApiServiceError, ServerErrorResponse } from '../../config/types';
-import userServiceData from './data';
+import { ApiError, ServerErrorResponse } from '../../config/types';
+import { apiErrors } from '../../config/data';
 
-const { endpoint, errors } = userServiceData;
+const endpoint = Endpoints.users;
 
-const getAllUsers = async (): Promise<UserResponseData[] | ApiServiceError> =>
+const getAllUsers = async (): Promise<UserResponseData[] | ApiError> =>
   axios
     .get(endpoint)
     .then(({ data }) => data as UserResponseData[])
     .catch(handleUserServiceErrors);
 
-const getUserById = async (id: string): Promise<UserResponseData | ApiServiceError> =>
+const getUserById = async (id: string): Promise<UserResponseData | ApiError> =>
   axios
     .get(`${endpoint}/${id}`)
     .then(({ data }) => data as UserResponseData)
     .catch(handleUserServiceErrors);
 
-const deleteUserById = async (id: string): Promise<UserResponseData | ApiServiceError> =>
+const deleteUserById = async (id: string): Promise<UserResponseData | ApiError> =>
   axios
     .delete(`${endpoint}/${id}`)
     .then(({ data }) => data as UserResponseData)
@@ -27,13 +27,13 @@ const deleteUserById = async (id: string): Promise<UserResponseData | ApiService
 const updateUserById = async (
   id: string,
   userData: UserData
-): Promise<UserResponseData | ApiServiceError> =>
+): Promise<UserResponseData | ApiError> =>
   axios
     .put(`${endpoint}/${id}`, userData)
     .then(({ data }) => data as UserResponseData)
     .catch(handleUserServiceErrors);
 
-const handleUserServiceErrors = (error: AxiosError): ApiServiceError => {
+const handleUserServiceErrors = (error: AxiosError): ApiError => {
   const { response, request } = error;
 
   if (error.isAxiosError) {
@@ -43,11 +43,11 @@ const handleUserServiceErrors = (error: AxiosError): ApiServiceError => {
         message: (response.data as ServerErrorResponse).message,
       };
     } else if (request) {
-      return errors.serverNotResponding;
+      return apiErrors.serverNotResponding;
     }
   }
 
-  return errors.fallbackError;
+  return apiErrors.fallbackError;
 };
 
 export { getAllUsers, getUserById, deleteUserById, updateUserById };

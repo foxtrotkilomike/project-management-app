@@ -1,7 +1,7 @@
 import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
-import { LoginForm, LoginPrompt } from './types';
-import { MIN_PASSWORD_LENGTH } from './constants';
+import { ApiError, LoginForm, LoginPrompt } from './types';
+import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -138,4 +138,23 @@ const selectData: SelectProps[] = [
   },
 ];
 
-export { buttonsText, footerData, loginFormData, loginHeading, loginPromptData, selectData };
+const apiErrors: Record<string, ApiError> = {
+  serverNotResponding: {
+    code: ResponseStatus.UNKNOWN_ERROR,
+    message: 'Server not responding',
+  },
+  fallbackError: {
+    code: ResponseStatus.UNKNOWN_ERROR,
+    message: 'Unknown error',
+  },
+};
+
+export {
+  buttonsText,
+  footerData,
+  loginFormData,
+  loginHeading,
+  loginPromptData,
+  selectData,
+  apiErrors,
+};

@@ -83,7 +83,7 @@ type ServerErrorResponse = {
   message: string;
 };
 
-type ApiServiceError = {
+type ApiError = {
   code: number;
   message: string;
 };
@@ -100,5 +100,5 @@ export type {
   SignUpData,
   SignInData,
   ServerErrorResponse,
-  ApiServiceError,
+  ApiError,
 };
