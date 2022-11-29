@@ -78,6 +78,8 @@ type JWTData = {
   login: string;
 };
 
+type UserData = SignUpData;
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -89,4 +91,5 @@ export type {
   SignInForm,
   SignUpData,
   SignInData,
+  UserData,
 };
