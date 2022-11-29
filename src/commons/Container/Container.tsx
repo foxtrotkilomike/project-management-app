@@ -9,16 +9,21 @@ export const Container = (props: ContainerProps): JSX.Element => {
     [classes.centered]: centered,
     [classes.main]: main,
     [classes.growing]: growing,
-    [classes.minHeight]: minHeight,
   });
 
-  return <div className={className}>{children}</div>;
+  const style = minHeight ? { minHeight: `${minHeight}px` } : {};
+
+  return (
+    <div className={className} style={style}>
+      {children}
+    </div>
+  );
 };
 
 type ContainerProps = {
   centered?: boolean;
   main?: boolean;
   growing?: boolean;
-  minHeight?: boolean;
+  minHeight?: number;
   children: React.ReactNode;
 };

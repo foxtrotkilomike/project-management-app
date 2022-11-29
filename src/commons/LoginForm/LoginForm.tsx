@@ -46,7 +46,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
       const { type, name, placeholder, registerOptions, autoComplete } = formInput;
 
       return (
-        <Container minHeight key={name}>
+        <Container minHeight={65} key={name}>
           <Form.Control
             type={type}
             placeholder={placeholder}
