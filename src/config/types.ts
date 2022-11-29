@@ -28,17 +28,16 @@ interface ApiErrors {
 }
 
 interface SignUpForm extends LoginFormControls {
-  submitErrors: {
+  submissionErrors: {
     userExists: string;
     passwordMismatch: string;
-  } & ApiErrors;
+  };
 }
 
 interface SignInForm extends Omit<LoginFormControls, 'userName' | 'repeatedPassword'> {
-  submitErrors: {
-    userDoesNotExists: string;
-    incorrectPassword: string;
-  } & ApiErrors;
+  submissionErrors: {
+    notAuthorized: string;
+  };
 }
 
 type FormValidationErrors = {
@@ -51,6 +50,7 @@ type FormValidationErrors = {
 type LoginForm = {
   signUp: SignUpForm;
   signIn: SignInForm;
+  submissionErrors: ApiErrors;
 };
 
 type LoginFormType = 'signUp' | 'signIn';
@@ -66,13 +66,27 @@ type SignUpData = {
   password: string;
 };
 
+type SignInData = {
+  login: string;
+  password: string;
+};
+
+type JWTData = {
+  exp: string;
+  iat: string;
+  id: string;
+  login: string;
+};
+
 export type {
-  LoginFormInputs,
-  SignUpForm,
-  SignInForm,
   FormValidationErrors,
+  JWTData,
   LoginForm,
+  LoginFormInputs,
   LoginFormType,
   LoginPrompt,
+  SignUpForm,
+  SignInForm,
   SignUpData,
+  SignInData,
 };

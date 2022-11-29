@@ -1,33 +1,41 @@
 import React from 'react';
 import axios from 'axios';
-import axiosInstance, { Endpoints } from './api';
-import { LoginFormInputs, SignInForm, SignUpData, SignUpForm } from '../config/types';
 import { ErrorOption, FieldPath } from 'react-hook-form';
-import { ResponseStatus } from '../config/constants';
 
-const postSignUpData = (data: SignUpData) => {
-  const url = `${Endpoints.auth.base}${Endpoints.auth.signUp}`;
+import axiosInstance, { Endpoints } from './api';
+import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
+import { ResponseStatus } from '../config/constants';
+import { loginFormData } from '../config/data';
+
+const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
+  const { base: baseUrl, signUp, signIn } = Endpoints.auth;
+  const authEndpoint = type === 'signUp' ? signUp : signIn;
+  const url = `${baseUrl}${authEndpoint}`;
   return axiosInstance.post(url, data);
 };
 
-const handleSignUpErrors = (
+const handleAuthErrors = (
   error: unknown,
   setError: (
     name: FieldPath<LoginFormInputs>,
     error: ErrorOption,
     options?: { shouldFocus: boolean }
   ) => void,
-  setSubmissionError: React.Dispatch<React.SetStateAction<string>>,
-  formTextData: SignUpForm | SignInForm
+  setSubmissionError: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  const { userExists, badRequest, unknownError, serverNotResponding } = (formTextData as SignUpForm)
-    .submitErrors;
+  const { userExists } = loginFormData.signUp.submissionErrors;
+  const { notAuthorized } = loginFormData.signIn.submissionErrors;
+  const { badRequest, unknownError, serverNotResponding } = loginFormData.submissionErrors;
 
   if (axios.isAxiosError(error)) {
     if (error.response) {
       switch (error.response.status) {
         case ResponseStatus.USER_ALREADY_EXIST:
           setError('login', { message: userExists });
+          break;
+
+        case ResponseStatus.NOT_AUTHORIZED:
+          setSubmissionError(notAuthorized);
           break;
 
         case ResponseStatus.BAD_REQUEST:
@@ -46,4 +54,11 @@ const handleSignUpErrors = (
   }
 };
 
-export { postSignUpData, handleSignUpErrors };
+const setAppData = (data: Record<string, string>) => {
+  for (const [key, value] of Object.entries(data)) {
+    window.localStorage.setItem(key, value);
+  }
+};
+const getAppData = (key: string) => window.localStorage.getItem(key);
+
+export { postAuthData, handleAuthErrors, setAppData, getAppData };

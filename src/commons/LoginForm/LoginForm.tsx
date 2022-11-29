@@ -4,11 +4,17 @@ import { LoginFormInputs, LoginFormType } from '../../config/types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
-import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
-import { handleSignUpErrors, postSignUpData } from '../../services/authService';
+import {
+  checkPasswordMatch,
+  decodeToken,
+  retrieveSignInData,
+  retrieveSignUpData,
+} from '../../helpers/authentication';
+import { handleAuthErrors, postAuthData, setAppData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
 
@@ -17,20 +23,51 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
 
-  const signUp = async (data: LoginFormInputs) => {
-    setSubmissionError('');
+  const signUp = (data: LoginFormInputs) => {
     // TODO add spinner for data loading process
-    checkPasswordMatch(data, setError, formTextData);
-    const signUpData = retrieveSignUpData(data);
-
-    const response = await postSignUpData(signUpData).catch((error) =>
-      handleSignUpErrors(error, setError, setSubmissionError, formTextData)
-    );
-    if (response) navigate(routes.BOARDS);
+    checkPasswordMatch(data, setError);
+    handleAuthorization('signUp', data);
   };
 
-  //TODO: implement signIn function
-  const signIn = (data: LoginFormInputs) => {};
+  const signIn = (data: LoginFormInputs) => {
+    // TODO add spinner for data loading process
+    handleAuthorization('signIn', data);
+  };
+
+  const handleAuthorization = (formType: LoginFormType, data: LoginFormInputs) => {
+    setSubmissionError('');
+    const formData = formType === 'signUp' ? retrieveSignUpData(data) : retrieveSignInData(data);
+    postAuthData(formData, formType)
+      .then((response) => handleResponse(response, formType, data))
+      .catch((error) => handleAuthErrors(error, setError, setSubmissionError));
+  };
+
+  const handleResponse = (
+    response: AxiosResponse | void,
+    formType: LoginFormType,
+    data: LoginFormInputs
+  ) => {
+    if (response) {
+      switch (formType) {
+        case 'signUp':
+          signIn(data);
+          break;
+
+        case 'signIn':
+          if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
+
+          const { userId, login, expirationTime } = decodeToken(response.data.token);
+          setAppData({ token: response.data.token, userId, login, expirationTime });
+          navigate(routes.BOARDS);
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      setSubmissionError(loginFormData.submissionErrors.serverNotResponding);
+    }
+  };
 
   const onSubmit = type === 'signUp' ? signUp : signIn;
 

@@ -33,7 +33,6 @@ const loginFormData: LoginForm = {
         type: 'text',
         name: 'userName',
         placeholder: 'Name',
-        autoComplete: 'username',
         registerOptions: {
           required: { value: true, message: 'Name is a required field' },
         },
@@ -75,12 +74,9 @@ const loginFormData: LoginForm = {
       },
     ],
     submitButtonText: 'Sign up',
-    submitErrors: {
+    submissionErrors: {
       userExists: 'User with such login already exists',
       passwordMismatch: 'Passwords do not match',
-      badRequest: 'An error occurred, check your data for correctness',
-      serverNotResponding: 'Server is not responding, please try again later',
-      unknownError: 'Sorry, something went wrong, please try again later',
     },
   },
   signIn: {
@@ -89,6 +85,7 @@ const loginFormData: LoginForm = {
         type: 'text',
         name: 'login',
         placeholder: 'Login',
+        autoComplete: 'username',
         registerOptions: {
           required: { value: true, message: 'Login is a required field' },
         },
@@ -104,13 +101,14 @@ const loginFormData: LoginForm = {
       },
     ],
     submitButtonText: 'Sign in',
-    submitErrors: {
-      userDoesNotExists: 'User with such login does not exist',
-      incorrectPassword: 'Password is incorrect',
-      badRequest: 'An error occurred, check your data for correctness',
-      serverNotResponding: 'Server is not responding, please try again later',
-      unknownError: 'Sorry, something went wrong, please try again later',
+    submissionErrors: {
+      notAuthorized: 'Login or password is incorrect',
     },
+  },
+  submissionErrors: {
+    badRequest: 'An error occurred, check your data for correctness',
+    serverNotResponding: 'Server is not responding, please try again later',
+    unknownError: 'Sorry, something went wrong, please try again later',
   },
 };
 
