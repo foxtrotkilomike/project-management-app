@@ -1,8 +1,11 @@
-type BoardsResponseData = {
-  _id: string;
+interface Board {
   title: string;
   owner: string;
   users: string[];
-};
+}
 
-export type { BoardsResponseData };
+interface BoardsResponse extends Board {
+  _id: string;
+}
+
+export type { Board, BoardsResponse };

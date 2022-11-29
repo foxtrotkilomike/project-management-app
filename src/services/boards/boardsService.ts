@@ -1,14 +1,20 @@
 import axios, { Endpoints } from '../api';
 import { ApiError } from '../../config/types';
-import { BoardsResponseData } from './types';
+import { Board, BoardsResponse } from './types';
 import { handleApiErrors } from '../handleApiErrors';
 
 const endpoint = Endpoints.boards;
 
-const getAllBoards = async (): Promise<BoardsResponseData[] | ApiError> =>
+const getAllBoards = async (): Promise<BoardsResponse[] | ApiError> =>
   axios
     .get(endpoint.base)
-    .then(({ data }) => data as BoardsResponseData[])
+    .then(({ data }) => data as BoardsResponse[])
     .catch(handleApiErrors);
 
-export { getAllBoards };
+const createBoard = async (board: Board): Promise<BoardsResponse | ApiError> =>
+  axios
+    .post(endpoint.base, board)
+    .then(({ data }) => data as BoardsResponse)
+    .catch(handleApiErrors);
+
+export { getAllBoards, createBoard };
