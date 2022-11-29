@@ -1,5 +1,7 @@
 enum ResponseStatus {
+  'BAD_REQUEST' = 400,
   'NOT_AUTHORIZED' = 401,
+  'USER_ALREADY_EXIST' = 409,
   'UNHANDLED_REJECTION' = 503,
 }
 
@@ -10,4 +12,6 @@ enum BreakPoints {
   'DESKTOP' = 1280,
 }
 
-export { ResponseStatus, BreakPoints };
+const MIN_PASSWORD_LENGTH = 8;
+
+export { ResponseStatus, BreakPoints, MIN_PASSWORD_LENGTH };

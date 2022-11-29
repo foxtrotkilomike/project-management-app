@@ -8,7 +8,7 @@ export const NavigationButton = (props: NavigationButtonProps): JSX.Element => {
   return (
     <Link to={location}>
       <Button variant="nav" size={size} className={classes.navButton} aria-label={ariaLabel}>
-        {icon && <img src={icon} className={classes.navButton__icon} alt="" />}
+        {icon && <img src={icon} className={classes.navButton__icon} alt="" aria-hidden={true} />}
         {text}
       </Button>
     </Link>

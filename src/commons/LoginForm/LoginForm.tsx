@@ -1,17 +1,36 @@
 import classes from './LoginForm.module.scss';
-import { LoginFormInputs, LoginFormType, SignUpForm } from '../../config/types';
+import { LoginFormInputs, LoginFormType } from '../../config/types';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import Container from '../Container';
+import ErrorMessage from '../ErrorMessage';
+import { checkPasswordMatch, retrieveSignUpData } from '../../helpers/authentication';
+import { handleSignUpErrors, postSignUpData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
+import { routes } from '../../config/routes';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
-  //TODO: add signUp function
-  const signUp = () => {};
+  const [submissionError, setSubmissionError] = useState('');
+  const navigate = useNavigate();
 
-  //TODO: add signIn function
-  const signIn = () => {};
+  const signUp = async (data: LoginFormInputs) => {
+    setSubmissionError('');
+    // TODO add spinner for data loading process
+    checkPasswordMatch(data, setError, formTextData);
+    const signUpData = retrieveSignUpData(data);
+
+    const response = await postSignUpData(signUpData).catch((error) =>
+      handleSignUpErrors(error, setError, setSubmissionError, formTextData)
+    );
+    if (response) navigate(routes.BOARDS);
+  };
+
+  //TODO: implement signIn function
+  const signIn = (data: LoginFormInputs) => {};
 
   const onSubmit = type === 'signUp' ? signUp : signIn;
 
@@ -20,60 +39,35 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     handleSubmit,
     formState: { errors },
     setError,
-    clearErrors,
   } = useForm<LoginFormInputs>();
 
-  const renderSignUpForm = () => (
-    <>
-      <Form.Control
-        type="text"
-        placeholder={(formTextData as SignUpForm).userName}
-        aria-label={(formTextData as SignUpForm).userName}
-        className={classes.formControl}
-      />
-      <Form.Control
-        type="text"
-        placeholder={formTextData.login}
-        aria-label={formTextData.login}
-        className={classes.formControl}
-      />
-      <Form.Control
-        type="password"
-        placeholder={formTextData.password}
-        aria-label={formTextData.password}
-        className={classes.formControl}
-      />
-      <Form.Control
-        type="password"
-        placeholder={(formTextData as SignUpForm).repeatedPassword}
-        aria-label={(formTextData as SignUpForm).repeatedPassword}
-        className={classes.formControl}
-      />
-    </>
-  );
+  const renderFormInputs = () => {
+    return formTextData.inputs.map((formInput) => {
+      const { type, name, placeholder, registerOptions, autoComplete } = formInput;
 
-  const renderSignInForm = () => (
-    <>
-      <Form.Control
-        type="text"
-        placeholder={formTextData.login}
-        aria-label={formTextData.login}
-        className={classes.formControl}
-      />
-      <Form.Control
-        type="password"
-        placeholder={formTextData.password}
-        aria-label={formTextData.password}
-        className={classes.formControl}
-      />
-    </>
-  );
+      return (
+        <Container minHeight={65} key={name}>
+          <Form.Control
+            type={type}
+            placeholder={placeholder}
+            aria-label={placeholder}
+            autoComplete={autoComplete}
+            className={classes.formControl}
+            isInvalid={!!errors[name]}
+            {...register(name, registerOptions)}
+          />
+          <Form.Control.Feedback type="invalid">{errors[name]?.message}</Form.Control.Feedback>
+        </Container>
+      );
+    });
+  };
 
   return (
-    <Form onSubmit={onSubmit} className={classes.loginForm}>
-      {type === 'signUp' ? renderSignUpForm() : renderSignInForm()}
+    <Form onSubmit={handleSubmit((data) => onSubmit(data))} className={classes.loginForm}>
+      {renderFormInputs()}
+      {submissionError && <ErrorMessage message={submissionError} />}
       <Button variant="primary" type="submit" className={classes.submitButton}>
-        {formTextData.submitButton}
+        {formTextData.submitButtonText}
       </Button>
     </Form>
   );
