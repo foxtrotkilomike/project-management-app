@@ -6,7 +6,12 @@
   flex: 1 0 auto;
   justify-content: center;
   padding: $padding-lg 0;
+  height: $height-main;
   &__title {
     margin-bottom: $margin-lg;
+  }
+  &__content {
+    overflow-x: scroll;
+    width: 100%;
   }
 }

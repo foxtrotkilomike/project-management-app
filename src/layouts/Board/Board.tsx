@@ -27,6 +27,24 @@ const MOCK_COLUMNS: ColumnResponse[] = [
     order: 3,
     boardId: 'board_id',
   },
+  {
+    _id: 'column 4',
+    title: 'column 4',
+    order: 3,
+    boardId: 'board_id',
+  },
+  {
+    _id: 'column 5',
+    title: 'column 5',
+    order: 3,
+    boardId: 'board_id',
+  },
+  {
+    _id: 'column 6',
+    title: 'column 6',
+    order: 3,
+    boardId: 'board_id',
+  },
 ];
 const MOCK_TASKS: Record<string, TaskResponse[]> = {
   // Just mocked data for simulating getting tasks by columnId
@@ -44,6 +62,106 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task2 id',
       title: 'Task 2 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task3 id',
+      title: 'Task 3 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task4 id',
+      title: 'Task 4 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task5 id',
+      title: 'Task 5 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task6 id',
+      title: 'Task 6 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task7 id',
+      title: 'Task 7 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task8 id',
+      title: 'Task 8 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task9 id',
+      title: 'Task 9 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task10 id',
+      title: 'Task 10 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task11 id',
+      title: 'Task 11 title',
+      order: 1,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
+    {
+      _id: 'task12 id',
+      title: 'Task 12 title',
       order: 1,
       boardId: 'board_id',
       columnId: 'column 1',
@@ -87,7 +205,7 @@ const getTasks = (columnId: string) =>
   Promise.resolve({ json: () => MOCK_TASKS[columnId] }).then((res) => res.json()); //TODO: implement getting tasks by board id;
 
 const fillColumnWithTasks = async (column: ColumnResponse): Promise<ColumnModel> => {
-  const tasks = await getTasks(column._id);
+  const tasks = (await getTasks(column._id)) || [];
   return {
     ...column,
     tasks,
@@ -114,7 +232,9 @@ export const Board = (): JSX.Element => {
     <Container centered main growing>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
-        <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+        <div className={classes.board__content}>
+          <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+        </div>
       </div>
     </Container>
   );
