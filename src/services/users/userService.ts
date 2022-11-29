@@ -18,6 +18,12 @@ const getUserById = async (id: string): Promise<UserResponseData[] | ApiServiceE
     .then(({ data }) => data as UserResponseData[])
     .catch(handleUserServiceErrors);
 
+const deleteUserById = async (id: string): Promise<UserResponseData | ApiServiceError> =>
+  axios
+    .delete(`${endpoint}/${id}`)
+    .then(({ data }) => data as UserResponseData)
+    .catch(handleUserServiceErrors);
+
 const updateUserById = async (
   id: string,
   userData: UserData
@@ -44,4 +50,4 @@ const handleUserServiceErrors = (error: AxiosError): ApiServiceError => {
   return errors.fallbackError;
 };
 
-export { getAllUsers, getUserById, updateUserById };
+export { getAllUsers, getUserById, deleteUserById, updateUserById };
