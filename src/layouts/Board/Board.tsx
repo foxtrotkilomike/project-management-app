@@ -232,7 +232,9 @@ export const Board = (): JSX.Element => {
     <Container centered main growing>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
-        <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+        <div className={classes.board__content}>
+          <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+        </div>
       </div>
     </Container>
   );

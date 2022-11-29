@@ -10,4 +10,8 @@
   &__title {
     margin-bottom: $margin-lg;
   }
+  &__content {
+    overflow-x: scroll;
+    width: 100%;
+  }
 }
