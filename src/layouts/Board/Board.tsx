@@ -8,7 +8,7 @@ import BoardColumnsWrapper from './BoardColumnsWrapper';
 // TODO: get rid of MOCKED CONSTANTS
 
 const MOCK_BOARD = { title: 'Title', _id: 'board_id', owner: 'owner', users: ['user1', 'user2'] };
-const MOCK_COLUMNS: ColumnResponseType[] = [
+const MOCK_COLUMNS: ColumnResponse[] = [
   {
     _id: 'column 1',
     title: 'column 1',
@@ -28,7 +28,7 @@ const MOCK_COLUMNS: ColumnResponseType[] = [
     boardId: 'board_id',
   },
 ];
-const MOCK_TASKS: Record<string, TaskResponseType[]> = {
+const MOCK_TASKS: Record<string, TaskResponse[]> = {
   // Just mocked data for simulating getting tasks by columnId
   'column 1': [
     {
@@ -86,7 +86,7 @@ const getColumns = (boardId: string) =>
 const getTasks = (columnId: string) =>
   Promise.resolve({ json: () => MOCK_TASKS[columnId] }).then((res) => res.json()); //TODO: implement getting tasks by board id;
 
-const fillColumnWithTasks = async (column: ColumnResponseType): Promise<ColumnModel> => {
+const fillColumnWithTasks = async (column: ColumnResponse): Promise<ColumnModel> => {
   const tasks = await getTasks(column._id);
   return {
     ...column,
@@ -96,7 +96,7 @@ const fillColumnWithTasks = async (column: ColumnResponseType): Promise<ColumnMo
 
 export const Board = (): JSX.Element => {
   const boardId = usePathnameEnding();
-  const [board, setBoard] = useState<BoardResponseType | null>(null);
+  const [board, setBoard] = useState<BoardResponse | null>(null);
   const [columns, setColumns] = useState<ColumnModel[]>([]);
 
   useEffect(() => {
@@ -120,14 +120,14 @@ export const Board = (): JSX.Element => {
   );
 };
 
-export type BoardResponseType = {
+export type BoardResponse = {
   _id: string;
   title: string;
   owner: string;
   users: string[];
 };
 
-export type ColumnResponseType = {
+export type ColumnResponse = {
   _id: string;
   title: string;
   order: number;
@@ -139,10 +139,10 @@ export type ColumnModel = {
   title: string;
   order: number;
   boardId: string;
-  tasks: TaskResponseType[];
+  tasks: TaskResponse[];
 };
 
-export type TaskResponseType = {
+export type TaskResponse = {
   _id: string;
   title: string;
   order: number;

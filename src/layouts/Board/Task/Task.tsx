@@ -26,8 +26,8 @@ export const Task = (props: ITask): JSX.Element => {
     <li>
       <div
         className={classes.task}
-        onClick={(e) => openModal(e)}
-        onKeyPress={(e) => openModal(e)}
+        onClick={openModal}
+        onKeyPress={openModal}
         role="button"
         tabIndex={0}
       >
