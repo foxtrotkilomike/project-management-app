@@ -1,9 +1,12 @@
 @import "../../styles/constants";
 
-.root {
+.board {
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
   justify-content: center;
-  align-items: center;
+  padding: $padding-lg 0;
+  &__title {
+    margin-bottom: $margin-lg;
+  }
 }

@@ -34,7 +34,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
             </Button>
           ) : (
             <Button className={iconClassNames} variant="outline-danger" onClick={onRemove}>
-              <img src={TrashcanIcon} alt="Remove" />
+              <img src={TrashcanIcon} alt="trashcan" />
             </Button>
           )}
         </div>

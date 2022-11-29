@@ -1,0 +1,11 @@
+@import '../../../styles/constants.scss';
+
+.columnsWrapper {
+  display: flex;
+  overflow-x: scroll;
+  align-items: flex-start;
+  padding: 0;
+  &__add {
+    background-color: $color-bg-light;
+  }
+}
