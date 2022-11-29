@@ -1,8 +1,7 @@
-import { AxiosError } from 'axios';
 import axios, { Endpoints } from '../api';
 import { UserData, UserResponseData } from './types';
-import { ApiError, ServerErrorResponse } from '../../config/types';
-import { apiErrors } from '../../config/data';
+import { ApiError } from '../../config/types';
+import { handleApiErrors } from '../handleApiErrors';
 
 const endpoint = Endpoints.users;
 
@@ -10,19 +9,19 @@ const getAllUsers = async (): Promise<UserResponseData[] | ApiError> =>
   axios
     .get(endpoint)
     .then(({ data }) => data as UserResponseData[])
-    .catch(handleUserServiceErrors);
+    .catch(handleApiErrors);
 
 const getUserById = async (id: string): Promise<UserResponseData | ApiError> =>
   axios
     .get(`${endpoint}/${id}`)
     .then(({ data }) => data as UserResponseData)
-    .catch(handleUserServiceErrors);
+    .catch(handleApiErrors);
 
 const deleteUserById = async (id: string): Promise<UserResponseData | ApiError> =>
   axios
     .delete(`${endpoint}/${id}`)
     .then(({ data }) => data as UserResponseData)
-    .catch(handleUserServiceErrors);
+    .catch(handleApiErrors);
 
 const updateUserById = async (
   id: string,
@@ -31,23 +30,6 @@ const updateUserById = async (
   axios
     .put(`${endpoint}/${id}`, userData)
     .then(({ data }) => data as UserResponseData)
-    .catch(handleUserServiceErrors);
-
-const handleUserServiceErrors = (error: AxiosError): ApiError => {
-  const { response, request } = error;
-
-  if (error.isAxiosError) {
-    if (response) {
-      return {
-        code: response.status,
-        message: (response.data as ServerErrorResponse).message,
-      };
-    } else if (request) {
-      return apiErrors.serverNotResponding;
-    }
-  }
-
-  return apiErrors.fallbackError;
-};
+    .catch(handleApiErrors);
 
 export { getAllUsers, getUserById, deleteUserById, updateUserById };
