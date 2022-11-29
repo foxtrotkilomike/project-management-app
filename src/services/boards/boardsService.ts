@@ -23,4 +23,10 @@ const getBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
     .then(({ data }) => data as BoardsResponse)
     .catch(handleApiErrors);
 
-export { getAllBoards, createBoard, getBoardById };
+const updateBoardById = (id: string, board: Board): Promise<BoardsResponse | ApiError> =>
+  axios
+    .put(`${endpoint.base}/${id}`, board)
+    .then(({ data }) => data as BoardsResponse)
+    .catch(handleApiErrors);
+
+export { getAllBoards, createBoard, getBoardById, updateBoardById };
