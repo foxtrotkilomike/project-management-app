@@ -114,7 +114,7 @@ export const Board = (): JSX.Element => {
     <Container centered main growing>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
-        <BoardColumnsWrapper>{renderColumns.length ? renderColumns : null}</BoardColumnsWrapper>
+        <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
       </div>
     </Container>
   );
