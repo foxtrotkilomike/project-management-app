@@ -29,6 +29,12 @@ const getBoardsByIds = (ids: string[]): Promise<BoardsResponse[] | ApiError> =>
     .then(({ data }) => data as BoardsResponse[])
     .catch(handleApiErrors);
 
+const getBoardsByUserId = (id: string): Promise<BoardsResponse[] | ApiError> =>
+  axios
+    .get(`${endpoint.set}/${id}`)
+    .then(({ data }) => data as BoardsResponse[])
+    .catch(handleApiErrors);
+
 const deleteBoardById = (id: string): Promise<BoardsResponse | ApiError> =>
   axios
     .delete(`${endpoint.base}/${id}`)
@@ -46,6 +52,7 @@ export {
   createBoard,
   getBoardById,
   getBoardsByIds,
+  getBoardsByUserId,
   deleteBoardById,
   updateBoardById,
 };
