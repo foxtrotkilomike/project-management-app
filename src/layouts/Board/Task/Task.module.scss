@@ -4,9 +4,12 @@
   padding: $padding-sm $padding-md;
   border-radius: $border-radius-sm;
   box-shadow: 0px 2px 8px -2px $color-shadow;
-  margin: $margin-xxs;
+  margin-right: $margin-xs;
   margin-bottom: $margin-md;
   background-color: $color-bg-light;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &__title {
     font-size: $font-size-lg;
     font-family: $font-family-primary;
