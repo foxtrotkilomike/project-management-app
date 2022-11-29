@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAppData } from './authService';
 
 export const Endpoints = {
   auth: {
@@ -6,11 +7,20 @@ export const Endpoints = {
     signUp: '/signup',
     signIn: '/signin',
   },
+  users: '/users',
 };
 
-const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+const AxiosConfig = {
+  baseURL: 'https://pm-app-backend.onrender.com',
   timeout: 5000,
+};
+
+export const authInstance = axios.create(AxiosConfig);
+export const instance = axios.create(AxiosConfig);
+
+instance.interceptors.request.use((config) => {
+  config.headers = { Authorization: `Bearer ${getAppData('token')}` };
+  return config;
 });
 
 export default instance;

@@ -78,6 +78,16 @@ type JWTData = {
   login: string;
 };
 
+type ServerErrorResponse = {
+  statusCode: string;
+  message: string;
+};
+
+type ApiError = {
+  code: number;
+  message: string;
+};
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -89,4 +99,6 @@ export type {
   SignInForm,
   SignUpData,
   SignInData,
+  ServerErrorResponse,
+  ApiError,
 };

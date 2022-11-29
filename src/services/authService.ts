@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 
-import axiosInstance, { Endpoints } from './api';
+import { authInstance, Endpoints } from './api';
 import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
 import { ResponseStatus } from '../config/constants';
 import { loginFormData } from '../config/data';
@@ -11,7 +11,7 @@ const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
   const { base: baseUrl, signUp, signIn } = Endpoints.auth;
   const authEndpoint = type === 'signUp' ? signUp : signIn;
   const url = `${baseUrl}${authEndpoint}`;
-  return axiosInstance.post(url, data);
+  return authInstance.post(url, data);
 };
 
 const handleAuthErrors = (
