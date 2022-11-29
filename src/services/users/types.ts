@@ -1,13 +1,13 @@
-type UserData = {
+type User = {
   name: string;
   login: string;
   password: string;
 };
 
-type UserResponseData = {
+type UserResponse = {
   _id: string;
   name: string;
   login: string;
 };
 
-export type { UserData, UserResponseData };
+export type { User, UserResponse };
