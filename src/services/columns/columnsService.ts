@@ -4,7 +4,7 @@ import { ColumnsResponse, CreatedColumn } from './types';
 import { handleApiErrors } from '../handleApiErrors';
 
 const boardsEndpoint = Endpoints.boards.base;
-const { base: columnsBaseEndpoint } = Endpoints.columns;
+const { base: columnsBaseEndpoint, set: columnsSetEndpoint } = Endpoints.columns;
 
 const createColumnsUrl = (boardId: string, columnId?: string) =>
   columnId
@@ -69,4 +69,24 @@ const deleteColumnById = async (
     .catch(handleApiErrors);
 };
 
-export { getColumns, createColumn, getColumnById, updateColumnById, deleteColumnById };
+const getColumnsByIds = async (columnIds: string[]): Promise<ColumnsResponse[] | ApiError> =>
+  axios
+    .get(columnsSetEndpoint, { params: { ids: columnIds.join(',') } })
+    .then(({ data }) => data as ColumnsResponse[])
+    .catch(handleApiErrors);
+
+const getColumnsByUserId = async (userId: string): Promise<ColumnsResponse[] | ApiError> =>
+  axios
+    .get(columnsSetEndpoint, { params: { userId } })
+    .then(({ data }) => data as ColumnsResponse[])
+    .catch(handleApiErrors);
+
+export {
+  getColumns,
+  createColumn,
+  getColumnById,
+  updateColumnById,
+  deleteColumnById,
+  getColumnsByIds,
+  getColumnsByUserId,
+};
