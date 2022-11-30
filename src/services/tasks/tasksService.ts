@@ -12,15 +12,6 @@ const createTasksUrl = (boardId: string, columnId: string, tasksId?: string) => 
   return tasksId ? `${baseUrl}/${tasksId}` : baseUrl;
 };
 
-const getTasks = async (boardId: string, columnId: string): Promise<TasksResponse[] | ApiError> => {
-  const url = createTasksUrl(boardId, columnId);
-
-  return axios
-    .get(url)
-    .then(({ data }) => data as TasksResponse[])
-    .catch(handleApiErrors);
-};
-
 const createTask = async (
   boardId: string,
   columnId: string,
@@ -34,6 +25,15 @@ const createTask = async (
     .catch(handleApiErrors);
 };
 
+const getTasks = async (boardId: string, columnId: string): Promise<TasksResponse[] | ApiError> => {
+  const url = createTasksUrl(boardId, columnId);
+
+  return axios
+    .get(url)
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+};
+
 const getTaskById = async (
   boardId: string,
   columnId: string,
@@ -43,33 +43,6 @@ const getTaskById = async (
 
   return axios
     .get(url)
-    .then(({ data }) => data as TasksResponse)
-    .catch(handleApiErrors);
-};
-
-const updateTask = async (
-  boardId: string,
-  columnId: string,
-  taskId: string,
-  task: UpdatedTask
-): Promise<TasksResponse | ApiError> => {
-  const url = createTasksUrl(boardId, columnId, taskId);
-
-  return axios
-    .put(url, task)
-    .then(({ data }) => data as TasksResponse)
-    .catch(handleApiErrors);
-};
-
-const deleteTask = async (
-  boardId: string,
-  columnId: string,
-  taskId: string
-): Promise<TasksResponse | ApiError> => {
-  const url = createTasksUrl(boardId, columnId, taskId);
-
-  return axios
-    .delete(url)
     .then(({ data }) => data as TasksResponse)
     .catch(handleApiErrors);
 };
@@ -92,11 +65,44 @@ const getTasksBySearch = async (search: string): Promise<TasksResponse[] | ApiEr
     .then(({ data }) => data as TasksResponse[])
     .catch(handleApiErrors);
 
+const getTasksByBoardId = async (boardId: string): Promise<TasksResponse[] | ApiError> =>
+  axios
+    .get(`${tasksSetEndpoint}/${boardId}`)
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+
+const updateTask = async (
+  boardId: string,
+  columnId: string,
+  taskId: string,
+  task: UpdatedTask
+): Promise<TasksResponse | ApiError> => {
+  const url = createTasksUrl(boardId, columnId, taskId);
+
+  return axios
+    .put(url, task)
+    .then(({ data }) => data as TasksResponse)
+    .catch(handleApiErrors);
+};
+
 const updateTasksSet = async (tasksSet: UpdatedSetTask[]): Promise<TasksResponse[] | ApiError> =>
   axios
     .patch(tasksSetEndpoint, tasksSet)
     .then(({ data }) => data as TasksResponse[])
     .catch(handleApiErrors);
+
+const deleteTask = async (
+  boardId: string,
+  columnId: string,
+  taskId: string
+): Promise<TasksResponse | ApiError> => {
+  const url = createTasksUrl(boardId, columnId, taskId);
+
+  return axios
+    .delete(url)
+    .then(({ data }) => data as TasksResponse)
+    .catch(handleApiErrors);
+};
 
 export {
   getTasks,
@@ -108,4 +114,5 @@ export {
   getTasksByUserId,
   getTasksBySearch,
   updateTasksSet,
+  getTasksByBoardId,
 };
