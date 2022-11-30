@@ -16,6 +16,10 @@ export const Endpoints = {
     base: 'columns',
     set: '/columnsSet',
   },
+  tasks: {
+    base: 'tasks',
+    set: '/tasksSet',
+  },
 };
 
 const AxiosConfig = {
