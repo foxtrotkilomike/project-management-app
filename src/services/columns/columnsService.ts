@@ -57,4 +57,16 @@ const updateColumnById = async (
     .catch(handleApiErrors);
 };
 
-export { getColumns, createColumn, getColumnById, updateColumnById };
+const deleteColumnById = async (
+  boardId: string,
+  columnId: string
+): Promise<ColumnsResponse | ApiError> => {
+  const url = createColumnsUrl(boardId, columnId);
+
+  return axios
+    .delete(url)
+    .then(({ data }) => data as ColumnsResponse)
+    .catch(handleApiErrors);
+};
+
+export { getColumns, createColumn, getColumnById, updateColumnById, deleteColumnById };
