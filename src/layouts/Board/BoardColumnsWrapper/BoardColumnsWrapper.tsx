@@ -17,7 +17,7 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
   };
   return (
     <ul className={classes.columnsWrapper}>
-      {!children && <BoardColumn title="New column" tasks={[]} />}
+      {!children && <BoardColumn _id={'new column'} title="New column" tasks={[]} />}
       {children}
       <li>
         <button className={classes.columnsWrapper__add} onClick={addColumn}>

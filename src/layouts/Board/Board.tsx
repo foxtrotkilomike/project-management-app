@@ -4,6 +4,7 @@ import { usePathnameEnding } from '../../hooks/usePathnameEnding';
 import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 // TODO: get rid of MOCKED CONSTANTS
 
@@ -172,7 +173,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
   ],
   'column 2': [
     {
-      _id: 'task1 id',
+      _id: 'task1 id col2',
       title: 'Task 1 col 2 title',
       order: 1,
       boardId: 'board_id',
@@ -184,7 +185,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
   ],
   'column 3': [
     {
-      _id: 'task1 id',
+      _id: 'task1 id col3',
       title: 'Task 1 col 3 title',
       order: 1,
       boardId: 'board_id',
@@ -227,13 +228,20 @@ export const Board = (): JSX.Element => {
     });
   }, []);
 
-  const renderColumns = columns.map((column) => <BoardColumn key={column._id} {...column} />);
+  const renderColumns = columns.map((column, index) => (
+    <BoardColumn key={column._id} {...column} index={index} />
+  ));
+  const onDragEnd = (result: DropResult) => {
+    console.log(result);
+  };
   return (
     <Container centered main growing>
       <div className={classes.board}>
         <h1 className={classes.board__title}>{board?.title}</h1>
         <div className={classes.board__content}>
-          <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+          </DragDropContext>
         </div>
       </div>
     </Container>
