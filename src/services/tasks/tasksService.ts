@@ -80,4 +80,18 @@ const getTasksByIds = async (tasksIds: string[]): Promise<TasksResponse[] | ApiE
     .then(({ data }) => data as TasksResponse[])
     .catch(handleApiErrors);
 
-export { getTasks, createTask, getTaskById, updateTask, deleteTask, getTasksByIds };
+const getTasksByUserId = async (userId: string): Promise<TasksResponse[] | ApiError> =>
+  axios
+    .get(tasksSetEndpoint, { params: { userId } })
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+
+export {
+  getTasks,
+  createTask,
+  getTaskById,
+  updateTask,
+  deleteTask,
+  getTasksByIds,
+  getTasksByUserId,
+};
