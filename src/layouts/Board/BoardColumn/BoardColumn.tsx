@@ -26,7 +26,10 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
             <h4 className={classes.column__title}>{title}</h4>
             <div className={classes.column__badge}>{tasks.length}</div>
           </div>
-          <ul className={classes.column__tasksWrapper}>{renderTasks}</ul>
+          <ul className={classes.column__tasksWrapper}>
+            {renderTasks}
+            {provided.placeholder}
+          </ul>
           <div className={classes.column__footer}>
             <Button className={classes.column__add} variant="primary" onClick={openModal}>
               + Add Task
