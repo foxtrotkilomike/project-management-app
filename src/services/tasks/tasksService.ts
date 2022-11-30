@@ -1,6 +1,6 @@
 import axios, { Endpoints } from '../api';
 import { ApiError } from '../../config/types';
-import { TasksResponse } from './types';
+import { CreatedTask, TasksResponse } from './types';
 import { handleApiErrors } from '../handleApiErrors';
 
 const boardsEndpoint = Endpoints.boards.base;
@@ -21,4 +21,17 @@ const getTasks = async (boardId: string, columnId: string): Promise<TasksRespons
     .catch(handleApiErrors);
 };
 
-export { getTasks };
+const createTask = async (
+  boardId: string,
+  columnId: string,
+  task: CreatedTask
+): Promise<TasksResponse | ApiError> => {
+  const url = createTasksUrl(boardId, columnId);
+
+  return axios
+    .post(url, task)
+    .then(({ data }) => data as TasksResponse)
+    .catch(handleApiErrors);
+};
+
+export { getTasks, createTask };
