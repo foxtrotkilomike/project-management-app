@@ -5,6 +5,7 @@ import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { end } from '@popperjs/core';
 
 // TODO: get rid of MOCKED CONSTANTS
 
@@ -13,19 +14,19 @@ const MOCK_COLUMNS: ColumnResponse[] = [
   {
     _id: 'column 1',
     title: 'column 1',
-    order: 1,
+    order: 0,
     boardId: 'board_id',
   },
   {
     _id: 'column 2',
     title: 'column 2',
-    order: 2,
+    order: 1,
     boardId: 'board_id',
   },
   {
     _id: 'column 3',
     title: 'column 3',
-    order: 3,
+    order: 2,
     boardId: 'board_id',
   },
   {
@@ -37,19 +38,29 @@ const MOCK_COLUMNS: ColumnResponse[] = [
   {
     _id: 'column 5',
     title: 'column 5',
-    order: 3,
+    order: 4,
     boardId: 'board_id',
   },
   {
     _id: 'column 6',
     title: 'column 6',
-    order: 3,
+    order: 5,
     boardId: 'board_id',
   },
 ];
 const MOCK_TASKS: Record<string, TaskResponse[]> = {
   // Just mocked data for simulating getting tasks by columnId
   'column 1': [
+    {
+      _id: 'task0 id',
+      title: 'Task title',
+      order: 0,
+      boardId: 'board_id',
+      columnId: 'column 1',
+      description: 'decription of task',
+      userId: 'user id',
+      users: ['Alina', 'Phil', 'Stas', 'Nastya'],
+    },
     {
       _id: 'task1 id',
       title: 'Task 1 title',
@@ -63,7 +74,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task2 id',
       title: 'Task 2 title',
-      order: 1,
+      order: 2,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -73,7 +84,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task3 id',
       title: 'Task 3 title',
-      order: 1,
+      order: 3,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -83,7 +94,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task4 id',
       title: 'Task 4 title',
-      order: 1,
+      order: 4,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -93,7 +104,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task5 id',
       title: 'Task 5 title',
-      order: 1,
+      order: 5,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -103,7 +114,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task6 id',
       title: 'Task 6 title',
-      order: 1,
+      order: 6,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -113,7 +124,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task7 id',
       title: 'Task 7 title',
-      order: 1,
+      order: 7,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -123,7 +134,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task8 id',
       title: 'Task 8 title',
-      order: 1,
+      order: 8,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -133,7 +144,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task9 id',
       title: 'Task 9 title',
-      order: 1,
+      order: 9,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -143,7 +154,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task10 id',
       title: 'Task 10 title',
-      order: 1,
+      order: 10,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -153,7 +164,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task11 id',
       title: 'Task 11 title',
-      order: 1,
+      order: 11,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -163,7 +174,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task12 id',
       title: 'Task 12 title',
-      order: 1,
+      order: 12,
       boardId: 'board_id',
       columnId: 'column 1',
       description: 'decription of task',
@@ -175,7 +186,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task1 id col2',
       title: 'Task 1 col 2 title',
-      order: 1,
+      order: 0,
       boardId: 'board_id',
       columnId: 'column 2',
       description: 'decription of task',
@@ -187,7 +198,7 @@ const MOCK_TASKS: Record<string, TaskResponse[]> = {
     {
       _id: 'task1 id col3',
       title: 'Task 1 col 3 title',
-      order: 1,
+      order: 0,
       boardId: 'board_id',
       columnId: 'column 3',
       description: 'decription of task',
@@ -222,7 +233,7 @@ export const Board = (): JSX.Element => {
     getBoard(boardId).then((board) => setBoard(board));
     getColumns(boardId).then(async (columns) => {
       const columnModels = await Promise.all(
-        columns.map(async (column) => fillColumnWithTasks(column))
+        columns.map(async (column) => await fillColumnWithTasks(column))
       );
       setColumns(columnModels);
     });
@@ -232,8 +243,43 @@ export const Board = (): JSX.Element => {
     <BoardColumn key={column._id} {...column} index={index} />
   ));
   const onDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
+    }
+    const newColumns = [...columns];
+    const startColumn = newColumns.find(
+      (column) => column._id === source.droppableId
+    ) as ColumnModel;
+    const endColumn = newColumns.find(
+      (column) => column._id === destination.droppableId
+    ) as ColumnModel;
+    console.log('start ', startColumn);
+    console.log('end ', endColumn);
+    // startColumn?.tasks.splice(source.index, 1);
+    // const dragged = startColumn?.tasks[source.index] as TaskResponse;
+    // console.log('dragged, ', dragged);
+    // endColumn?.tasks.splice(destination.index, 0, dragged);
     console.log(result);
+    // setColumns(newColumns);
+    if (destination.droppableId === source.droppableId) {
+      const newTasks = [...startColumn.tasks];
+      const [task] = newTasks.splice(source.index, 1);
+      newTasks.splice(destination.index, 0, task);
+      startColumn.tasks = newTasks;
+      console.log('newTasks ', newTasks);
+      setColumns(newColumns);
+    } else {
+      const newStartTasks = [...startColumn.tasks];
+      const newEndTasks = [...endColumn.tasks];
+      const [task] = newStartTasks.splice(source.index, 1);
+      newEndTasks.splice(destination.index, 0, task);
+      startColumn.tasks = newStartTasks;
+      endColumn.tasks = newEndTasks;
+      setColumns(newColumns);
+    }
   };
+
   return (
     <Container centered main growing>
       <div className={classes.board}>
