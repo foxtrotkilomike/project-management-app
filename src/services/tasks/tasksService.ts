@@ -1,6 +1,6 @@
 import axios, { Endpoints } from '../api';
 import { ApiError } from '../../config/types';
-import { CreatedTask, TasksResponse, UpdatedTask } from './types';
+import { CreatedTask, TasksResponse, UpdatedSetTask, UpdatedTask } from './types';
 import { handleApiErrors } from '../handleApiErrors';
 
 const boardsEndpoint = Endpoints.boards.base;
@@ -92,6 +92,12 @@ const getTasksBySearch = async (search: string): Promise<TasksResponse[] | ApiEr
     .then(({ data }) => data as TasksResponse[])
     .catch(handleApiErrors);
 
+const updateTasksSet = async (tasksSet: UpdatedSetTask[]): Promise<TasksResponse[] | ApiError> =>
+  axios
+    .patch(tasksSetEndpoint, tasksSet)
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+
 export {
   getTasks,
   createTask,
@@ -101,4 +107,5 @@ export {
   getTasksByIds,
   getTasksByUserId,
   getTasksBySearch,
+  updateTasksSet,
 };

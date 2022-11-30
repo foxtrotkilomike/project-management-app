@@ -14,5 +14,10 @@ interface TasksResponse extends Task {
 
 type CreatedTask = Omit<Task, 'boardId' | 'columnId'>;
 type UpdatedTask = Omit<Task, 'boardId'>;
+type UpdatedSetTask = {
+  _id: string;
+  order: number;
+  columnId: string;
+};
 
-export type { Task, TasksResponse, CreatedTask, UpdatedTask };
+export type { Task, TasksResponse, CreatedTask, UpdatedTask, UpdatedSetTask };
