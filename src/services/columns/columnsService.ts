@@ -1,6 +1,6 @@
 import axios, { Endpoints } from '../api';
 import { ApiError } from '../../config/types';
-import { ColumnsResponse, CreatedColumn } from './types';
+import { ColumnsResponse, CreatedColumn, UpdatedOrderColumn } from './types';
 import { handleApiErrors } from '../handleApiErrors';
 
 const boardsEndpoint = Endpoints.boards.base;
@@ -81,6 +81,14 @@ const getColumnsByUserId = async (userId: string): Promise<ColumnsResponse[] | A
     .then(({ data }) => data as ColumnsResponse[])
     .catch(handleApiErrors);
 
+const changeColumnsOrder = async (
+  columns: UpdatedOrderColumn[]
+): Promise<ColumnsResponse[] | ApiError> =>
+  axios
+    .patch(columnsSetEndpoint, columns)
+    .then(({ data }) => data as ColumnsResponse[])
+    .catch(handleApiErrors);
+
 export {
   getColumns,
   createColumn,
@@ -89,4 +97,5 @@ export {
   deleteColumnById,
   getColumnsByIds,
   getColumnsByUserId,
+  changeColumnsOrder,
 };

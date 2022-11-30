@@ -11,5 +11,9 @@ interface ColumnsResponse extends Column {
 }
 
 type CreatedColumn = Omit<Column, 'boardId'>;
+type UpdatedOrderColumn = {
+  _id: string;
+  order: number;
+};
 
-export type { Column, ColumnsResponse, CreatedColumn };
+export type { Column, ColumnsResponse, CreatedColumn, UpdatedOrderColumn };
