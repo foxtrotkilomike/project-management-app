@@ -5,7 +5,6 @@ import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { end } from '@popperjs/core';
 
 // TODO: get rid of MOCKED CONSTANTS
 
@@ -243,7 +242,7 @@ export const Board = (): JSX.Element => {
     <BoardColumn key={column._id} {...column} index={index} />
   ));
   const onDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
     if (!destination) {
       return;
     }
