@@ -44,4 +44,17 @@ const getColumnById = async (
     .catch(handleApiErrors);
 };
 
-export { getColumns, createColumn, getColumnById };
+const updateColumnById = async (
+  boardId: string,
+  columnId: string,
+  columnData: CreatedColumn
+): Promise<ColumnsResponse | ApiError> => {
+  const url = createColumnsUrl(boardId, columnId);
+
+  return axios
+    .put(url, columnData)
+    .then(({ data }) => data as ColumnsResponse)
+    .catch(handleApiErrors);
+};
+
+export { getColumns, createColumn, getColumnById, updateColumnById };
