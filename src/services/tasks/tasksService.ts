@@ -5,7 +5,7 @@ import { handleApiErrors } from '../handleApiErrors';
 
 const boardsEndpoint = Endpoints.boards.base;
 const { base: columnsBaseEndpoint } = Endpoints.columns;
-const { base: tasksBaseEndpoint } = Endpoints.tasks;
+const { base: tasksBaseEndpoint, set: tasksSetEndpoint } = Endpoints.tasks;
 
 const createTasksUrl = (boardId: string, columnId: string, tasksId?: string) => {
   const baseUrl = `${boardsEndpoint}/${boardId}/${columnsBaseEndpoint}/${columnId}/${tasksBaseEndpoint}`;
@@ -74,4 +74,10 @@ const deleteTask = async (
     .catch(handleApiErrors);
 };
 
-export { getTasks, createTask, getTaskById, updateTask, deleteTask };
+const getTasksByIds = async (tasksIds: string[]): Promise<TasksResponse[] | ApiError> =>
+  axios
+    .get(tasksSetEndpoint, { params: { ids: tasksIds.join(',') } })
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+
+export { getTasks, createTask, getTaskById, updateTask, deleteTask, getTasksByIds };
