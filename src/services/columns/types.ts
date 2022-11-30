@@ -1,5 +1,3 @@
-import { Col } from 'react-bootstrap';
-
 interface Column {
   title: string;
   order: number;
