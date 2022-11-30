@@ -61,4 +61,17 @@ const updateTask = async (
     .catch(handleApiErrors);
 };
 
-export { getTasks, createTask, getTaskById, updateTask };
+const deleteTask = async (
+  boardId: string,
+  columnId: string,
+  taskId: string
+): Promise<TasksResponse | ApiError> => {
+  const url = createTasksUrl(boardId, columnId, taskId);
+
+  return axios
+    .delete(url)
+    .then(({ data }) => data as TasksResponse)
+    .catch(handleApiErrors);
+};
+
+export { getTasks, createTask, getTaskById, updateTask, deleteTask };
