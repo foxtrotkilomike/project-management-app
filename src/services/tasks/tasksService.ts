@@ -86,6 +86,12 @@ const getTasksByUserId = async (userId: string): Promise<TasksResponse[] | ApiEr
     .then(({ data }) => data as TasksResponse[])
     .catch(handleApiErrors);
 
+const getTasksBySearch = async (search: string): Promise<TasksResponse[] | ApiError> =>
+  axios
+    .get(tasksSetEndpoint, { params: { search } })
+    .then(({ data }) => data as TasksResponse[])
+    .catch(handleApiErrors);
+
 export {
   getTasks,
   createTask,
@@ -94,4 +100,5 @@ export {
   deleteTask,
   getTasksByIds,
   getTasksByUserId,
+  getTasksBySearch,
 };
