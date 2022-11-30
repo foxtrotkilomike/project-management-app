@@ -1,3 +1,5 @@
+import { Col } from 'react-bootstrap';
+
 interface Column {
   title: string;
   order: number;
@@ -8,4 +10,6 @@ interface ColumnsResponse extends Column {
   _id: string;
 }
 
-export type { Column, ColumnsResponse };
+type CreatedColumn = Omit<Column, 'boardId'>;
+
+export type { Column, ColumnsResponse, CreatedColumn };

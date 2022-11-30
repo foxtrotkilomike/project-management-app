@@ -13,14 +13,14 @@ export const Endpoints = {
     set: '/boardsSet',
   },
   columns: {
-    base: '/columns',
+    base: 'columns',
     set: '/columnsSet',
   },
 };
 
 const AxiosConfig = {
   baseURL: 'https://pm-app-backend.onrender.com',
-  timeout: 5000,
+  timeout: 30000,
 };
 
 export const authInstance = axios.create(AxiosConfig);
