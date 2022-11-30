@@ -1,6 +1,7 @@
 import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
-import { LoginForm, LoginPrompt } from './types';
+import { ApiError, LoginForm, LoginPrompt } from './types';
+import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -27,29 +28,87 @@ const footerData = {
 
 const loginFormData: LoginForm = {
   signUp: {
-    userName: 'Name',
-    login: 'Login',
-    password: 'Password',
-    passwordRepeat: 'Repeat password',
-    submitButton: 'Sign up',
-    errors: {
+    inputs: [
+      {
+        type: 'text',
+        name: 'userName',
+        placeholder: 'Name',
+        registerOptions: {
+          required: { value: true, message: 'Name is a required field' },
+        },
+      },
+      {
+        type: 'text',
+        name: 'login',
+        placeholder: 'Login',
+        autoComplete: 'username',
+        registerOptions: {
+          required: { value: true, message: 'Login is a required field' },
+        },
+      },
+      {
+        type: 'password',
+        name: 'password',
+        placeholder: 'Password',
+        autoComplete: 'new-password',
+        registerOptions: {
+          required: { value: true, message: 'Password is a required field' },
+          minLength: {
+            value: MIN_PASSWORD_LENGTH,
+            message: 'Password must be at least 8 characters long',
+          },
+        },
+      },
+      {
+        type: 'password',
+        name: 'repeatedPassword',
+        placeholder: 'Repeat password',
+        autoComplete: 'new-password',
+        registerOptions: {
+          required: { value: true, message: 'Password is a required field' },
+          minLength: {
+            value: MIN_PASSWORD_LENGTH,
+            message: 'Password must be at least 8 characters long',
+          },
+        },
+      },
+    ],
+    submitButtonText: 'Sign up',
+    submissionErrors: {
       userExists: 'User with such login already exists',
-      passwordMismatch: "Passwords don't not match",
+      passwordMismatch: 'Passwords do not match',
     },
   },
   signIn: {
-    login: 'Login',
-    password: 'Password',
-    submitButton: 'Log in',
-    errors: {
-      userDoesNotExists: 'User with such login does not exist',
-      incorrectPassword: 'Password is incorrect',
+    inputs: [
+      {
+        type: 'text',
+        name: 'login',
+        placeholder: 'Login',
+        autoComplete: 'username',
+        registerOptions: {
+          required: { value: true, message: 'Login is a required field' },
+        },
+      },
+      {
+        type: 'password',
+        name: 'password',
+        placeholder: 'Password',
+        autoComplete: 'current-password',
+        registerOptions: {
+          required: { value: true, message: 'Password is a required field' },
+        },
+      },
+    ],
+    submitButtonText: 'Sign in',
+    submissionErrors: {
+      notAuthorized: 'Login or password is incorrect',
     },
   },
-  validationErrors: {
-    userNameRequired: 'User name is a required field',
-    passwordRequired: 'Password is a required field',
-    passwordLength: 'Password must be at least 8 characters long',
+  submissionErrors: {
+    badRequest: 'An error occurred, check your data for correctness',
+    serverNotResponding: 'Server is not responding, please try again later',
+    unknownError: 'Sorry, something went wrong, please try again later',
   },
 };
 
@@ -79,4 +138,23 @@ const selectData: SelectProps[] = [
   },
 ];
 
-export { buttonsText, footerData, loginFormData, loginHeading, loginPromptData, selectData };
+const apiErrors: Record<string, ApiError> = {
+  serverIsNotResponding: {
+    code: ResponseStatus.UNKNOWN_ERROR,
+    message: 'Server is not responding',
+  },
+  fallbackError: {
+    code: ResponseStatus.UNKNOWN_ERROR,
+    message: 'Unknown error',
+  },
+};
+
+export {
+  buttonsText,
+  footerData,
+  loginFormData,
+  loginHeading,
+  loginPromptData,
+  selectData,
+  apiErrors,
+};

@@ -1,35 +1,48 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
+import { RegisterOptions } from 'react-hook-form';
 
 type LoginFormInputs = {
-  id: number;
-  userName: string;
-  password: string;
-};
-
-type SignUpForm = {
   userName: string;
   login: string;
   password: string;
   repeatedPassword: string;
-  submitButton: string;
-  errors: {
+};
+
+type FormInput = {
+  type: string;
+  name: keyof LoginFormInputs;
+  placeholder?: string;
+  autoComplete?: string;
+  registerOptions: RegisterOptions;
+};
+
+interface LoginFormControls {
+  inputs: FormInput[];
+  submitButtonText: string;
+}
+
+interface ApiErrors {
+  serverNotResponding: string;
+  badRequest: string;
+  unknownError: string;
+}
+
+interface SignUpForm extends LoginFormControls {
+  submissionErrors: {
     userExists: string;
     passwordMismatch: string;
   };
-};
+}
 
-type SignInForm = {
-  login: string;
-  password: string;
-  submitButton: string;
-  errors: {
-    userDoesNotExists: string;
-    incorrectPassword: string;
+interface SignInForm extends Omit<LoginFormControls, 'userName' | 'repeatedPassword'> {
+  submissionErrors: {
+    notAuthorized: string;
   };
-};
+}
 
 type FormValidationErrors = {
   userNameRequired: string;
+  loginRequired: string;
   passwordRequired: string;
   passwordLength: string;
 };
@@ -37,7 +50,7 @@ type FormValidationErrors = {
 type LoginForm = {
   signUp: SignUpForm;
   signIn: SignInForm;
-  validationErrors: FormValidationErrors;
+  submissionErrors: ApiErrors;
 };
 
 type LoginFormType = 'signUp' | 'signIn';
@@ -47,12 +60,45 @@ type LoginPrompt = {
   signIn: LoginPromptData;
 };
 
+type SignUpData = {
+  name: string;
+  login: string;
+  password: string;
+};
+
+type SignInData = {
+  login: string;
+  password: string;
+};
+
+type JWTData = {
+  exp: string;
+  iat: string;
+  id: string;
+  login: string;
+};
+
+type ServerErrorResponse = {
+  statusCode: string;
+  message: string;
+};
+
+type ApiError = {
+  code: number;
+  message: string;
+};
+
 export type {
-  LoginFormInputs,
-  SignUpForm,
-  SignInForm,
   FormValidationErrors,
+  JWTData,
   LoginForm,
+  LoginFormInputs,
   LoginFormType,
   LoginPrompt,
+  SignUpForm,
+  SignInForm,
+  SignUpData,
+  SignInData,
+  ServerErrorResponse,
+  ApiError,
 };
