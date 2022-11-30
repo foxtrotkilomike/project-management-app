@@ -12,6 +12,10 @@ export const Endpoints = {
     base: '/boards',
     set: '/boardsSet',
   },
+  columns: {
+    base: '/columns',
+    set: '/columnsSet',
+  },
 };
 
 const AxiosConfig = {
