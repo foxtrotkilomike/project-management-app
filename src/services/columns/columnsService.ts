@@ -32,4 +32,16 @@ const createColumn = async (
     .catch(handleApiErrors);
 };
 
-export { getColumns, createColumn };
+const getColumnById = async (
+  boardId: string,
+  columnId: string
+): Promise<ColumnsResponse | ApiError> => {
+  const url = createColumnsUrl(boardId, columnId);
+
+  return axios
+    .get(url)
+    .then(({ data }) => data as ColumnsResponse)
+    .catch(handleApiErrors);
+};
+
+export { getColumns, createColumn, getColumnById };
