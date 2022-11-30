@@ -34,4 +34,17 @@ const createTask = async (
     .catch(handleApiErrors);
 };
 
-export { getTasks, createTask };
+const getTaskById = async (
+  boardId: string,
+  columnId: string,
+  taskId: string
+): Promise<TasksResponse | ApiError> => {
+  const url = createTasksUrl(boardId, columnId, taskId);
+
+  return axios
+    .get(url)
+    .then(({ data }) => data as TasksResponse)
+    .catch(handleApiErrors);
+};
+
+export { getTasks, createTask, getTaskById };
