@@ -245,14 +245,18 @@ export const Board = (): JSX.Element => {
   const renderColumns = columns.map((column, index) => (
     <BoardColumn key={column._id} {...column} index={index} />
   ));
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
+
     if (!destination) {
       return;
     }
+
     if (type === 'tasks') {
       setColumns(updateTasksInColumns(columns, source, destination));
     }
+
     if (type === 'column') {
       setColumns(reorderList(columns, source, destination));
     }

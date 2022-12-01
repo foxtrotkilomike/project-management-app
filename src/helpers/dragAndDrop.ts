@@ -11,6 +11,7 @@ export function reorderList<T>(
   listCopy.splice(destination.index, 0, dragged);
   return listCopy;
 }
+
 export const updateTasksInColumns = (
   columns: ColumnModel[],
   source: DraggableLocation,
@@ -23,6 +24,7 @@ export const updateTasksInColumns = (
   const destinationColumn = columnsList.find(
     (column) => column._id === destination.droppableId
   ) as ColumnModel;
+
   if (destination.droppableId === source.droppableId) {
     const tasksList = reorderList(sourceColumn.tasks, source, destination);
     sourceColumn.tasks = tasksList;
