@@ -6,8 +6,12 @@
   box-shadow: 0px 2px 8px -2px $color-shadow;
   margin: $margin-xxs $margin-xs $margin-md $margin-xxs;
   background-color: $color-bg-light;
+  cursor: grab;
   &:last-child {
     margin-bottom: 0;
+  }
+  &__content {
+    cursor: inherit;
   }
   &__title {
     font-size: $font-size-lg;

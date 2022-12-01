@@ -2,9 +2,10 @@ import { useState } from 'react';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
 import classes from './Task.module.scss';
+import { Draggable } from 'react-beautiful-dnd';
 
 export const Task = (props: ITask): JSX.Element => {
-  const { title, description } = props;
+  const { title, description, _id: id, index } = props;
   const [isModalActive, setIsModalActive] = useState(false);
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
@@ -23,16 +24,31 @@ export const Task = (props: ITask): JSX.Element => {
   };
 
   return (
-    <li className={classes.task}>
-      <div onClick={openModal} onKeyPress={openModal} role="button" tabIndex={0}>
-        <h4 className={classes.task__title}>{title}</h4>
-      </div>
-      {isModalActive && (
-        <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
-          <p> {description}</p>
-        </Modal>
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <li
+          className={classes.task}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <div
+            className={classes.task__content}
+            onClick={openModal}
+            onKeyPress={openModal}
+            role="button"
+            tabIndex={0}
+          >
+            <h4 className={classes.task__title}>{title}</h4>
+          </div>
+          {isModalActive && (
+            <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
+              <p> {description}</p>
+            </Modal>
+          )}
+        </li>
       )}
-    </li>
+    </Draggable>
   );
 };
 
@@ -40,4 +56,5 @@ export interface ITask {
   _id: string;
   title: string;
   description: string;
+  index: number;
 }

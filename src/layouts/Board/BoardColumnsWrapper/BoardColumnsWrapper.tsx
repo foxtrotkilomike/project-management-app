@@ -3,6 +3,7 @@ import plusButton from '../../../assets/svg/plus.svg';
 import Modal from '../../../commons/Modal';
 import { useState } from 'react';
 import BoardColumn from '../BoardColumn';
+import { Droppable } from 'react-beautiful-dnd';
 
 export const BoardColumnsWrapper = (props: wrapperProps) => {
   const children = props.children;
@@ -16,19 +17,24 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
     setIsModalActive(false);
   };
   return (
-    <ul className={classes.columnsWrapper}>
-      {!children && <BoardColumn title="New column" tasks={[]} />}
-      {children}
-      <li>
-        <button className={classes.columnsWrapper__add} onClick={addColumn}>
-          <img src={plusButton} alt="add column" />
-        </button>
-      </li>
-      <Modal isActive={isModalActive} onHide={onHide} title="New column">
-        {/* TODO: add form */}
-        Column adding form
-      </Modal>
-    </ul>
+    <Droppable droppableId="columns" direction="horizontal" type="column">
+      {(provided) => (
+        <ul className={classes.columnsWrapper} {...provided.droppableProps} ref={provided.innerRef}>
+          {!children && <BoardColumn index={0} _id={'new column'} title="New column" tasks={[]} />}
+          {children}
+          <li>
+            <button className={classes.columnsWrapper__add} onClick={addColumn}>
+              <img src={plusButton} alt="add column" />
+            </button>
+          </li>
+          <Modal isActive={isModalActive} onHide={onHide} title="New column">
+            {/* TODO: add form */}
+            Column adding form
+          </Modal>
+          {provided.placeholder}
+        </ul>
+      )}
+    </Droppable>
   );
 };
 
