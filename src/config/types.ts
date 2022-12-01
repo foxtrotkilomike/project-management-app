@@ -95,6 +95,8 @@ type AppData = {
   userId: string;
   userLogin: string;
   userName: string;
+  token: string;
+  expirationTime: string;
 };
 
 export type {
