@@ -1,5 +1,6 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 import { RegisterOptions } from 'react-hook-form';
+import { UserResponse } from '../services/users/types';
 
 type LoginFormInputs = {
   userName: string;
@@ -88,6 +89,14 @@ type ApiError = {
   message: string;
 };
 
+type User = UserResponse;
+
+type AppData = {
+  userId: string;
+  userLogin: string;
+  userName: string;
+};
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -101,4 +110,6 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
+  User,
+  AppData,
 };

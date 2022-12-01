@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 
 import { authInstance, Endpoints } from './api';
-import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
+import { AppData, LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
 import { ResponseStatus } from '../config/constants';
 import { loginFormData } from '../config/data';
 
@@ -59,6 +59,6 @@ const setAppData = (data: Record<string, string>) => {
     window.localStorage.setItem(key, value);
   }
 };
-const getAppData = (key: string) => window.localStorage.getItem(key);
+const getAppData = (key: keyof AppData) => window.localStorage.getItem(key);
 
 export { postAuthData, handleAuthErrors, setAppData, getAppData };
