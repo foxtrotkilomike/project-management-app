@@ -8,6 +8,10 @@ export const Endpoints = {
     signIn: '/signin',
   },
   users: '/users',
+  boards: {
+    base: '/boards',
+    set: '/boardsSet',
+  },
 };
 
 const AxiosConfig = {
