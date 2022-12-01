@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 const App = () => {
   return (
     <div className={classes.root}>
+      {/* TODO add spinner */}
       <Header />
       <Outlet />
       <Footer />
