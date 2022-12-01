@@ -5,6 +5,7 @@ import classes from './Board.module.scss';
 import BoardColumn from './BoardColumn';
 import BoardColumnsWrapper from './BoardColumnsWrapper';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { reorderList, updateTasksInColumns } from '../../helpers/dragAndDrop';
 
 // TODO: get rid of MOCKED CONSTANTS
 
@@ -236,46 +237,24 @@ export const Board = (): JSX.Element => {
       );
       setColumns(columnModels);
     });
+    return () => {
+      //TODO: implement setting tasks and columns changes to backend
+    };
   }, []);
 
   const renderColumns = columns.map((column, index) => (
     <BoardColumn key={column._id} {...column} index={index} />
   ));
   const onDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId, type } = result;
+    const { destination, source, type } = result;
     if (!destination) {
       return;
     }
-    const newColumns = [...columns];
-    const startColumn = newColumns.find(
-      (column) => column._id === source.droppableId
-    ) as ColumnModel;
-    const endColumn = newColumns.find(
-      (column) => column._id === destination.droppableId
-    ) as ColumnModel;
-    console.log('start ', startColumn);
-    console.log('end ', endColumn);
-    // startColumn?.tasks.splice(source.index, 1);
-    // const dragged = startColumn?.tasks[source.index] as TaskResponse;
-    // console.log('dragged, ', dragged);
-    // endColumn?.tasks.splice(destination.index, 0, dragged);
-    console.log(result);
-    // setColumns(newColumns);
-    if (destination.droppableId === source.droppableId) {
-      const newTasks = [...startColumn.tasks];
-      const [task] = newTasks.splice(source.index, 1);
-      newTasks.splice(destination.index, 0, task);
-      startColumn.tasks = newTasks;
-      console.log('newTasks ', newTasks);
-      setColumns(newColumns);
-    } else {
-      const newStartTasks = [...startColumn.tasks];
-      const newEndTasks = [...endColumn.tasks];
-      const [task] = newStartTasks.splice(source.index, 1);
-      newEndTasks.splice(destination.index, 0, task);
-      startColumn.tasks = newStartTasks;
-      endColumn.tasks = newEndTasks;
-      setColumns(newColumns);
+    if (type === 'tasks') {
+      setColumns(updateTasksInColumns(columns, source, destination));
+    }
+    if (type === 'column') {
+      setColumns(reorderList(columns, source, destination));
     }
   };
 
