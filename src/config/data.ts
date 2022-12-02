@@ -6,6 +6,8 @@ import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 const buttonsText = {
   signUp: 'sign up',
   signIn: 'sign in',
+  cancel: 'cancel',
+  submit: 'submit',
 };
 
 const footerData = {

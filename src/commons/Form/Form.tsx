@@ -2,9 +2,10 @@ import classes from './Form.module.scss';
 import { useForm } from 'react-hook-form';
 import { IFormField } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
+import { buttonsText } from '../../config/data';
 
 export const Form = (props: IFormProps) => {
-  const { fields, type: formType } = props;
+  const { fields, type: formType, onFormSubmit } = props;
 
   const getType = () => {
     switch (formType) {
@@ -24,7 +25,10 @@ export const Form = (props: IFormProps) => {
   } = useForm<typeof returned>();
 
   const onSubmit = (data: typeof returned) => {
+    //TODO: implement onSubmit
     console.log(data);
+
+    onFormSubmit();
   };
 
   const renderFields = fields.map((field) => {
@@ -52,10 +56,10 @@ export const Form = (props: IFormProps) => {
         {renderFields}
         <div className={classes.buttons}>
           <Button variant="danger" className={classes.cancel}>
-            CANCEL
+            {buttonsText.cancel}
           </Button>
           <Button variant="success" type="submit" className={classes.submit}>
-            SUBMIT
+            {buttonsText.submit}
           </Button>
         </div>
       </BootstrapForm>
@@ -66,4 +70,5 @@ export const Form = (props: IFormProps) => {
 interface IFormProps {
   fields: IFormField[];
   type: 'column' | 'task';
+  onFormSubmit: () => void;
 }
