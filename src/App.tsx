@@ -6,6 +6,7 @@ import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import { Outlet } from 'react-router-dom';
 import AppContextProvider from './contexts/AppContextProvider';
+import Spinner from './commons/Spinner';
 
 const App = () => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('complete');
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <AppContextProvider>
       <LoadingContext.Provider value={{ loadingStatus, setLoadingStatus }}>
-        {/* TODO add spinner */}
+        {loadingStatus === 'loading' && <Spinner />}
         <div className={classes.root}>
           <Header />
           <Outlet />
