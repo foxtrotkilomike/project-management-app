@@ -94,7 +94,7 @@ type User = UserResponse;
 type AppData = {
   userId: string;
   userLogin: string;
-  userName: string;
+  userName?: string;
   token: string;
   expirationTime: string;
 };
