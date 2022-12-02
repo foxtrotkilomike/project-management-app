@@ -72,4 +72,6 @@ export const routes = {
   PROFILE: '/profile',
 };
 
-export const privateRoutes = [routes.BOARDS, routes.BOARD, routes.PROFILE];
+export const privateRoutes = [routes.BOARDS, routes.BOARD, routes.PROFILE].map((path) =>
+  path.slice(1)
+);
