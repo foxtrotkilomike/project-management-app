@@ -1,6 +1,6 @@
 import classes from './Form.module.scss';
 import { useForm } from 'react-hook-form';
-import { IFormField } from '../../config/types';
+import { IFormField, FormType, ModalForm } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { ElementType } from 'react';
@@ -22,11 +22,11 @@ export const Form = (props: IFormProps) => {
   };
 
   const getControlProps = (field: IFormField) => {
-    const { type, name, placeholder, registerOptions } = field;
+    const { type, name, placeholder, registerOptions, rows } = field;
     if (type === 'textarea') {
       return {
         as: 'textarea' as ElementType,
-        rows: 6,
+        rows,
         placeholder,
         isInvalid: !!errors[name],
         ...register(name, registerOptions),
@@ -74,10 +74,3 @@ interface IFormProps {
   type: FormType;
   onFormSubmit: () => void;
 }
-
-type FormType = 'column' | 'task' | 'board';
-
-type ModalForm = {
-  title: string;
-  description?: string;
-};

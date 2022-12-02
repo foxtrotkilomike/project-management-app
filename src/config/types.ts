@@ -90,9 +90,16 @@ type ApiError = {
 
 export interface IFormField extends Omit<FormInput, 'name'> {
   name: 'title' | 'description';
+  rows?: number;
 }
 type CreationFormData = {
-  [index in 'column' | 'task']: { type: 'column' | 'task'; fields: IFormField[]; title: string };
+  [index in FormType]: { type: FormType; fields: IFormField[]; title: string };
+};
+type FormType = 'column' | 'task' | 'board';
+
+type ModalForm = {
+  title: string;
+  description?: string;
 };
 
 export type {
@@ -110,4 +117,6 @@ export type {
   ApiError,
   FormInput,
   CreationFormData,
+  ModalForm,
+  FormType,
 };
