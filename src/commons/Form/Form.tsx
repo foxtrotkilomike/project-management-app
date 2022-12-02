@@ -3,48 +3,50 @@ import { useForm } from 'react-hook-form';
 import { IFormField } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
+import { ElementType } from 'react';
 
 export const Form = (props: IFormProps) => {
-  const { fields, type: formType, onFormSubmit } = props;
-
-  const getType = () => {
-    switch (formType) {
-      case 'column':
-        return { title: '' };
-      case 'task':
-        return { title: '', description: '' };
-    }
-  };
-
-  const returned = getType();
+  const { fields, onFormSubmit } = props;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<typeof returned>();
+  } = useForm<ModalForm>();
 
-  const onSubmit = (data: typeof returned) => {
+  const onSubmit = (data: ModalForm) => {
     //TODO: implement onSubmit
     console.log(data);
 
     onFormSubmit();
   };
 
-  const renderFields = fields.map((field) => {
+  const getControlProps = (field: IFormField) => {
     const { type, name, placeholder, registerOptions } = field;
+    if (type === 'textarea') {
+      return {
+        as: 'textarea' as ElementType,
+        rows: 6,
+        placeholder,
+        isInvalid: !!errors[name],
+        ...register(name, registerOptions),
+      };
+    } else {
+      return {
+        type: type,
+        placeholder,
+        isInvalid: !!errors[name],
+        ...register(name, registerOptions),
+      };
+    }
+  };
+
+  const renderFields = fields.map((field) => {
     return (
-      <div className={classes.control} key={name}>
-        <BootstrapForm.Control
-          as={type === 'textarea' ? 'textarea' : undefined}
-          rows={type === 'textarea' ? 6 : undefined}
-          type={type !== 'textarea' ? type : undefined}
-          placeholder={placeholder}
-          isInvalid={!!errors[name]}
-          {...register(name, registerOptions)}
-        />
+      <div className={classes.control} key={field.name}>
+        <BootstrapForm.Control {...getControlProps(field)} />
         <BootstrapForm.Control.Feedback type="invalid" className={classes.error}>
-          {errors[name]?.message}
+          {errors[field.name]?.message}
         </BootstrapForm.Control.Feedback>
       </div>
     );
@@ -69,6 +71,13 @@ export const Form = (props: IFormProps) => {
 
 interface IFormProps {
   fields: IFormField[];
-  type: 'column' | 'task';
+  type: FormType;
   onFormSubmit: () => void;
 }
+
+type FormType = 'column' | 'task' | 'board';
+
+type ModalForm = {
+  title: string;
+  description?: string;
+};
