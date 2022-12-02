@@ -88,6 +88,13 @@ type ApiError = {
   message: string;
 };
 
+export interface IFormField extends Omit<FormInput, 'name'> {
+  name: 'title' | 'description';
+}
+type CreationFormData = {
+  [index in 'column' | 'task']: { type: 'column' | 'task'; fields: IFormField[]; title: string };
+};
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -101,4 +108,6 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
+  FormInput,
+  CreationFormData,
 };
