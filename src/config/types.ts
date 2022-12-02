@@ -99,6 +99,8 @@ type AppData = {
   expirationTime: string;
 };
 
+type LoadingStatus = 'loading' | 'complete';
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -114,4 +116,5 @@ export type {
   ApiError,
   User,
   AppData,
+  LoadingStatus,
 };
