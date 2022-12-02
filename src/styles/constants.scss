@@ -7,6 +7,9 @@ $color-secondary: #d54216;
 $color-disabled: #d6d6d6;
 $color-shadow: #939393;
 $color-danger: #ff0000;
+$color-danger-hover: #f96565;
+$color-success: #198b38;
+$color-success-hover: #65b37a;
 $color-error: #ff4545;
 $color-text: #000000;
 $color-text-light: #fffaf8;
@@ -17,6 +20,7 @@ $color-bg-footer: $color-bg-light;
 $color-hover: #ffffff;
 $color-overlay: #3333338c;
 $color-border-active: #e69163;
+$color-modal-bg: #ffeede;
 
 $font-family-primary: 'Nunito', sans-serif;
 
@@ -42,6 +46,7 @@ $padding-xs: 0.325em;
 $padding-sm: 0.65em;
 $padding-md: 1em;
 $padding-lg: 1.25em;
+$padding-l: 1.5em;
 $padding-xl: 2em;
 $padding-xxl: 3em;
 
