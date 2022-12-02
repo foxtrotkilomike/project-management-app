@@ -1,5 +1,6 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 import { RegisterOptions } from 'react-hook-form';
+import { UserResponse } from '../services/users/types';
 
 type LoginFormInputs = {
   userName: string;
@@ -88,6 +89,16 @@ type ApiError = {
   message: string;
 };
 
+type User = UserResponse;
+
+type AppData = {
+  userId: string;
+  userLogin: string;
+  userName?: string;
+  token: string;
+  expirationTime: string;
+};
+
 export interface IFormField extends Omit<FormInput, 'name'> {
   name: 'title' | 'description';
   rows?: number;
@@ -115,6 +126,8 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
+  User,
+  AppData,
   FormInput,
   CreationFormData,
   ModalForm,

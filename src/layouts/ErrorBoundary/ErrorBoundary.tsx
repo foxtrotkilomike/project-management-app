@@ -4,9 +4,10 @@ import { ResponseStatus } from '../../config/constants';
 
 export const ErrorBoundary = ({}: Props): JSX.Element => {
   const error = useRouteError() as Error;
-  console.error(error);
 
   if (isRouteErrorResponse(error)) {
+    console.error(error);
+
     if (error.status === ResponseStatus.NOT_AUTHORIZED) {
       return <p className={classes.root}>You are not authorized to view this page</p>;
     }

@@ -8,11 +8,23 @@ export const Endpoints = {
     signIn: '/signin',
   },
   users: '/users',
+  boards: {
+    base: '/boards',
+    set: '/boardsSet',
+  },
+  columns: {
+    base: 'columns',
+    set: '/columnsSet',
+  },
+  tasks: {
+    base: 'tasks',
+    set: '/tasksSet',
+  },
 };
 
 const AxiosConfig = {
   baseURL: 'https://pm-app-backend.onrender.com',
-  timeout: 5000,
+  timeout: 30000,
 };
 
 export const authInstance = axios.create(AxiosConfig);

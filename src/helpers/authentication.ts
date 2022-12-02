@@ -32,7 +32,7 @@ const retrieveSignInData = (data: LoginFormInputs) => {
 
 const decodeToken = (token: string) => {
   const { exp, iat, id, login } = jwtDecode(token) as JWTData;
-  return { expirationTime: exp, issuedAt: iat, userId: id, login };
+  return { expirationTime: exp, issuedAt: iat, userId: id, userLogin: login };
 };
 
 export { checkPasswordMatch, retrieveSignUpData, retrieveSignInData, decodeToken };

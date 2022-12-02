@@ -38,6 +38,7 @@
     flex-grow: 1;
     overflow-y: auto;
     margin-bottom: 0;
+    min-height: $margin-md;
   }
   &__footer {
     margin-top: $padding-md;
