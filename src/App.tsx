@@ -7,6 +7,7 @@ import AppContextProvider from './contexts/AppContextProvider';
 const App = () => {
   return (
     <AppContextProvider>
+      {/* TODO add spinner */}
       <div className={classes.root}>
         <Header />
         <Outlet />
