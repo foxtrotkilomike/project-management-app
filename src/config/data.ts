@@ -180,6 +180,7 @@ const creationFormData: CreationFormData = {
       {
         type: 'textarea',
         name: 'description',
+        rows: 6,
         placeholder: 'Description',
         registerOptions: {
           required: { value: true, message: 'Description is a required field' },
@@ -187,6 +188,20 @@ const creationFormData: CreationFormData = {
       },
     ],
     title: 'New task',
+  },
+  board: {
+    type: 'board',
+    fields: [
+      {
+        type: 'text',
+        name: 'title',
+        placeholder: 'Title',
+        registerOptions: {
+          required: { value: true, message: 'Title is a required field' },
+        },
+      },
+    ],
+    title: 'New board',
   },
 };
 
