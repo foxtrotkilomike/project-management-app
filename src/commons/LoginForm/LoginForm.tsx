@@ -3,7 +3,7 @@ import { LoginFormInputs, LoginFormType } from '../../config/types';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
@@ -14,7 +14,12 @@ import {
   retrieveSignInData,
   retrieveSignUpData,
 } from '../../helpers/authentication';
-import { handleAuthErrors, postAuthData, setAppData } from '../../services/authService';
+import {
+  checkUserCredentials,
+  handleAuthErrors,
+  postAuthData,
+  setAppData,
+} from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
 
@@ -22,6 +27,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
   const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
+  const isAuthenticatedUser = checkUserCredentials();
 
   const signUp = (data: LoginFormInputs) => {
     // TODO add spinner for data loading process
@@ -56,8 +62,8 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
         case 'signIn':
           if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
 
-          const { userId, login, expirationTime } = decodeToken(response.data.token);
-          setAppData({ token: response.data.token, userId, login, expirationTime });
+          const { userId, userLogin, expirationTime } = decodeToken(response.data.token);
+          setAppData({ token: response.data.token, userId, userLogin, expirationTime });
           navigate(routes.BOARDS);
           break;
 
@@ -98,6 +104,8 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
       );
     });
   };
+
+  if (isAuthenticatedUser) return <Navigate to={routes.BOARDS} replace />;
 
   return (
     <Form onSubmit={handleSubmit((data) => onSubmit(data))} className={classes.loginForm}>
