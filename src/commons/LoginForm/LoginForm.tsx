@@ -11,14 +11,13 @@ import Container from '../Container';
 import ErrorMessage from '../ErrorMessage';
 import {
   checkPasswordMatch,
-  decodeToken,
   retrieveSignInData,
   retrieveSignUpData,
 } from '../../helpers/authentication';
 import { checkUserCredentials, handleAuthErrors, postAuthData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
-import { setAppData } from '../../helpers/handleAppData';
+import { getAppDataFromResponse, setAppData } from '../../helpers/handleAppData';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
@@ -47,7 +46,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
       .finally(() => setLoadingStatus('complete'));
   };
 
-  const handleResponse = (
+  const handleResponse = async (
     response: AxiosResponse | void,
     formType: LoginFormType,
     data: LoginFormInputs
@@ -61,8 +60,8 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
         case 'signIn':
           if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
 
-          const { userId, userLogin, expirationTime } = decodeToken(response.data.token);
-          setAppData({ token: response.data.token, userId, userLogin, expirationTime });
+          const appData = await getAppDataFromResponse(response);
+          setAppData(appData);
           navigate(routes.BOARDS);
           break;
 
