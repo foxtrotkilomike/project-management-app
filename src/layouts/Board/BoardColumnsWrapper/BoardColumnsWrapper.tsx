@@ -28,8 +28,6 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
     closeModal();
   };
 
-  const onCancel = () => {}; // TODO implement
-
   return (
     <Droppable droppableId="columns" direction="horizontal" type="column">
       {(provided) => (
@@ -43,7 +41,7 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
             </button>
           </li>
           <Modal isActive={isModalActive} onHide={closeModal} title={creationFormData.column.title}>
-            <Form {...creationFormData.column} onSubmit={onSubmit} onCancel={onCancel} />
+            <Form {...creationFormData.column} onSubmit={onSubmit} onCancel={closeModal} />
           </Modal>
           {provided.placeholder}
         </ul>
