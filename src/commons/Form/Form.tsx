@@ -8,7 +8,7 @@ import { ColumnModel } from '../../layouts/Board/Board';
 import { createColumn } from '../../services/columns/columnsService';
 
 export const Form = (props: IFormProps) => {
-  const { fields, onFormSubmit, closeModal } = props;
+  const { fields, onSubmit, onCancel } = props;
 
   const {
     register,
@@ -16,12 +16,12 @@ export const Form = (props: IFormProps) => {
     formState: { errors },
   } = useForm<ModalForm>();
 
-  const onSubmit = (data: ModalForm) => {
-    const { title } = data;
-    const { boardId, order } = onFormSubmit(title);
-    closeModal(); //remove. not all the forms in modals
-    createColumn(boardId, { title, order });
-  };
+  // const onSubmit = (data: ModalForm) => { //MOVE LOGIC OUTSIDE!!!
+  //   const { title } = data;
+  //   const { boardId, order } = onFormSubmit(title);
+  //   closeModal(); //remove. not all the forms in modals
+  //   createColumn(boardId, { title, order });
+  // };
 
   const getControlProps = (field: IFormField) => {
     const { type, name, placeholder, registerOptions, rows } = field;
@@ -59,7 +59,7 @@ export const Form = (props: IFormProps) => {
       <BootstrapForm onSubmit={handleSubmit((data) => onSubmit(data))}>
         {renderFields}
         <div className={classes.buttons}>
-          <Button variant="danger" className={classes.cancel}>
+          <Button variant="danger" className={classes.cancel} onClick={onCancel}>
             {buttonsText.cancel}
           </Button>
           <Button variant="success" type="submit" className={classes.submit}>
@@ -74,6 +74,6 @@ export const Form = (props: IFormProps) => {
 interface IFormProps {
   fields: IFormField[];
   type: FormType;
-  onFormSubmit: (title: string) => ColumnModel;
-  closeModal: () => void;
+  onSubmit: (data: ModalForm) => void;
+  onCancel: () => void;
 }

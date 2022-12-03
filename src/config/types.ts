@@ -89,16 +89,6 @@ type ApiError = {
   message: string;
 };
 
-type User = UserResponse;
-
-type AppData = {
-  userId: string;
-  userLogin: string;
-  userName?: string;
-  token: string;
-  expirationTime: string;
-};
-
 export interface IFormField extends Omit<FormInput, 'name'> {
   name: 'title' | 'description';
   rows?: number;
@@ -113,6 +103,18 @@ type ModalForm = {
   description?: string;
 };
 
+type User = UserResponse;
+
+type AppData = {
+  userId: string;
+  userLogin: string;
+  userName?: string;
+  token: string;
+  expirationTime: string;
+};
+
+type LoadingStatus = 'loading' | 'complete';
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -126,10 +128,11 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
-  User,
-  AppData,
   FormInput,
   CreationFormData,
   ModalForm,
   FormType,
+  User,
+  AppData,
+  LoadingStatus,
 };
