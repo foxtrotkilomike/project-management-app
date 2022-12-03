@@ -15,5 +15,6 @@ enum BreakPoints {
 }
 
 const MIN_PASSWORD_LENGTH = 8;
+const MILLISECONDS_IN_SECOND = 1000;
 
-export { ResponseStatus, BreakPoints, MIN_PASSWORD_LENGTH };
+export { ResponseStatus, BreakPoints, MIN_PASSWORD_LENGTH, MILLISECONDS_IN_SECOND };

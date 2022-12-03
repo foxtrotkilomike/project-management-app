@@ -1,5 +1,6 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 import { RegisterOptions } from 'react-hook-form';
+import { UserResponse } from '../services/users/types';
 
 type LoginFormInputs = {
   userName: string;
@@ -102,6 +103,16 @@ type ModalForm = {
   description?: string;
 };
 
+type User = UserResponse;
+
+type AppData = {
+  userId: string;
+  userLogin: string;
+  userName?: string;
+  token: string;
+  expirationTime: string;
+};
+
 export type {
   FormValidationErrors,
   JWTData,
@@ -119,4 +130,6 @@ export type {
   CreationFormData,
   ModalForm,
   FormType,
+  User,
+  AppData,
 };

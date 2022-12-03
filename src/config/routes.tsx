@@ -6,6 +6,7 @@ import Boards from '../layouts/Boards';
 import Board from '../layouts/Board';
 import Profile from '../layouts/Profile';
 import LogIn from '../layouts/LogIn';
+import PrivateRoute from '../commons/PrivateRoute';
 
 export const routesConfig: RouteObject[] = [
   {
@@ -22,11 +23,19 @@ export const routesConfig: RouteObject[] = [
           },
           {
             path: 'boards',
-            element: <Boards />,
+            element: (
+              <PrivateRoute>
+                <Boards />
+              </PrivateRoute>
+            ),
           },
           {
             path: 'board/:boardId',
-            element: <Board />,
+            element: (
+              <PrivateRoute>
+                <Board />
+              </PrivateRoute>
+            ),
           },
           {
             path: 'signup',
@@ -38,7 +47,11 @@ export const routesConfig: RouteObject[] = [
           },
           {
             path: 'profile/edit',
-            element: <Profile />,
+            element: (
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            ),
           },
           {
             path: '*',
@@ -56,4 +69,9 @@ export const routes = {
   BOARD: '/board',
   SIGN_UP: '/signup',
   SIGN_IN: '/signin',
+  PROFILE: '/profile',
 };
+
+export const privateRoutes = [routes.BOARDS, routes.BOARD, routes.PROFILE].map((path) =>
+  path.slice(1)
+);

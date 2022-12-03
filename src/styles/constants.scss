@@ -20,6 +20,8 @@ $color-bg-footer: $color-bg-light;
 $color-hover: #ffffff;
 $color-overlay: #3333338c;
 $color-border-active: #e69163;
+$color-spinner-light: #00000060;
+$color-spinner-active: #ff3d00;
 $color-modal-bg: #ffeede;
 
 $font-family-primary: 'Nunito', sans-serif;
@@ -85,3 +87,5 @@ $height-scrollbar: 6px;
 $height-header: 78px;
 $height-footer: 57px;
 $height-main: calc(100vh - $height-header - $height-footer);
+
+$spinner-size: 65px
