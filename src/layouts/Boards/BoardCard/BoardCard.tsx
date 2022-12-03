@@ -64,6 +64,6 @@ export type BoardProps =
       title: string;
       metaData: BoardInfoItemProps[];
       onRemove: (id: string) => void;
-      className: string;
+      className?: string;
     }
-  | { children: ReactNode; className: string };
+  | { children: ReactNode; className?: string };
