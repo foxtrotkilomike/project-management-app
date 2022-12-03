@@ -1,11 +1,9 @@
 import classes from './Form.module.scss';
 import { useForm } from 'react-hook-form';
-import { IFormField, FormType, ModalForm } from '../../config/types';
+import { IFormField, ModalForm } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { ElementType } from 'react';
-import { ColumnModel } from '../../layouts/Board/Board';
-import { createColumn } from '../../services/columns/columnsService';
 
 export const Form = (props: IFormProps) => {
   const { fields, onSubmit, onCancel } = props;
@@ -15,13 +13,6 @@ export const Form = (props: IFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<ModalForm>();
-
-  // const onSubmit = (data: ModalForm) => { //MOVE LOGIC OUTSIDE!!!
-  //   const { title } = data;
-  //   const { boardId, order } = onFormSubmit(title);
-  //   closeModal(); //remove. not all the forms in modals
-  //   createColumn(boardId, { title, order });
-  // };
 
   const getControlProps = (field: IFormField) => {
     const { type, name, placeholder, registerOptions, rows } = field;
@@ -73,7 +64,6 @@ export const Form = (props: IFormProps) => {
 
 interface IFormProps {
   fields: IFormField[];
-  type: FormType;
   onSubmit: (data: ModalForm) => void;
   onCancel: () => void;
 }
