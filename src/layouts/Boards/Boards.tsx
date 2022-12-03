@@ -52,12 +52,14 @@ export const Boards = (): JSX.Element => {
 
   return (
     <Container centered main growing>
-      <h1 className={classes.boards__title}>Your projects ({boards.length})</h1>
-      <div className={classes.boards__content}>
-        {renderBoards()}
-        <BoardCard className={classes.boards__empty}>
-          <button className={classes.boards__add} onClick={showModal}></button>
-        </BoardCard>
+      <div className={classes.boards}>
+        <h1 className={classes.boards__title}>Your projects ({boards.length})</h1>
+        <div className={classes.boards__content}>
+          {renderBoards()}
+          <BoardCard className={classes.boards__empty}>
+            <button className={classes.boards__add} onClick={showModal}></button>
+          </BoardCard>
+        </div>
       </div>
     </Container>
   );

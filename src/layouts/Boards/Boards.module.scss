@@ -2,6 +2,11 @@
 @import "../../styles/templates";
 
 .boards {
+  padding: $padding-xl 0 $padding-lg;
+  &__title {
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-black;
+  }
   &__content {
     @extend %flex-space-between;
     flex-wrap: wrap;
