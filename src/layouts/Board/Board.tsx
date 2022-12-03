@@ -237,12 +237,9 @@ export const Board = (): JSX.Element => {
       );
       setColumns(columnModels);
     });
-    return () => {
-      //TODO: implement setting tasks and columns changes to backend
-    };
   }, []);
 
-  const createColumn = (title: string) => {
+  const addColumn = (title: string) => {
     const column: ColumnModel = {
       _id: '',
       title,
@@ -256,8 +253,8 @@ export const Board = (): JSX.Element => {
     return column;
   };
 
-  const renderColumns = columns.map((column, index) => (
-    <BoardColumn key={column._id} {...column} index={index} />
+  const renderColumns = columns.map((column) => (
+    <BoardColumn key={column._id} {...column} index={column.order} />
   ));
 
   const onDragEnd = (result: DropResult) => {
@@ -282,7 +279,7 @@ export const Board = (): JSX.Element => {
         <h1 className={classes.board__title}>{board?.title}</h1>
         <div className={classes.board__content}>
           <DragDropContext onDragEnd={onDragEnd}>
-            <BoardColumnsWrapper createColumn={createColumn}>
+            <BoardColumnsWrapper addColumn={addColumn}>
               {renderColumns.length > 0 && renderColumns}
             </BoardColumnsWrapper>
           </DragDropContext>
