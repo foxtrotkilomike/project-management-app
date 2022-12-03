@@ -242,6 +242,12 @@ export const Board = (): JSX.Element => {
     };
   }, []);
 
+  const pushColumn = (column: ColumnModel) => {
+    const newColumns = [...columns];
+    newColumns.push(column);
+    setColumns(newColumns);
+  };
+
   const renderColumns = columns.map((column, index) => (
     <BoardColumn key={column._id} {...column} index={index} />
   ));
@@ -268,7 +274,9 @@ export const Board = (): JSX.Element => {
         <h1 className={classes.board__title}>{board?.title}</h1>
         <div className={classes.board__content}>
           <DragDropContext onDragEnd={onDragEnd}>
-            <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+            <BoardColumnsWrapper pushColumn={pushColumn}>
+              {renderColumns.length > 0 && renderColumns}
+            </BoardColumnsWrapper>
           </DragDropContext>
         </div>
       </div>

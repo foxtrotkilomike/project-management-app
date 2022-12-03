@@ -1,11 +1,13 @@
 import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
-import { ApiError, LoginForm, LoginPrompt } from './types';
+import { ApiError, CreationFormData, LoginForm, LoginPrompt } from './types';
 import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 
 const buttonsText = {
   signUp: 'sign up',
   signIn: 'sign in',
+  cancel: 'cancel',
+  submit: 'submit',
 };
 
 const footerData = {
@@ -150,6 +152,60 @@ const apiErrors: Record<string, ApiError> = {
   },
 };
 
+const creationFormData: CreationFormData = {
+  column: {
+    type: 'column',
+    fields: [
+      {
+        type: 'text',
+        name: 'title',
+        placeholder: 'Title',
+        registerOptions: {
+          required: { value: true, message: 'Title is a required field' },
+        },
+      },
+    ],
+    title: 'New column',
+  },
+  task: {
+    type: 'task',
+    fields: [
+      {
+        type: 'text',
+        name: 'title',
+        placeholder: 'Title',
+        registerOptions: {
+          required: { value: true, message: 'Title is a required field' },
+        },
+      },
+      {
+        type: 'textarea',
+        name: 'description',
+        rows: 6,
+        placeholder: 'Description',
+        registerOptions: {
+          required: { value: true, message: 'Description is a required field' },
+        },
+      },
+    ],
+    title: 'New task',
+  },
+  board: {
+    type: 'board',
+    fields: [
+      {
+        type: 'text',
+        name: 'title',
+        placeholder: 'Title',
+        registerOptions: {
+          required: { value: true, message: 'Title is a required field' },
+        },
+      },
+    ],
+    title: 'New board',
+  },
+};
+
 export {
   buttonsText,
   footerData,
@@ -158,4 +214,5 @@ export {
   loginPromptData,
   selectData,
   apiErrors,
+  creationFormData,
 };
