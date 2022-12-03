@@ -9,7 +9,7 @@ import Form from '../../../commons/Form';
 import { ColumnModel } from '../Board';
 
 export const BoardColumnsWrapper = (props: wrapperProps) => {
-  const { children, pushColumn } = props;
+  const { children, createColumn } = props;
   const [isModalActive, setIsModalActive] = useState(false);
   const showModal = () => {
     //TODO implement logic
@@ -31,8 +31,8 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
               <img src={plusButton} alt="add column" />
             </button>
           </li>
-          <Modal isActive={isModalActive} onHide={onHide} title={creationFormData.task.title}>
-            <Form {...creationFormData.task} onFormSubmit={pushColumn} />
+          <Modal isActive={isModalActive} onHide={onHide} title={creationFormData.column.title}>
+            <Form {...creationFormData.column} onFormSubmit={createColumn} closeModal={onHide} />
           </Modal>
           {provided.placeholder}
         </ul>
@@ -43,5 +43,5 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
 
 export type wrapperProps = {
   children: React.ReactNode;
-  pushColumn: (column: ColumnModel) => void;
+  createColumn: (title: string) => ColumnModel;
 };

@@ -4,9 +4,11 @@ import { IFormField, FormType, ModalForm } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { ElementType } from 'react';
+import { ColumnModel } from '../../layouts/Board/Board';
+import { createColumn } from '../../services/columns/columnsService';
 
 export const Form = (props: IFormProps) => {
-  const { fields, onFormSubmit } = props;
+  const { fields, onFormSubmit, closeModal } = props;
 
   const {
     register,
@@ -15,10 +17,10 @@ export const Form = (props: IFormProps) => {
   } = useForm<ModalForm>();
 
   const onSubmit = (data: ModalForm) => {
-    //TODO: implement onSubmit
-    console.log(data);
-
-    onFormSubmit();
+    const { title } = data;
+    const { boardId, order } = onFormSubmit(title);
+    closeModal(); //remove. not all the forms in modals
+    createColumn(boardId, { title, order });
   };
 
   const getControlProps = (field: IFormField) => {
@@ -72,5 +74,6 @@ export const Form = (props: IFormProps) => {
 interface IFormProps {
   fields: IFormField[];
   type: FormType;
-  onFormSubmit: () => void;
+  onFormSubmit: (title: string) => ColumnModel;
+  closeModal: () => void;
 }
