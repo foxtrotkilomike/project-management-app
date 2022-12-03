@@ -1,6 +1,5 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 import { RegisterOptions } from 'react-hook-form';
-import { UserResponse } from '../services/users/types';
 
 type LoginFormInputs = {
   userName: string;
@@ -9,13 +8,19 @@ type LoginFormInputs = {
   repeatedPassword: string;
 };
 
-type FormInput = {
+type EditProfileFormInputs = Omit<LoginFormInputs, 'repeatedPassword'>;
+
+interface FormInput {
   type: string;
   name: keyof LoginFormInputs;
   placeholder?: string;
   autoComplete?: string;
   registerOptions: RegisterOptions;
-};
+}
+
+interface EditProfileFormInput extends FormInput {
+  name: keyof EditProfileFormInputs;
+}
 
 interface LoginFormControls {
   inputs: FormInput[];
@@ -103,8 +108,6 @@ type ModalForm = {
   description?: string;
 };
 
-type User = UserResponse;
-
 type AppData = {
   userId: string;
   userLogin: string;
@@ -117,6 +120,8 @@ type LoadingStatus = 'loading' | 'complete';
 
 export type {
   FormValidationErrors,
+  FormInput,
+  EditProfileFormInput,
   JWTData,
   LoginForm,
   LoginFormInputs,
@@ -128,11 +133,9 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
-  FormInput,
   CreationFormData,
   ModalForm,
   FormType,
-  User,
   AppData,
   LoadingStatus,
 };

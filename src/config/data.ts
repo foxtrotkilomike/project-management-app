@@ -2,6 +2,7 @@ import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
 import { ApiError, CreationFormData, LoginForm, LoginPrompt } from './types';
 import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
+import { ProfilePageData } from '../layouts/Profile/Profile';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -206,6 +207,46 @@ const creationFormData: CreationFormData = {
   },
 };
 
+const profilePageConfig: ProfilePageData = {
+  heading: 'Edit profile',
+  form: {
+    inputs: [
+      {
+        type: 'text',
+        name: 'userName',
+        placeholder: 'Name',
+        registerOptions: {
+          required: { value: true, message: 'Name is a required field' },
+        },
+      },
+      {
+        type: 'text',
+        name: 'login',
+        placeholder: 'Login',
+        autoComplete: 'username',
+        registerOptions: {
+          required: { value: true, message: 'Login is a required field' },
+        },
+      },
+      {
+        type: 'password',
+        name: 'password',
+        placeholder: 'Password',
+        autoComplete: 'new-password',
+        registerOptions: {
+          required: { value: true, message: 'Password is a required field' },
+          minLength: {
+            value: MIN_PASSWORD_LENGTH,
+            message: 'Password must be at least 8 characters long',
+          },
+        },
+      },
+    ],
+    submitButtonText: 'Save',
+    deleteProfileButtonText: 'Delete profile',
+  },
+};
+
 export {
   buttonsText,
   footerData,
@@ -215,4 +256,5 @@ export {
   selectData,
   apiErrors,
   creationFormData,
+  profilePageConfig,
 };
