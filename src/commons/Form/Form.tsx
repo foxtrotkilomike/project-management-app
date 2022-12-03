@@ -6,20 +6,13 @@ import { buttonsText } from '../../config/data';
 import { ElementType } from 'react';
 
 export const Form = (props: IFormProps) => {
-  const { fields, onFormSubmit } = props;
+  const { fields, onSubmit, onCancel } = props;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ModalForm>();
-
-  const onSubmit = (data: ModalForm) => {
-    //TODO: implement onSubmit
-    console.log(data);
-
-    onFormSubmit();
-  };
 
   const getControlProps = (field: IFormField) => {
     const { type, name, placeholder, registerOptions, rows } = field;
@@ -57,7 +50,7 @@ export const Form = (props: IFormProps) => {
       <BootstrapForm onSubmit={handleSubmit((data) => onSubmit(data))}>
         {renderFields}
         <div className={classes.buttons}>
-          <Button variant="danger" className={classes.cancel}>
+          <Button variant="danger" className={classes.cancel} onClick={onCancel}>
             {buttonsText.cancel}
           </Button>
           <Button variant="success" type="submit" className={classes.submit}>
@@ -72,5 +65,6 @@ export const Form = (props: IFormProps) => {
 interface IFormProps {
   fields: IFormField[];
   type: FormType;
-  onFormSubmit: () => void;
+  onSubmit: (data: ModalForm) => void;
+  onCancel: () => void;
 }
