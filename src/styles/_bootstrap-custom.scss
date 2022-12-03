@@ -17,10 +17,12 @@
 
 .btn-danger {
   @include button-variant($color-danger, $color-danger, $color-text-light, $color-danger-hover, $color-danger-hover, $color-text-light, $color-danger, $color-danger);
+  font-weight: $font-weight-semi-bold;
   text-transform: uppercase;
 }
 .btn-success {
   @include button-variant($color-success, $color-success, $color-text-light, $color-success-hover, $color-success-hover, $color-text-light, $color-success, $color-success);
+  font-weight: $font-weight-semi-bold;
   text-transform: uppercase;
 }
 
