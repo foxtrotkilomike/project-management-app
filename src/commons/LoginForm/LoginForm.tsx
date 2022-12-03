@@ -15,14 +15,10 @@ import {
   retrieveSignInData,
   retrieveSignUpData,
 } from '../../helpers/authentication';
-import {
-  checkUserCredentials,
-  handleAuthErrors,
-  postAuthData,
-  setAppData,
-} from '../../services/authService';
+import { checkUserCredentials, handleAuthErrors, postAuthData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
+import { setAppData } from '../../helpers/handleAppData';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];

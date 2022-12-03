@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAppData } from './authService';
+import { getAppData } from '../helpers/handleAppData';
 
 export const Endpoints = {
   auth: {

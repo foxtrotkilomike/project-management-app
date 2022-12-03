@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { AppData } from '../../config/types';
 import { UserResponse } from '../../services/users/types';
-import { getAppData } from '../../services/authService';
 import { AuthContext } from './authContext';
+import { getAppData } from '../../helpers/handleAppData';
 
 const getUserData = (key: keyof AppData) => {
   const userData = getAppData(key);
