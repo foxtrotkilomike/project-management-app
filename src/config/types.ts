@@ -94,33 +94,37 @@ type ApiError = {
   message: string;
 };
 
+type FormInputNames = {
+  title: string;
+  description: string;
+  userName: string;
+  userLogin: string;
+  password: string;
+};
+
 export interface IFormField extends Omit<FormInput, 'name'> {
-  name: 'title' | 'description';
+  name: keyof FormInputNames;
   rows?: number;
 }
+
 type CreationFormData = {
   [index in FormType]: { type: FormType; fields: IFormField[]; title: string };
 };
-type FormType = 'column' | 'task' | 'board';
+
+type FormType = 'column' | 'task' | 'board' | 'profile';
 
 type ModalForm = {
   title: string;
   description?: string;
 };
 
-type AppData = {
-  userId: string;
-  userLogin: string;
-  userName?: string;
-  token: string;
-  expirationTime: string;
-};
-
 type LoadingStatus = 'loading' | 'complete';
+type ProfileEditAction = 'updateUser' | 'deleteUser';
 
 export type {
   FormValidationErrors,
   FormInput,
+  FormInputNames,
   EditProfileFormInput,
   JWTData,
   LoginForm,
@@ -136,6 +140,6 @@ export type {
   CreationFormData,
   ModalForm,
   FormType,
-  AppData,
   LoadingStatus,
+  ProfileEditAction,
 };

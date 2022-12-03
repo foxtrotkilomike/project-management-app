@@ -156,6 +156,7 @@ const apiErrors: Record<string, ApiError> = {
 const creationFormData: CreationFormData = {
   column: {
     type: 'column',
+    title: 'New column',
     fields: [
       {
         type: 'text',
@@ -166,10 +167,10 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New column',
   },
   task: {
     type: 'task',
+    title: 'New task',
     fields: [
       {
         type: 'text',
@@ -189,10 +190,10 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New task',
   },
   board: {
     type: 'board',
+    title: 'New board',
     fields: [
       {
         type: 'text',
@@ -203,14 +204,11 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New board',
   },
-};
-
-const profilePageConfig: ProfilePageData = {
-  heading: 'Edit profile',
-  form: {
-    inputs: [
+  profile: {
+    type: 'profile',
+    title: '',
+    fields: [
       {
         type: 'text',
         name: 'userName',
@@ -221,7 +219,7 @@ const profilePageConfig: ProfilePageData = {
       },
       {
         type: 'text',
-        name: 'login',
+        name: 'userLogin',
         placeholder: 'Login',
         autoComplete: 'username',
         registerOptions: {
@@ -242,10 +240,24 @@ const profilePageConfig: ProfilePageData = {
         },
       },
     ],
+  },
+};
+
+const profilePageConfig: ProfilePageData = {
+  heading: 'Edit profile',
+  form: {
     submitButtonText: 'Save',
     deleteProfileButtonText: 'Delete profile',
   },
 };
+
+enum AppData {
+  USER_ID = 'userId',
+  USER_LOGIN = 'userLogin',
+  USER_NAME = 'userName',
+  TOKEN = 'token',
+  EXPIRATION_TIME = 'expirationTime',
+}
 
 export {
   buttonsText,
@@ -257,4 +269,5 @@ export {
   apiErrors,
   creationFormData,
   profilePageConfig,
+  AppData,
 };
