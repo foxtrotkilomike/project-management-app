@@ -107,7 +107,8 @@ const loginFormData: LoginForm = {
   },
   submissionErrors: {
     badRequest: 'An error occurred, check your data for correctness',
-    serverNotResponding: 'Server is not responding, please try again later',
+    serverNotResponding:
+      'Server is not responding, please try again in a few moments, it should be up and running',
     unknownError: 'Sorry, something went wrong, please try again later',
   },
 };
