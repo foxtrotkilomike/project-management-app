@@ -26,7 +26,6 @@ export const Board = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
-      const boardTostId = toast.loading(toastMessages.loading.info);
       const board = await getBoardById(boardId);
       if ('code' in board) {
         toast.error(toastMessages.error.unknown);
@@ -38,7 +37,6 @@ export const Board = (): JSX.Element => {
           const columnModels = await Promise.all(
             columns.map(async (column) => await fillColumnWithTasks(column))
           );
-          toast.dismiss(boardTostId);
           toast.success(toastMessages.success.boardLoaded);
           setColumns(columnModels);
           setIsLoading(false);
@@ -95,10 +93,11 @@ export const Board = (): JSX.Element => {
       const reqData = reorderedColumns.map(({ _id }, index) => ({ _id, order: index }));
       changeColumnsOrder(reqData).then((res) => {
         if ('code' in res) {
-          console.log('error occured during update');
+          toast.error(toastMessages.error.unknown);
           setColumns(initialColumns);
         } else {
           setColumns(reorderedColumns);
+          toast.success(toastMessages.success.columnReordered);
         }
         setIsLoading(false);
       });

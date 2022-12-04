@@ -267,15 +267,16 @@ const toastMessages = {
     logout: 'Logged out successfully',
     profileUpdate: 'Profile updated successfully',
     profileDelete: 'Profile deleted successfully',
-    boardLoaded: 'The board has been loaded successfully',
-    columnCreated: 'The column has been created successfully',
+    boardLoaded: 'Board loaded',
+    boardRemoved: 'Board removed',
+    boardCreated: 'Board created',
+    boardsLoaded: 'Boards loaded',
+    columnCreated: 'Column created',
+    columnReordered: 'Columns reordered',
   },
   error: {
     profileUpdate: 'Login already exits',
     unknown: 'Some error occurred, please try again later',
-  },
-  loading: {
-    info: 'Loading...',
   },
 };
 

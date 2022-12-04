@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '../../commons/Container';
 import { createBoard, deleteBoardById, getAllBoards } from '../../services/boards/boardsService';
 import { BoardsResponse } from '../../services/boards/types';
@@ -6,11 +6,12 @@ import BoardCard from './BoardCard';
 import classes from './Boards.module.scss';
 import Modal from '../../commons/Modal';
 import Form from '../../commons/Form';
-import { creationFormData } from '../../config/data';
-import { ModalForm } from '../../config/types';
+import { creationFormData, toastMessages } from '../../config/data';
 import { useAuthContext } from '../../contexts/auth/authContext';
 import Spinner from '../../commons/Spinner';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { FormInputNames } from '../../config/types';
 
 export const Boards = (): JSX.Element => {
   const [boards, setBoards] = useState<BoardsResponse[]>([]);
@@ -22,10 +23,10 @@ export const Boards = (): JSX.Element => {
   useEffect(() => {
     getAllBoards().then((result) => {
       setIsLoading(false);
-
       if ('code' in result) {
-        console.log('error occured ', result);
+        toast.error(toastMessages.error.unknown);
       } else {
+        toast.success(toastMessages.success.boardsLoaded);
         setBoards(result);
       }
     });
@@ -34,9 +35,9 @@ export const Boards = (): JSX.Element => {
   const removeBoard = (id: string) => {
     deleteBoardById(id).then((res) => {
       if ('code' in res) {
-        console.log("couldn't delete the board");
+        toast.error(toastMessages.error.unknown);
       } else {
-        console.log('board removed successfully');
+        toast.success(toastMessages.success.boardRemoved);
         const newBoards = [...boards].filter((board) => board._id !== id);
         setBoards(newBoards);
       }
@@ -44,7 +45,6 @@ export const Boards = (): JSX.Element => {
   };
 
   const goToBoardPage = (id: string) => {
-    console.log(id);
     navigate(`/board/${id}`);
   };
 
@@ -75,7 +75,7 @@ export const Boards = (): JSX.Element => {
     setIsModalActive(false);
   };
 
-  const createBoardCard = (data: ModalForm) => {
+  const createBoardCard = (data: FormInputNames) => {
     const newBoard = {
       owner: user.login,
       title: data.title,
@@ -84,8 +84,9 @@ export const Boards = (): JSX.Element => {
 
     createBoard(newBoard).then((res) => {
       if ('code' in res) {
-        console.log('Error occured while creating board. Please try again later');
+        toast.error(toastMessages.error.unknown);
       } else {
+        toast.success(toastMessages.success.boardCreated);
         const newBoards = [...boards, res];
         setBoards(newBoards);
         closeModal();
