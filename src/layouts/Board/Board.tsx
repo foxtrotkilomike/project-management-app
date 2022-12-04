@@ -12,6 +12,7 @@ import { getBoardById } from '../../services/boards/boardsService';
 import {
   changeColumnsOrder,
   createColumn,
+  deleteColumnById,
   getColumns,
 } from '../../services/columns/columnsService';
 import { BoardsResponse } from '../../services/boards/types';
@@ -22,17 +23,22 @@ export const Board = (): JSX.Element => {
   const boardId = usePathnameEnding();
   const [board] = useState<BoardsResponse | null>(null);
   const [columns, setColumns] = useState<ColumnModel[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       const board = await getBoardById(boardId);
+
       if ('code' in board) {
         toast.error(toastMessages.error.unknown);
+        setIsLoading(false);
       } else {
         const columns = await getColumns(boardId);
+
         if ('code' in columns) {
           toast.error(toastMessages.error.unknown);
+          setIsLoading(false);
         } else {
           const columnModels = await Promise.all(
             columns.map(async (column) => await fillColumnWithTasks(column))
@@ -49,6 +55,7 @@ export const Board = (): JSX.Element => {
     setIsLoading(true);
     const order = columns.length;
     const res = await createColumn(boardId, { title, order });
+
     if ('code' in res) {
       toast.error(toastMessages.error.unknown);
     } else {
@@ -67,14 +74,45 @@ export const Board = (): JSX.Element => {
     }
     setIsLoading(false);
   };
+  const removeColumn = async (columnId: string) => {
+    setIsLoading(true);
+    const res = await deleteColumnById(boardId, columnId);
+
+    if ('code' in res) {
+      toast.error(toastMessages.error.unknown);
+    } else {
+      const initialColumns = [...columns];
+      const newColumns = initialColumns.filter((column) => column._id !== res._id);
+      const reqData = newColumns.map(({ _id }, index) => ({ _id, order: index }));
+
+      if (reqData.length === 0) {
+        setColumns(newColumns);
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await changeColumnsOrder(reqData);
+
+      if ('code' in response) {
+        toast.error(toastMessages.error.unknown);
+        setColumns(initialColumns);
+      } else {
+        setColumns(newColumns);
+        toast.success(toastMessages.success.columnRemoved);
+      }
+
+      setIsLoading(false);
+    }
+  };
 
   const renderColumns = columns.map((column, index) => (
-    <BoardColumn key={column._id} {...column} index={index} />
+    <BoardColumn key={column._id} {...column} index={index} onRemove={removeColumn} />
   ));
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
     setIsLoading(true);
+
     if (!destination) {
       setIsLoading(false);
       return;

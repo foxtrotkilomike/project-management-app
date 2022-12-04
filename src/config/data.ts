@@ -273,6 +273,7 @@ const toastMessages = {
     boardsLoaded: 'Boards loaded',
     columnCreated: 'Column created',
     columnReordered: 'Columns reordered',
+    columnRemoved: 'Column removed',
   },
   error: {
     profileUpdate: 'Login already exits',

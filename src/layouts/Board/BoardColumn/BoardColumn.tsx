@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
 import Task from '../Task';
 import classes from './BoardColumn.module.scss';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { TasksResponse } from '../../../services/tasks/types';
+import TrashcanIcon from '../../../assets/svg/trash.svg';
 
 export const BoardColumn = (props: IColumnProps): JSX.Element => {
-  const { _id: id, index, title, tasks } = props;
+  const { _id: id, index, title, tasks, onRemove: onColumnRemove } = props;
   const [isModalActive, setIsModalActive] = useState(false);
   const renderTasks = tasks.map((task) => <Task key={task._id} {...task} index={task.order} />);
   const openModal = () => {
@@ -16,6 +17,10 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
   };
   const closeModal = () => {
     setIsModalActive(false);
+  };
+
+  const onRemove = (id: string) => {
+    onColumnRemove(id);
   };
 
   return (
@@ -30,6 +35,9 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
           <div className={classes.column__header}>
             <h4 className={classes.column__title}>{title}</h4>
             <div className={classes.column__badge}>{tasks.length}</div>
+            <Button className={classes.column__delete} onClick={() => onRemove(id)}>
+              <img src={TrashcanIcon} alt="trashcan" />
+            </Button>
           </div>
           <Droppable droppableId={id} type="tasks">
             {(provided) => (
@@ -67,4 +75,5 @@ export interface IColumnProps {
   title: string;
   _id: string;
   index: number;
+  onRemove: (id: string) => void;
 }
