@@ -12,6 +12,7 @@
   font-weight: $font-weight-bold;
   margin-right: $margin-lg;
   max-height: 100%;
+  position: relative;
   &:last-child {
     margin-right: 0;
   }
@@ -29,6 +30,20 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    &:hover {
+      @extend %flex-center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: $padding-md;
+      background-color: $color-main-light;
+      z-index: 3;
+      width: 100%;
+      height: fit-content;
+      white-space: break-spaces;
+      text-align: center;
+      border-radius: $border-radius-sm;
+    }
   }
   &__badge {
     @extend %flex-center;
@@ -37,6 +52,7 @@
     background-color: rgba($color-main, 0.2);
     border-radius: $border-radius-sm;
     align-self: stretch;
+    margin-left: $margin-sm;
   }
   &__tasksWrapper {
     padding: 0;
@@ -59,11 +75,4 @@
     border: none;
     margin-left: $margin-xxs;
   }
-}
-
-#tooltip {
-  background-color: $color-main-light;
-  border: $border-width-sm solid $color-border-active;
-  padding: $padding-sm;
-  border-radius: $border-radius-sm;
 }
