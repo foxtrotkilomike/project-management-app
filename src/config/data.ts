@@ -261,6 +261,19 @@ enum AppData {
   EXPIRATION_TIME = 'expirationTime',
 }
 
+const toastMessages = {
+  success: {
+    login: 'Logged in successfully',
+    logout: 'Logged out successfully',
+    profileUpdate: 'Profile updated successfully',
+    profileDelete: 'Profile deleted successfully',
+  },
+  error: {
+    profileUpdate: 'Login already exits',
+    unknown: 'Some error occurred, please try again later',
+  },
+};
+
 export {
   buttonsText,
   confirmationModalButtonsText,
@@ -273,4 +286,5 @@ export {
   creationFormData,
   profilePageConfig,
   AppData,
+  toastMessages,
 };
