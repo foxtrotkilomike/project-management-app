@@ -5,7 +5,7 @@ import TaskIcon from '../../../commons/Modal/TaskIcon';
 import Task from '../Task';
 import classes from './BoardColumn.module.scss';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { TaskResponse } from '../Board';
+import { TasksResponse } from '../../../services/tasks/types';
 
 export const BoardColumn = (props: IColumnProps): JSX.Element => {
   const { _id: id, index, title, tasks } = props;
@@ -63,7 +63,7 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
 };
 
 export interface IColumnProps {
-  tasks: TaskResponse[];
+  tasks: TasksResponse[];
   title: string;
   _id: string;
   index: number;
