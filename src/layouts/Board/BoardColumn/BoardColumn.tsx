@@ -10,7 +10,7 @@ import { TaskResponse } from '../Board';
 export const BoardColumn = (props: IColumnProps): JSX.Element => {
   const { _id: id, index, title, tasks } = props;
   const [isModalActive, setIsModalActive] = useState(false);
-  const renderTasks = tasks.map((item, index) => <Task key={item._id} {...item} index={index} />);
+  const renderTasks = tasks.map((task) => <Task key={task._id} {...task} index={task.order} />);
   const openModal = () => {
     setIsModalActive(true);
   };

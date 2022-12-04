@@ -108,16 +108,10 @@ export interface IFormField extends Omit<FormInput, 'name'> {
 }
 
 type CreationFormData = {
-  [index in FormType]: { type: FormType; fields: IFormField[]; title: string };
+  [index in FormType]: { fields: IFormField[]; title: string };
 };
 
 type FormType = 'column' | 'task' | 'board' | 'profile';
-
-type ModalForm = {
-  title: string;
-  description?: string;
-};
-
 type LoadingStatus = 'loading' | 'complete';
 
 export type {
@@ -137,7 +131,6 @@ export type {
   ServerErrorResponse,
   ApiError,
   CreationFormData,
-  ModalForm,
   FormType,
   LoadingStatus,
 };
