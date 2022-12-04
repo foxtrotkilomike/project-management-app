@@ -12,6 +12,7 @@ import Spinner from '../../commons/Spinner';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FormInputNames } from '../../config/types';
+import { routes } from '../../config/routes';
 
 export const Boards = (): JSX.Element => {
   const [boards, setBoards] = useState<BoardsResponse[]>([]);
@@ -45,7 +46,7 @@ export const Boards = (): JSX.Element => {
   };
 
   const goToBoardPage = (id: string) => {
-    navigate(`/board/${id}`);
+    navigate(`${routes.BOARD}/${id}`);
   };
 
   const renderBoards = () =>

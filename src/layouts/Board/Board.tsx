@@ -105,7 +105,7 @@ export const Board = (): JSX.Element => {
 
   return (
     <>
-      {isLoading && <Spinner></Spinner>}
+      {isLoading && <Spinner />}
       <Container centered main growing>
         <div className={classes.board}>
           <h1 className={classes.board__title}>{board?.title}</h1>
