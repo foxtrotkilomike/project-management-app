@@ -248,6 +248,7 @@ const profilePageConfig: ProfilePageData = {
   form: {
     submitButtonText: 'Save',
     deleteProfileButtonText: 'Delete profile',
+    deleteConfirmationMessage: 'Do you really want to delete your profile?',
   },
 };
 
