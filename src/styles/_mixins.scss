@@ -1,1 +1,33 @@
-
+@mixin plus-button ($size, $border-color, $content-width, $content-color: $border-color, $bg-color: transparent, $color-hover:$border-color ) {
+  width: $size;
+height: $size;
+display: block;
+border-radius: $border-radius-sm;
+background-color: $bg-color;
+border: $content-width solid $border-color;
+position: relative;
+transition: all $transition-duration-sm;
+  &:hover {
+    background-color: rgba($color-hover, 0.1);
+    border-color: $color-hover;;
+    &::before,
+    &::after {
+      background-color: $color-hover;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    width: 80%;
+    height: $content-width;
+    background-color: $content-color;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  &::after{
+    height: 80%;
+    width: $content-width;
+  }
+}

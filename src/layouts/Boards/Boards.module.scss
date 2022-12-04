@@ -1,5 +1,6 @@
 @import "../../styles/constants.scss";
 @import "../../styles/templates";
+@import "../../styles/mixins";
 
 .boards {
   padding: $padding-xl 0 $padding-lg;
@@ -19,35 +20,9 @@
     }
   }
   &__add {
-    width: 4rem;
-    height: 4rem;
-    display: block;
-    border-radius: $border-radius-sm;
-    background-color: transparent;
-    border: 2px solid $color-border-active;
-    position: relative;
-    transition: background-color $transition-duration-sm;
-    &:hover {
-      background-color: rgba($color-border-active, .1);;
-    }
+    @include plus-button($add-btn-size, $color-border-main-light, $border-width-md, $color-hover: $color-border-active);
     @media screen and (max-width: $board-cards-break-point){
       margin: 0 auto;
-
-    }
-    &::before,
-    &::after {
-      content: '';
-      width: 80%;
-      height: 2px;
-      background-color: $color-border-active;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      position: absolute;
-    }
-    &::after{
-      height: 80%;
-      width: 2px;
     }
   }
 };
