@@ -14,6 +14,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
     window.addEventListener('resize', () => setIsMobile(isLargeMobile()));
     return () => window.removeEventListener('resize', () => setIsMobile(isLargeMobile()));
   });
+
   if ('children' in props) {
     const { children, className } = props;
     const cardClassNames = classNames(classes.boardCard, className);
@@ -37,6 +38,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
 
     const goToBoard = (e: React.MouseEvent) => {
       const target = e.target as HTMLElement;
+
       if (!target.closest(`.${classes.button}`)) {
         onClick(id);
       }

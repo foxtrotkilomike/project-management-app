@@ -22,10 +22,11 @@ export const Boards = (): JSX.Element => {
   useEffect(() => {
     getAllBoards().then((result) => {
       setIsLoading(false);
-      if (!('code' in result)) {
-        setBoards(result);
-      } else {
+
+      if ('code' in result) {
         console.log('error occured ', result);
+      } else {
+        setBoards(result);
       }
     });
   }, []);
