@@ -267,10 +267,14 @@ const toastMessages = {
     logout: 'Logged out successfully',
     profileUpdate: 'Profile updated successfully',
     profileDelete: 'Profile deleted successfully',
+    boardLoaded: 'The board has been loaded successfully',
   },
   error: {
     profileUpdate: 'Login already exits',
     unknown: 'Some error occurred, please try again later',
+  },
+  loading: {
+    info: 'Loading...',
   },
 };
 

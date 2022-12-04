@@ -15,6 +15,8 @@ import {
   getColumns,
 } from '../../services/columns/columnsService';
 import { BoardsResponse } from '../../services/boards/types';
+import toast from 'react-hot-toast';
+import { toastMessages } from '../../config/data';
 
 export const Board = (): JSX.Element => {
   const boardId = usePathnameEnding();
@@ -24,17 +26,21 @@ export const Board = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
+      const boardTostId = toast.loading(toastMessages.loading.info);
       const board = await getBoardById(boardId);
       if ('code' in board) {
-        console.log("couldn't fetch board data");
+        toast.error(toastMessages.error.unknown);
       } else {
         const columns = await getColumns(boardId);
         if ('code' in columns) {
+          toast.error(toastMessages.error.unknown);
           console.log("couldn't fetch board columns");
         } else {
           const columnModels = await Promise.all(
             columns.map(async (column) => await fillColumnWithTasks(column))
           );
+          toast.dismiss(boardTostId);
+          toast.success(toastMessages.success.boardLoaded);
           setColumns(columnModels);
           setIsLoading(false);
         }
