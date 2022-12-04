@@ -119,7 +119,6 @@ type ModalForm = {
 };
 
 type LoadingStatus = 'loading' | 'complete';
-type ProfileEditAction = 'updateUser' | 'deleteUser';
 
 export type {
   FormValidationErrors,
@@ -141,5 +140,4 @@ export type {
   ModalForm,
   FormType,
   LoadingStatus,
-  ProfileEditAction,
 };

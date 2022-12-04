@@ -42,3 +42,11 @@ a {
   --bs-link-color: #ec7b3c;
   --bs-link-hover-color: #f09a6a;
 }
+
+.modal-backdrop {
+  --bs-backdrop-zindex: 900;
+}
+
+.modal {
+  --bs-modal-zindex: 950;
+}

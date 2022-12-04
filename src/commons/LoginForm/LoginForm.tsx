@@ -17,7 +17,7 @@ import {
 import { checkUserCredentials, handleAuthErrors, postAuthData } from '../../services/authService';
 import { loginFormData } from '../../config/data';
 import { routes } from '../../config/routes';
-import { getAppDataFromResponse, setAppData } from '../../helpers/handleAppData';
+import { setReceivedAppData } from '../../helpers/handleAppData';
 
 export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
@@ -26,21 +26,21 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const { setLoadingStatus } = useLoadingContext();
   const isAuthenticatedUser = checkUserCredentials();
 
-  const signUp = (data: LoginFormInputs) => {
+  const signUp = async (data: LoginFormInputs) => {
     setLoadingStatus('loading');
     checkPasswordMatch(data, setError);
-    handleAuthorization('signUp', data);
+    await handleAuthorization('signUp', data);
   };
 
-  const signIn = (data: LoginFormInputs) => {
+  const signIn = async (data: LoginFormInputs) => {
     setLoadingStatus('loading');
-    handleAuthorization('signIn', data);
+    await handleAuthorization('signIn', data);
   };
 
-  const handleAuthorization = (formType: LoginFormType, data: LoginFormInputs) => {
+  const handleAuthorization = async (formType: LoginFormType, data: LoginFormInputs) => {
     setSubmissionError('');
     const formData = formType === 'signUp' ? retrieveSignUpData(data) : retrieveSignInData(data);
-    postAuthData(formData, formType)
+    await postAuthData(formData, formType)
       .then((response) => handleResponse(response, formType, data))
       .catch((error) => handleAuthErrors(error, setError, setSubmissionError))
       .finally(() => setLoadingStatus('complete'));
@@ -54,14 +54,12 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     if (response) {
       switch (formType) {
         case 'signUp':
-          signIn(data);
+          await signIn(data);
           break;
 
         case 'signIn':
           if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
-
-          const appData = await getAppDataFromResponse(response);
-          setAppData(appData);
+          await setReceivedAppData(response);
           navigate(routes.BOARDS);
           break;
 
