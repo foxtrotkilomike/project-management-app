@@ -268,6 +268,7 @@ const toastMessages = {
     profileUpdate: 'Profile updated successfully',
     profileDelete: 'Profile deleted successfully',
     boardLoaded: 'The board has been loaded successfully',
+    columnCreated: 'The column has been created successfully',
   },
   error: {
     profileUpdate: 'Login already exits',

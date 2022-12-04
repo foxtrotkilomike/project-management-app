@@ -34,7 +34,6 @@ export const Board = (): JSX.Element => {
         const columns = await getColumns(boardId);
         if ('code' in columns) {
           toast.error(toastMessages.error.unknown);
-          console.log("couldn't fetch board columns");
         } else {
           const columnModels = await Promise.all(
             columns.map(async (column) => await fillColumnWithTasks(column))
@@ -49,11 +48,11 @@ export const Board = (): JSX.Element => {
   }, []);
 
   const addColumn = async (title: string) => {
-    console.log('adding');
+    setIsLoading(true);
     const order = columns.length;
     const res = await createColumn(boardId, { title, order });
     if ('code' in res) {
-      console.log('error occured while creating a column');
+      toast.error(toastMessages.error.unknown);
     } else {
       console.log(res);
       const { _id, boardId, title } = res;
@@ -67,7 +66,9 @@ export const Board = (): JSX.Element => {
       const newColumns = [...columns];
       newColumns.push(column);
       setColumns(newColumns);
+      toast.success(toastMessages.success.columnCreated);
     }
+    setIsLoading(false);
   };
 
   const renderColumns = columns.map((column, index) => (
