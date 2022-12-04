@@ -1,4 +1,5 @@
 @import '../../../styles/constants.scss';
+@import "../../../styles/mixins";
 
 .columnsWrapper {
   display: flex;
@@ -11,5 +12,6 @@
   &__add {
     background-color: $color-bg-light;
     background-color: transparent;
+    @include plus-button($add-btn-size, $color-border-main-light, $border-width-md, $color-hover: $color-border-active);
   }
 }
