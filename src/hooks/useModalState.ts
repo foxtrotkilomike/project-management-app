@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export const useModalState = (): [boolean, () => void, () => void] => {
-  const [isModalActive, setIsModalActive] = useState(false);
+export const useModalState = (defaultState = false): [boolean, () => void, () => void] => {
+  const [isModalActive, setIsModalActive] = useState(defaultState);
 
   const closeModal = () => {
     setIsModalActive(false);
