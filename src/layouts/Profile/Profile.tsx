@@ -1,15 +1,35 @@
-import classes from './Profile.module.scss';
+import { profilePageConfig } from '../../config/data';
 
-export const Profile = ({}: Props): JSX.Element => {
-  return (
-    <div>
-      This is Profile page
-      {/*
-        This page will contain a form for profile editing
-        <EditProfile />
-      */}
-    </div>
+import TwoColumnsFlex from '../TwoColumnsFlex';
+import NavigationButton from '../../commons/NavigationButton';
+import ArrowLeftIcon from '../../assets/svg/arrow-left.svg';
+import EditProfileForm, { EditProfileFormProps } from './EditProfileForm';
+import { BACK_ONE_PAGE } from '../../config/constants';
+
+export const Profile = (): JSX.Element => {
+  const { heading, form } = profilePageConfig;
+
+  const leftColumn = (
+    <NavigationButton
+      location={BACK_ONE_PAGE}
+      size="lg"
+      icon={ArrowLeftIcon}
+      text="Back"
+      ariaLabel="Navigate back"
+    />
   );
+
+  const rightColumn = (
+    <>
+      <h1>{heading}</h1>
+      <EditProfileForm {...form} />
+    </>
+  );
+
+  return <TwoColumnsFlex leftColumn={leftColumn} rightColumn={rightColumn} />;
 };
 
-type Props = Record<string, string>;
+export type ProfilePageData = {
+  heading: string;
+  form: EditProfileFormProps;
+};
