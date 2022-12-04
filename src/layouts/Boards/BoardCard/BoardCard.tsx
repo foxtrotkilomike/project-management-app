@@ -27,7 +27,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
       </Card>
     );
   } else {
-    const { onRemove, title, metaData, className, id } = props;
+    const { onRemove, title, metaData, className, id, onClick } = props;
     const cardClassNames = classNames(classes.boardCard, className);
     const renderDescription = metaData.map((item) => (
       <BoardInfoItem key={item.name} name={item.name} value={item.value} />
@@ -36,7 +36,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
     const iconClassNames = classNames(classes.button, classes.deleteIcon);
 
     return (
-      <Card className={cardClassNames}>
+      <Card className={cardClassNames} onClick={() => onClick(id)}>
         <Card.Body className={classes.boardCard__content}>
           <div className={classes.boardCard__header}>
             <Card.Title className={classes.boardCard__title}>{title}</Card.Title>
@@ -74,5 +74,6 @@ export type BoardProps =
       metaData: BoardInfoItemProps[];
       onRemove: (id: string) => void;
       className?: string;
+      onClick: (id: string) => void;
     }
   | { children: ReactNode; className?: string };

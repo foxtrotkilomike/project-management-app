@@ -10,11 +10,13 @@ import { creationFormData } from '../../config/data';
 import { ModalForm } from '../../config/types';
 import { useAuthContext } from '../../contexts/auth/authContext';
 import Spinner from '../../commons/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 export const Boards = (): JSX.Element => {
   const [boards, setBoards] = useState<BoardsResponse[]>([]);
   const [isModalActive, setIsModalActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -40,6 +42,11 @@ export const Boards = (): JSX.Element => {
     });
   };
 
+  const goToBoardPage = (id: string) => {
+    console.log(id);
+    navigate(`/board/${id}`, { replace: true });
+  };
+
   const renderBoards = () =>
     boards.map((board) => {
       const { owner, users, _id: id, title } = board;
@@ -48,7 +55,14 @@ export const Boards = (): JSX.Element => {
         { name: 'users number', value: users.length },
       ];
       return (
-        <BoardCard key={id} id={id} title={title} metaData={metaData} onRemove={removeBoard} />
+        <BoardCard
+          key={id}
+          id={id}
+          title={title}
+          metaData={metaData}
+          onRemove={removeBoard}
+          onClick={goToBoardPage}
+        />
       );
     });
 
