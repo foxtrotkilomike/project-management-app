@@ -6,7 +6,6 @@ export const fillColumnWithTasks = async (column: ColumnsResponse): Promise<Colu
   const { boardId, _id } = column;
   const res = await getTasks(boardId, _id);
   if ('code' in res) {
-    console.log('error occured during fetching tasks');
     return {
       ...column,
       tasks: [],

@@ -52,7 +52,6 @@ export const Board = (): JSX.Element => {
     if ('code' in res) {
       toast.error(toastMessages.error.unknown);
     } else {
-      console.log(res);
       const { _id, boardId, title } = res;
       const column: ColumnModel = {
         _id,
