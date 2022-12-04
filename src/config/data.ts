@@ -154,7 +154,6 @@ const apiErrors: Record<string, ApiError> = {
 
 const creationFormData: CreationFormData = {
   column: {
-    type: 'column',
     fields: [
       {
         type: 'text',
@@ -168,7 +167,6 @@ const creationFormData: CreationFormData = {
     title: 'New column',
   },
   task: {
-    type: 'task',
     fields: [
       {
         type: 'text',
@@ -191,7 +189,6 @@ const creationFormData: CreationFormData = {
     title: 'New task',
   },
   board: {
-    type: 'board',
     fields: [
       {
         type: 'text',

@@ -94,7 +94,7 @@ export interface IFormField extends Omit<FormInput, 'name'> {
   rows?: number;
 }
 type CreationFormData = {
-  [index in FormType]: { type: FormType; fields: IFormField[]; title: string };
+  [index in FormType]: { fields: IFormField[]; title: string };
 };
 type FormType = 'column' | 'task' | 'board';
 

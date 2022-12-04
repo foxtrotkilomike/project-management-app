@@ -1,6 +1,6 @@
 import classes from './Form.module.scss';
 import { useForm } from 'react-hook-form';
-import { IFormField, FormType, ModalForm } from '../../config/types';
+import { IFormField, ModalForm } from '../../config/types';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { ElementType } from 'react';
@@ -64,7 +64,6 @@ export const Form = (props: IFormProps) => {
 
 interface IFormProps {
   fields: IFormField[];
-  type: FormType;
   onSubmit: (data: ModalForm) => void;
   onCancel: () => void;
 }
