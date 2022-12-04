@@ -32,8 +32,6 @@ export const BoardColumnsWrapper = (props: wrapperProps) => {
     <Droppable droppableId="columns" direction="horizontal" type="column">
       {(provided) => (
         <ul className={classes.columnsWrapper} {...provided.droppableProps} ref={provided.innerRef}>
-          {/* maybe delete the empty column? */}
-          {!children && <BoardColumn index={0} _id={'new column'} title="New column" tasks={[]} />}
           {children}
           <li>
             <button className={classes.columnsWrapper__add} onClick={showModal}>
