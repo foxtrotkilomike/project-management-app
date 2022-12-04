@@ -41,6 +41,15 @@
   @include button-variant(transparent, transparent, $color-text, $color-main-light, $color-main-light, $color-text);
 }
 
+.btn-danger {
+  @include button-variant($color-danger, $color-danger, $color-text-light, $color-danger-hover, $color-danger-hover, $color-text-light, $color-danger, $color-danger);
+  text-transform: uppercase;
+}
+.btn-success {
+  @include button-variant($color-success, $color-success, $color-text-light, $color-success-hover, $color-success-hover, $color-text-light, $color-success, $color-success);
+  text-transform: uppercase;
+}
+
 .dropdown-toggle::after {
   @include caret-down;
 }

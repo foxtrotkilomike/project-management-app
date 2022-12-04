@@ -14,10 +14,13 @@
 
 .modalContent {
   padding: $padding-md;
-  background-color: lighten($color-main, 45);
+  background-color: $color-modal-bg;
   border-radius: $border-radius-sm;
   width: 100%;
   box-shadow: 0 0 20px $color-shadow;
+  @media screen and (max-width: $mobile-m){
+    padding: $padding-md $padding-xs;
+  }
 }
 
 .modalIcon {

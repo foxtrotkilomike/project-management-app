@@ -89,6 +89,20 @@ type ApiError = {
   message: string;
 };
 
+export interface IFormField extends Omit<FormInput, 'name'> {
+  name: 'title' | 'description';
+  rows?: number;
+}
+type CreationFormData = {
+  [index in FormType]: { fields: IFormField[]; title: string };
+};
+type FormType = 'column' | 'task' | 'board';
+
+type ModalForm = {
+  title: string;
+  description?: string;
+};
+
 type User = UserResponse;
 
 type AppData = {
@@ -98,6 +112,8 @@ type AppData = {
   token: string;
   expirationTime: string;
 };
+
+type LoadingStatus = 'loading' | 'complete';
 
 export type {
   FormValidationErrors,
@@ -112,6 +128,11 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
+  FormInput,
+  CreationFormData,
+  ModalForm,
+  FormType,
   User,
   AppData,
+  LoadingStatus,
 };

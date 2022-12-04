@@ -4,6 +4,7 @@ import { LoginFormInputs, LoginFormType } from '../../config/types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useLoadingContext } from '../../contexts/loading/loadingContext';
 import { AxiosResponse } from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import Container from '../Container';
@@ -27,16 +28,17 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
   const formTextData = loginFormData[type];
   const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
+  const { setLoadingStatus } = useLoadingContext();
   const isAuthenticatedUser = checkUserCredentials();
 
   const signUp = (data: LoginFormInputs) => {
-    // TODO add spinner for data loading process
+    setLoadingStatus('loading');
     checkPasswordMatch(data, setError);
     handleAuthorization('signUp', data);
   };
 
   const signIn = (data: LoginFormInputs) => {
-    // TODO add spinner for data loading process
+    setLoadingStatus('loading');
     handleAuthorization('signIn', data);
   };
 
@@ -45,7 +47,8 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
     const formData = formType === 'signUp' ? retrieveSignUpData(data) : retrieveSignInData(data);
     postAuthData(formData, formType)
       .then((response) => handleResponse(response, formType, data))
-      .catch((error) => handleAuthErrors(error, setError, setSubmissionError));
+      .catch((error) => handleAuthErrors(error, setError, setSubmissionError))
+      .finally(() => setLoadingStatus('complete'));
   };
 
   const handleResponse = (

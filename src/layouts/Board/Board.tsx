@@ -17,36 +17,36 @@ const MOCK_COLUMNS: ColumnResponse[] = [
     order: 0,
     boardId: 'board_id',
   },
-  {
-    _id: 'column 2',
-    title: 'column 2',
-    order: 1,
-    boardId: 'board_id',
-  },
-  {
-    _id: 'column 3',
-    title: 'column 3',
-    order: 2,
-    boardId: 'board_id',
-  },
-  {
-    _id: 'column 4',
-    title: 'column 4',
-    order: 3,
-    boardId: 'board_id',
-  },
-  {
-    _id: 'column 5',
-    title: 'column 5',
-    order: 4,
-    boardId: 'board_id',
-  },
-  {
-    _id: 'column 6',
-    title: 'column 6',
-    order: 5,
-    boardId: 'board_id',
-  },
+  // {
+  //   _id: 'column 2',
+  //   title: 'column 2',
+  //   order: 1,
+  //   boardId: 'board_id',
+  // },
+  // {
+  //   _id: 'column 3',
+  //   title: 'column 3',
+  //   order: 2,
+  //   boardId: 'board_id',
+  // },
+  // {
+  //   _id: 'column 4',
+  //   title: 'column 4',
+  //   order: 3,
+  //   boardId: 'board_id',
+  // },
+  // {
+  //   _id: 'column 5',
+  //   title: 'column 5',
+  //   order: 4,
+  //   boardId: 'board_id',
+  // },
+  // {
+  //   _id: 'column 6',
+  //   title: 'column 6',
+  //   order: 5,
+  //   boardId: 'board_id',
+  // },
 ];
 const MOCK_TASKS: Record<string, TaskResponse[]> = {
   // Just mocked data for simulating getting tasks by columnId
@@ -237,13 +237,24 @@ export const Board = (): JSX.Element => {
       );
       setColumns(columnModels);
     });
-    return () => {
-      //TODO: implement setting tasks and columns changes to backend
-    };
   }, []);
 
-  const renderColumns = columns.map((column, index) => (
-    <BoardColumn key={column._id} {...column} index={index} />
+  const addColumn = (title: string) => {
+    const column: ColumnModel = {
+      _id: '',
+      title,
+      order: columns.length,
+      boardId,
+      tasks: [],
+    };
+    const newColumns = [...columns];
+    newColumns.push(column);
+    setColumns(newColumns);
+    return column;
+  };
+
+  const renderColumns = columns.map((column) => (
+    <BoardColumn key={column._id} {...column} index={column.order} />
   ));
 
   const onDragEnd = (result: DropResult) => {
@@ -268,7 +279,9 @@ export const Board = (): JSX.Element => {
         <h1 className={classes.board__title}>{board?.title}</h1>
         <div className={classes.board__content}>
           <DragDropContext onDragEnd={onDragEnd}>
-            <BoardColumnsWrapper>{renderColumns.length > 0 && renderColumns}</BoardColumnsWrapper>
+            <BoardColumnsWrapper addColumn={addColumn}>
+              {renderColumns.length > 0 && renderColumns}
+            </BoardColumnsWrapper>
           </DragDropContext>
         </div>
       </div>
