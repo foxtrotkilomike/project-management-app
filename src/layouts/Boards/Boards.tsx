@@ -13,10 +13,11 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FormInputNames } from '../../config/types';
 import { routes } from '../../config/routes';
+import { useModalState } from '../../hooks/useModalState';
 
 export const Boards = (): JSX.Element => {
   const [boards, setBoards] = useState<BoardsResponse[]>([]);
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isModalActive, closeModal, showModal] = useModalState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuthContext();
@@ -67,14 +68,6 @@ export const Boards = (): JSX.Element => {
         />
       );
     });
-
-  const showModal = () => {
-    setIsModalActive(true);
-  };
-
-  const closeModal = () => {
-    setIsModalActive(false);
-  };
 
   const createBoardCard = (data: FormInputNames) => {
     const newBoard = {

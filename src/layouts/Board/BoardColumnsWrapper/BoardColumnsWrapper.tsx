@@ -1,23 +1,15 @@
 import classes from './BoardColumnsWrapper.module.scss';
-import plusButton from '../../../assets/svg/plus.svg';
 import Modal from '../../../commons/Modal';
-import { useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { creationFormData } from '../../../config/data';
 import Form from '../../../commons/Form';
 import { FormInputNames } from '../../../config/types';
+import { useModalState } from '../../../hooks/useModalState';
 
 export const BoardColumnsWrapper = (props: wrapperProps) => {
   const { children, addColumn } = props;
-  const [isModalActive, setIsModalActive] = useState(false);
-  const showModal = () => {
-    //TODO implement logic
-    setIsModalActive(true);
-  };
-  const closeModal = () => {
-    //TODO implement close modal func
-    setIsModalActive(false);
-  };
+  const [isModalActive, closeModal, showModal] = useModalState(false);
+
   const onSubmit = (data: FormInputNames) => {
     const { title } = data;
     addColumn(title);

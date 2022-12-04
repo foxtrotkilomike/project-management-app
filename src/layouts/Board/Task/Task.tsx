@@ -1,26 +1,22 @@
-import { useState } from 'react';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
 import classes from './Task.module.scss';
 import { Draggable } from 'react-beautiful-dnd';
+import { useModalState } from '../../../hooks/useModalState';
 
 export const Task = (props: ITask): JSX.Element => {
   const { title, description, _id: id, index } = props;
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isModalActive, hideModal, showModal] = useModalState(false);
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
   ) => {
     if ('key' in e) {
       if (e.key === 'Enter') {
-        setIsModalActive(true);
+        showModal();
       }
     } else {
-      setIsModalActive(true);
+      showModal();
     }
-  };
-
-  const hideModal = () => {
-    setIsModalActive(false);
   };
 
   return (
