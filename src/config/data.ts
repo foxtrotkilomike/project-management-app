@@ -11,6 +11,11 @@ const buttonsText = {
   submit: 'submit',
 };
 
+const confirmationModalButtonsText = {
+  cancel: 'cancel',
+  submit: 'confirm',
+};
+
 const footerData = {
   year: '2022',
   developers: [
@@ -258,6 +263,7 @@ enum AppData {
 
 export {
   buttonsText,
+  confirmationModalButtonsText,
   footerData,
   loginFormData,
   loginHeading,

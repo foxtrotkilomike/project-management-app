@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import classes from '../../commons/Form/Form.module.scss';
+import React from 'react';
 import { ApiError, FormInputNames } from '../../config/types';
 import { useLoadingContext } from '../../contexts/loading/loadingContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,16 +7,16 @@ import { deleteUserById, updateUserById } from '../../services/users/userService
 import clearUserData from '../../helpers/clearUserData';
 
 import Form from '../../commons/Form';
-import Modal from '../../commons/Modal';
-import { Button } from 'react-bootstrap';
 import { AppData, creationFormData } from '../../config/data';
 import { UserResponse } from '../../services/users/types';
 import { routes } from '../../config/routes';
+import { useModalState } from '../../hooks/useModalState';
+import ConfirmationModal from '../../commons/ConfirmationModal';
 
 const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
   const { submitButtonText, deleteProfileButtonText, deleteConfirmationMessage } = props;
   const { setLoadingStatus } = useLoadingContext();
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isModalActive, closeModal, openModal] = useModalState();
   const navigate = useNavigate();
 
   const logOutUser = () => {
@@ -80,29 +79,22 @@ const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
     }
   };
 
-  const closeModal = () => {
-    setIsModalActive(false);
-  };
-
   return (
     <>
       <Form
         fields={creationFormData.profile.fields}
         onSubmit={updateUserData}
-        onCancel={() => setIsModalActive(true)}
+        onCancel={openModal}
         buttonsText={{ submit: submitButtonText, cancel: deleteProfileButtonText }}
         fullPage
       />
-      <Modal title={deleteConfirmationMessage} onHide={closeModal} isActive={isModalActive}>
-        <div className={classes.buttons}>
-          <Button variant="danger" className={classes.cancel} onClick={deleteUser}>
-            Delete
-          </Button>
-          <Button variant="success" className={classes.submit} onClick={closeModal}>
-            Cancel
-          </Button>
-        </div>
-      </Modal>
+      <ConfirmationModal
+        title={deleteConfirmationMessage}
+        onHide={closeModal}
+        isActive={isModalActive}
+        handleCancelClick={closeModal}
+        handleConfirmationClick={deleteUser}
+      />
     </>
   );
 };

@@ -1,0 +1,18 @@
+@import '../../styles/constants.scss';
+
+.buttons {
+  margin-top: $margin-xl;
+  display: flex;
+  justify-content: space-around;
+  gap: $gap-md;
+
+  >button {
+    padding: $padding-sm $padding-xl;
+
+    @media screen and (max-width: $mobile-m) {
+      width: auto;
+      padding: $padding-xs $padding-md;
+      gap: $gap-xs;
+    }
+  }
+}
