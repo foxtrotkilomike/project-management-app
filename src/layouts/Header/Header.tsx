@@ -1,32 +1,43 @@
+import { useState } from 'react';
 import classes from './Header.module.scss';
-import { buttonsText, selectData } from '../../config/data';
+import { selectData } from '../../config/data';
+import { useHeaderColor } from '../../hooks/useHeaderColor';
+import { HeaderButtons } from './HeaderButtons';
+import { usePrivateRoute } from '../../hooks/usePrivateRoute';
 import Select from '../../commons/Select';
+import BurgerMenu from './BurgerMenu';
 import Logo from '../../commons/Logo';
 import Container from '../../commons/Container';
 import classNames from 'classnames';
-import { Button } from 'react-bootstrap';
 
-export const Header = (props: Props): JSX.Element => {
-  const { sticky } = props;
+export const Header = (): JSX.Element => {
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
+  const isPrivateRoute = usePrivateRoute();
   const headerClassName = classNames(classes.root, {
-    [classes.headerSticky]: sticky,
+    [classes.headerSticky]: isPrivateRoute,
+  });
+  const classNav = classNames(classes.buttonsContainer, {
+    [classes.buttonsContainer_active]: isBurgerActive,
   });
   const languageSelectData = selectData[0];
+  const privateHeaderColor = useHeaderColor();
+  const color = isPrivateRoute ? privateHeaderColor : '#fce9df';
 
   return (
-    <header className={headerClassName}>
+    <header className={headerClassName} style={{ backgroundColor: color }}>
       <Container centered main>
         <div className={classes.headerContent}>
+          <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+          <div
+            aria-hidden={true}
+            className={classes.navBackground}
+            onClick={() => setIsBurgerActive(false)}
+          />
           <Logo />
-          <div className={classes.buttonsContainer}>
-            <Button variant="primary" onClick={() => {}}>
-              {buttonsText.signUp}
-            </Button>
-            <Button variant="outline-secondary" onClick={() => {}}>
-              {buttonsText.signIn}
-            </Button>
-            <Select {...languageSelectData} activeOptionIndex={0} />
+          <div className={classNav}>
+            <HeaderButtons setIsBurgerActive={setIsBurgerActive} />
           </div>
+          <Select {...languageSelectData} activeOptionIndex={0} />
         </div>
       </Container>
     </header>

@@ -4,8 +4,12 @@ import { ApiError, LoginForm, LoginPrompt } from './types';
 import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 
 const buttonsText = {
-  signUp: 'sign up',
-  signIn: 'sign in',
+  signUp: 'Sign up',
+  signIn: 'Sign in',
+  createBoard: 'Create board',
+  editProfile: 'Edit profile',
+  mainPage: 'Main page',
+  signOut: 'Sign out',
 };
 
 const footerData = {

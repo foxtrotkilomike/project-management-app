@@ -6,16 +6,140 @@
 }
 
 .headerSticky {
-  position: sticky;
+  position: fixed;
   top: 0;
+	width: 100%;
+
+	& + * {
+		padding-top: 78px;
+	}
 }
 
 .headerContent {
   @extend %flex-space-between;
+  align-items: center;
   padding: $padding-lg;
 }
 
+.burger {
+	margin-right: 25px;
+	padding: 0;
+	width: 45px;
+	height: 26px;
+	position: relative;
+	z-index: 20;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.burger__line {
+	width: 100%;
+	height: 3px;
+	display: block;
+	position: absolute;
+	left: 23px;
+	background-color: $color-main;
+}
+
+.burger .burger__line:nth-child(1) {
+	top: 1px;
+	transform: translateX(-50%) translateY(0);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s, transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87);
+}
+
+.burger .burger__line:nth-child(2) {
+	top: 13px;
+	opacity: 1;
+	transform: translateX(-50%);
+}
+
+.burger .burger__line:nth-child(3) {
+	top: 25px;
+	transform: translateX(-50%) translateY(0);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s,transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87);
+}
+
+.burger_open .burger__line:nth-child(1) {
+	top: 50%;          
+	transform: translateX(-50%) translateY(0) rotate(45deg);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87), transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s;
+}
+
+.burger_open .burger__line:nth-child(2) {
+	opacity: 0;
+}
+
+.burger_open .burger__line:nth-child(3) {
+	top: 50%;
+	transform: translateX(-50%) translateY(0) rotate(-45deg);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) ,transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s;
+}
+
+.burger:hover .burger__line {
+	background: $color-main-hover;
+}
+
 .buttonsContainer {
+	margin-left: auto;
   display: flex;
-  gap: $gap-lg;
+  gap: $gap-sm;
+}
+
+.navBackground {
+	display: none;
+}
+
+@media (min-width: 769px) {
+	.burger {
+		display: none;
+	}
+
+	.signOutBtn {
+		padding-right: 35px;
+		background-image: url("data:image/svg+xml,%3Csvg width='19' height='19' viewBox='0 0 19 19' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.875 14.8438C11.875 15.1717 11.6092 15.4375 11.2812 15.4375L1.78125 15.4375C1.45333 15.4375 1.1875 15.1717 1.1875 14.8437L1.1875 4.15625C1.1875 3.82833 1.45333 3.5625 1.78125 3.5625L11.2813 3.5625C11.6092 3.5625 11.875 3.82833 11.875 4.15625L11.875 6.53125C11.875 6.85917 12.1408 7.125 12.4688 7.125C12.7967 7.125 13.0625 6.85917 13.0625 6.53125L13.0625 4.15625C13.0625 3.17249 12.265 2.375 11.2813 2.375L1.78125 2.375C0.797495 2.375 5.88028e-07 3.17249 5.45026e-07 4.15625L7.78609e-08 14.8437C3.48595e-08 15.8275 0.797493 16.625 1.78125 16.625L11.2812 16.625C12.265 16.625 13.0625 15.8275 13.0625 14.8438L13.0625 12.4688C13.0625 12.1408 12.7967 11.875 12.4688 11.875C12.1408 11.875 11.875 12.1408 11.875 12.4688L11.875 14.8438Z' fill='black'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.8261 9.91984C19.058 9.68797 19.058 9.31203 18.8261 9.08016L15.2636 5.51766C15.0317 5.28578 14.6558 5.28578 14.4239 5.51766C14.192 5.74953 14.192 6.12547 14.4239 6.35734L16.9728 8.90625L6.53125 8.90625C6.20333 8.90625 5.9375 9.17208 5.9375 9.5C5.9375 9.82792 6.20333 10.0937 6.53125 10.0937L16.9728 10.0937L14.4239 12.6427C14.192 12.8745 14.192 13.2505 14.4239 13.4823C14.6558 13.7142 15.0317 13.7142 15.2636 13.4823L18.8261 9.91984Z' fill='black'/%3E%3C/svg%3E");
+		background-size: 20px;
+		background-position: center right 5px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (max-width: 768px) {
+	.burger_open + .navBackground {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		width: 100%;
+		height: 100vh;
+		background-color: $color-spinner-light;
+	}
+
+	.buttonsContainer {
+		padding: 0;
+    width: 80%;
+    height: 101vh;
+    position: fixed;
+    z-index: 15;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    background: $color-bg-light;
+		border-right: 1px solid $color-overlay;
+    transition: left $transition-duration-md, opacity $transition-duration-md;
+
+		&_active {
+			left: 0;
+    	opacity: 1;
+		}
+	}
+
+	.signOutBtn {
+		margin-top: 2rem;
+	}
 }

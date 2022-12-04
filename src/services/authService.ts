@@ -70,7 +70,7 @@ const checkUserCredentials = () => {
     const hasUserData = getAppData('userId');
     const hasToken = getAppData('token');
 
-    return !isExpiredToken && hasUserData && hasToken;
+    return Boolean(!isExpiredToken && hasUserData && hasToken);
   }
 
   return false;
