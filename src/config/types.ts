@@ -1,6 +1,5 @@
 import { LoginPromptData } from '../commons/LoginPrompt';
 import { RegisterOptions } from 'react-hook-form';
-import { UserResponse } from '../services/users/types';
 
 type LoginFormInputs = {
   userName: string;
@@ -9,13 +8,19 @@ type LoginFormInputs = {
   repeatedPassword: string;
 };
 
-type FormInput = {
+type EditProfileFormInputs = Omit<LoginFormInputs, 'repeatedPassword'>;
+
+interface FormInput {
   type: string;
   name: keyof LoginFormInputs;
   placeholder?: string;
   autoComplete?: string;
   registerOptions: RegisterOptions;
-};
+}
+
+interface EditProfileFormInput extends FormInput {
+  name: keyof EditProfileFormInputs;
+}
 
 interface LoginFormControls {
   inputs: FormInput[];
@@ -89,34 +94,31 @@ type ApiError = {
   message: string;
 };
 
+type FormInputNames = {
+  title: string;
+  description: string;
+  userName: string;
+  userLogin: string;
+  password: string;
+};
+
 export interface IFormField extends Omit<FormInput, 'name'> {
-  name: 'title' | 'description';
+  name: keyof FormInputNames;
   rows?: number;
 }
+
 type CreationFormData = {
   [index in FormType]: { fields: IFormField[]; title: string };
 };
-type FormType = 'column' | 'task' | 'board';
 
-type ModalForm = {
-  title: string;
-  description?: string;
-};
-
-type User = UserResponse;
-
-type AppData = {
-  userId: string;
-  userLogin: string;
-  userName?: string;
-  token: string;
-  expirationTime: string;
-};
-
+type FormType = 'column' | 'task' | 'board' | 'profile';
 type LoadingStatus = 'loading' | 'complete';
 
 export type {
   FormValidationErrors,
+  FormInput,
+  FormInputNames,
+  EditProfileFormInput,
   JWTData,
   LoginForm,
   LoginFormInputs,
@@ -128,11 +130,7 @@ export type {
   SignInData,
   ServerErrorResponse,
   ApiError,
-  FormInput,
   CreationFormData,
-  ModalForm,
   FormType,
-  User,
-  AppData,
   LoadingStatus,
 };

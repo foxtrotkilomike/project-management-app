@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { AppData, User } from '../../config/types';
-import { getAppData } from '../../services/authService';
+import { AppData } from '../../config/types';
+import { UserResponse } from '../../services/users/types';
 import { AuthContext } from './authContext';
+import { getAppData } from '../../helpers/handleAppData';
 
 const getUserData = (key: keyof AppData) => {
   const userData = getAppData(key);
   return userData ? userData : '';
 };
 
-const initializeUserData = (): User => ({
+const initializeUserData = (): UserResponse => ({
   _id: getUserData('userId'),
   name: getUserData('userName'),
   login: getUserData('userLogin'),
 });
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps): JSX.Element => {
-  const [user, setUser] = useState<User>(initializeUserData);
+  const [user, setUser] = useState<UserResponse>(initializeUserData);
 
   return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
 };

@@ -2,6 +2,7 @@ import { SelectProps } from '../commons/Select';
 import GlobeIcon from '../assets/svg/globe2.svg';
 import { ApiError, CreationFormData, LoginForm, LoginPrompt } from './types';
 import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
+import { ProfilePageData } from '../layouts/Profile/Profile';
 
 const buttonsText = {
   signUp: 'sign up',
@@ -154,6 +155,7 @@ const apiErrors: Record<string, ApiError> = {
 
 const creationFormData: CreationFormData = {
   column: {
+    title: 'New column',
     fields: [
       {
         type: 'text',
@@ -164,9 +166,9 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New column',
   },
   task: {
+    title: 'New task',
     fields: [
       {
         type: 'text',
@@ -186,9 +188,9 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New task',
   },
   board: {
+    title: 'New board',
     fields: [
       {
         type: 'text',
@@ -199,9 +201,60 @@ const creationFormData: CreationFormData = {
         },
       },
     ],
-    title: 'New board',
+  },
+  profile: {
+    title: '',
+    fields: [
+      {
+        type: 'text',
+        name: 'userName',
+        placeholder: 'Name',
+        registerOptions: {
+          required: { value: true, message: 'Name is a required field' },
+        },
+      },
+      {
+        type: 'text',
+        name: 'userLogin',
+        placeholder: 'Login',
+        autoComplete: 'username',
+        registerOptions: {
+          required: { value: true, message: 'Login is a required field' },
+        },
+      },
+      {
+        type: 'password',
+        name: 'password',
+        placeholder: 'Password',
+        autoComplete: 'new-password',
+        registerOptions: {
+          required: { value: true, message: 'Password is a required field' },
+          minLength: {
+            value: MIN_PASSWORD_LENGTH,
+            message: 'Password must be at least 8 characters long',
+          },
+        },
+      },
+    ],
   },
 };
+
+const profilePageConfig: ProfilePageData = {
+  heading: 'Edit profile',
+  form: {
+    submitButtonText: 'Save',
+    deleteProfileButtonText: 'Delete profile',
+    deleteConfirmationMessage: 'Do you really want to delete your profile?',
+  },
+};
+
+enum AppData {
+  USER_ID = 'userId',
+  USER_LOGIN = 'userLogin',
+  USER_NAME = 'userName',
+  TOKEN = 'token',
+  EXPIRATION_TIME = 'expirationTime',
+}
 
 export {
   buttonsText,
@@ -212,4 +265,6 @@ export {
   selectData,
   apiErrors,
   creationFormData,
+  profilePageConfig,
+  AppData,
 };

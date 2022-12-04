@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { User } from '../../config/types';
+import { UserResponse } from '../../services/users/types';
 
 const AuthContext = createContext<AuthContext>({
   user: {
@@ -13,8 +13,8 @@ const AuthContext = createContext<AuthContext>({
 const useAuthContext = () => useContext(AuthContext);
 
 interface AuthContext {
-  user: User;
-  setUser: (user: User) => void;
+  user: UserResponse;
+  setUser: (user: UserResponse) => void;
 }
 
 export { AuthContext, useAuthContext };

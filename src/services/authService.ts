@@ -3,9 +3,10 @@ import axios from 'axios';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 
 import { authInstance, Endpoints } from './api';
-import { AppData, LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
+import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
 import { MILLISECONDS_IN_SECOND, ResponseStatus } from '../config/constants';
-import { loginFormData } from '../config/data';
+import { AppData, loginFormData } from '../config/data';
+import { getAppData } from '../helpers/handleAppData';
 
 const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
   const { base: baseUrl, signUp, signIn } = Endpoints.auth;
@@ -54,21 +55,14 @@ const handleAuthErrors = (
   }
 };
 
-const setAppData = (data: AppData) => {
-  for (const [key, value] of Object.entries(data)) {
-    window.localStorage.setItem(key, value);
-  }
-};
-const getAppData = (key: keyof AppData) => window.localStorage.getItem(key);
-
 const checkUserCredentials = () => {
-  const tokenExpirationValue = getAppData('expirationTime');
+  const tokenExpirationValue = getAppData(AppData.EXPIRATION_TIME);
 
   if (tokenExpirationValue) {
     const tokenExpirationTime = parseInt(tokenExpirationValue);
     const isExpiredToken = Date.now() > tokenExpirationTime * MILLISECONDS_IN_SECOND;
-    const hasUserData = getAppData('userId');
-    const hasToken = getAppData('token');
+    const hasUserData = getAppData(AppData.USER_ID);
+    const hasToken = getAppData(AppData.TOKEN);
 
     return !isExpiredToken && hasUserData && hasToken;
   }
@@ -76,4 +70,4 @@ const checkUserCredentials = () => {
   return false;
 };
 
-export { postAuthData, handleAuthErrors, setAppData, getAppData, checkUserCredentials };
+export { postAuthData, handleAuthErrors, checkUserCredentials };
