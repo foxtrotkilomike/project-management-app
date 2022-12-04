@@ -44,7 +44,7 @@ export const Boards = (): JSX.Element => {
 
   const goToBoardPage = (id: string) => {
     console.log(id);
-    navigate(`/board/${id}`, { replace: true });
+    navigate(`/board/${id}`);
   };
 
   const renderBoards = () =>

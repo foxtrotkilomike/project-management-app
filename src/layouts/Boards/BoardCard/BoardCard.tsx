@@ -35,8 +35,15 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
 
     const iconClassNames = classNames(classes.button, classes.deleteIcon);
 
+    const goToBoard = (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(`.${classes.button}`)) {
+        onClick(id);
+      }
+    };
+
     return (
-      <Card className={cardClassNames} onClick={() => onClick(id)}>
+      <Card className={cardClassNames} onClick={(e) => goToBoard(e)}>
         <Card.Body className={classes.boardCard__content}>
           <div className={classes.boardCard__header}>
             <Card.Title className={classes.boardCard__title}>{title}</Card.Title>
