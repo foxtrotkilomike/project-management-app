@@ -27,7 +27,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
       </Card>
     );
   } else {
-    const { onRemove, title, metaData, className } = props;
+    const { onRemove, title, metaData, className, id } = props;
     const cardClassNames = classNames(classes.boardCard, className);
     const renderDescription = metaData.map((item) => (
       <BoardInfoItem key={item.name} name={item.name} value={item.value} />
@@ -41,11 +41,19 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
           <div className={classes.boardCard__header}>
             <Card.Title className={classes.boardCard__title}>{title}</Card.Title>
             {!isMobile ? (
-              <Button className={classes.button} variant="outline-danger" onClick={(e) => onRemove}>
+              <Button
+                className={classes.button}
+                variant="outline-danger"
+                onClick={() => onRemove(id)}
+              >
                 Remove
               </Button>
             ) : (
-              <Button className={iconClassNames} variant="outline-danger" onClick={(e) => onRemove}>
+              <Button
+                className={iconClassNames}
+                variant="outline-danger"
+                onClick={() => onRemove(id)}
+              >
                 <img src={TrashcanIcon} alt="trashcan" />
               </Button>
             )}
@@ -62,6 +70,7 @@ export const BoardCard = (props: BoardProps): JSX.Element => {
 export type BoardProps =
   | {
       title: string;
+      id: string;
       metaData: BoardInfoItemProps[];
       onRemove: (id: string) => void;
       className?: string;
