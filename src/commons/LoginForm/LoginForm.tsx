@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import classes from './LoginForm.module.scss';
 import { LoginFormInputs, LoginFormType } from '../../config/types';
 
@@ -15,7 +16,7 @@ import {
   retrieveSignUpData,
 } from '../../helpers/authentication';
 import { checkUserCredentials, handleAuthErrors, postAuthData } from '../../services/authService';
-import { loginFormData } from '../../config/data';
+import { loginFormData, toastMessages } from '../../config/data';
 import { routes } from '../../config/routes';
 import { setReceivedAppData } from '../../helpers/handleAppData';
 
@@ -60,6 +61,7 @@ export const LoginForm = ({ type }: LoginFormProps): JSX.Element => {
         case 'signIn':
           if (!response.data.token) setSubmissionError(loginFormData.submissionErrors.unknownError);
           await setReceivedAppData(response);
+          toast.success(toastMessages.success.login);
           navigate(routes.BOARDS);
           break;
 

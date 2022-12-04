@@ -1,5 +1,6 @@
 import React from 'react';
-import { ApiError, FormInputNames } from '../../config/types';
+import toast from 'react-hot-toast';
+import { FormInputNames } from '../../config/types';
 import { useLoadingContext } from '../../contexts/loading/loadingContext';
 import { useNavigate } from 'react-router-dom';
 import { getAppData, setAppData } from '../../helpers/handleAppData';
@@ -7,7 +8,7 @@ import { deleteUserById, updateUserById } from '../../services/users/userService
 import clearUserData from '../../helpers/clearUserData';
 
 import Form from '../../commons/Form';
-import { AppData, creationFormData } from '../../config/data';
+import { AppData, creationFormData, toastMessages } from '../../config/data';
 import { UserResponse } from '../../services/users/types';
 import { routes } from '../../config/routes';
 import { useModalState } from '../../hooks/useModalState';
@@ -21,7 +22,6 @@ const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
 
   const logOutUser = () => {
     closeModal();
-    // TODO add Success Notification
     clearUserData();
     navigate(routes.MAIN);
   };
@@ -60,22 +60,18 @@ const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
 
       setLoadingStatus('complete');
       if ('code' in updatedUserData) {
-        // TODO add Error Notification
-        alert(`Error: ${(updatedUserData as ApiError).message}`);
+        toast.error(toastMessages.error.profileUpdate);
       } else {
         if (actionType === 'update') {
-          // TODO add Notification
-          alert('Profile updated successfully');
           setUpdatedUserData(updatedUserData as UserResponse);
+          toast.success(toastMessages.success.profileUpdate);
         } else {
-          // TODO add Notification
-          alert('Profile deleted successfully');
           logOutUser();
+          toast.success(toastMessages.success.profileDelete);
         }
       }
     } catch (error) {
-      // TODO add notification
-      alert('Some error occurred, please try again later');
+      toast.error(toastMessages.error.unknown);
     }
   };
 

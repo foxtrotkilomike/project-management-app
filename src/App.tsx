@@ -7,6 +7,7 @@ import Footer from './layouts/Footer';
 import { Outlet } from 'react-router-dom';
 import AppContextProvider from './contexts/AppContextProvider';
 import Spinner from './commons/Spinner';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('complete');
@@ -15,6 +16,7 @@ const App = () => {
     <AppContextProvider>
       <LoadingContext.Provider value={{ loadingStatus, setLoadingStatus }}>
         {loadingStatus === 'loading' && <Spinner />}
+        <Toaster />
         <div className={classes.root}>
           <Header />
           <Outlet />
