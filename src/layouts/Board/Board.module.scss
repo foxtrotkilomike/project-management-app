@@ -14,5 +14,6 @@
   &__content {
     overflow-x: scroll;
     width: 100%;
+    flex-grow: 1;
   }
 }
