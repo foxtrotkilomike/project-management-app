@@ -1,9 +1,28 @@
-@import "../../styles/constants";
+@import "../../styles/constants.scss";
+@import "../../styles/templates";
+@import "../../styles/mixins";
 
-.root {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  justify-content: center;
-  align-items: center;
-}
+.boards {
+  padding: $padding-xl 0 $padding-lg;
+  &__title {
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-black;
+  }
+  &__content {
+    @extend %flex-space-between;
+    flex-wrap: wrap;
+  }
+  &__empty {
+    border: none;
+    div {
+      padding: 0;
+      margin-left: 0;
+    }
+  }
+  &__add {
+    @include plus-button($add-btn-size, $color-border-main-light, $border-width-md, $color-hover: $color-border-active);
+    @media screen and (max-width: $board-cards-break-point){
+      margin: 0 auto;
+    }
+  }
+};

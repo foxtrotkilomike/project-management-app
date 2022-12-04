@@ -12,5 +12,5 @@ export const BoardInfoItem = (props: BoardInfoItemProps): JSX.Element => {
 
 export type BoardInfoItemProps = {
   name: string;
-  value: number;
+  value: number | string;
 };
