@@ -107,7 +107,13 @@ export const Board = (): JSX.Element => {
   };
 
   const renderColumns = columns.map((column, index) => (
-    <BoardColumn key={column._id} {...column} index={index} onRemove={removeColumn} />
+    <BoardColumn
+      key={column._id}
+      {...column}
+      setColumns={setColumns}
+      index={index}
+      onRemove={removeColumn}
+    />
   ));
 
   const onDragEnd = (result: DropResult) => {
