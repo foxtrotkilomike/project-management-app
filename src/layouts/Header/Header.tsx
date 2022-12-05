@@ -11,6 +11,7 @@ import Container from '../../commons/Container';
 import classNames from 'classnames';
 
 export const Header = (): JSX.Element => {
+  const PUBLIC_HEADER_COLOR = '#fce9df';
   const [isBurgerActive, setIsBurgerActive] = useState(false);
   const isPrivateRoute = usePrivateRoute();
   const headerClassName = classNames(classes.root, {
@@ -21,7 +22,7 @@ export const Header = (): JSX.Element => {
   });
   const languageSelectData = selectData[0];
   const privateHeaderColor = useHeaderColor();
-  const color = isPrivateRoute ? privateHeaderColor : '#fce9df';
+  const color = isPrivateRoute ? privateHeaderColor : PUBLIC_HEADER_COLOR;
 
   return (
     <header className={headerClassName} style={{ backgroundColor: color }}>
@@ -42,8 +43,4 @@ export const Header = (): JSX.Element => {
       </Container>
     </header>
   );
-};
-
-type Props = {
-  sticky?: boolean;
 };

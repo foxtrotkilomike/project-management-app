@@ -24,7 +24,7 @@
   color: $color-main;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .btn-header-primary,
   .btn-header-secondary {
     @include button-variant(transparent, transparent, $color-text);

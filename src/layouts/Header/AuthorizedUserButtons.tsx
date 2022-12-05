@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { clearUserData } from '../../helpers/clearUserData';
 import { Button } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { routes } from '../../config/routes';
@@ -38,8 +39,10 @@ export const AuthorizedUserButtons = ({ setIsBurgerActive }: Props): JSX.Element
         variant="header-secondary"
         className={classes.signOutBtn}
         onClick={() => {
-          navigate(routes.MAIN);
           setIsBurgerActive(false);
+          clearUserData();
+          toast.success(toastMessages.success.logout);
+          navigate(routes.MAIN);
         }}
       >
         {buttonsText.signOut}
