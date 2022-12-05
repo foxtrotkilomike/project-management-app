@@ -11,6 +11,32 @@
   font-weight: $font-weight-semi-bold;
 }
 
+.btn-header-primary {
+  @include button-variant($color-main, $color-main, $color-text-light, $color-main-hover, $color-main-hover, $color-text-light);
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-header-secondary {
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-header-secondary:hover {
+  color: $color-main;
+}
+
+@media (max-width: $tablet) {
+  .btn-header-primary,
+  .btn-header-secondary {
+    @include button-variant(transparent, transparent, $color-text);
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-xxl;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
+}
+
 .btn-nav {
   @include button-variant(transparent, transparent, $color-text, $color-main-light, $color-main-light, $color-text);
 }

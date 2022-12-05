@@ -5,8 +5,12 @@ import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 import { ProfilePageData } from '../layouts/Profile/Profile';
 
 const buttonsText = {
-  signUp: 'sign up',
-  signIn: 'sign in',
+  signUp: 'Sign up',
+  signIn: 'Sign in',
+  createBoard: 'Create board',
+  editProfile: 'Edit profile',
+  mainPage: 'Main page',
+  signOut: 'Sign out',
   cancel: 'cancel',
   submit: 'submit',
 };

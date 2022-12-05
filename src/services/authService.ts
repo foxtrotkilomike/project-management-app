@@ -64,7 +64,7 @@ const checkUserCredentials = () => {
     const hasUserData = getAppData(AppData.USER_ID);
     const hasToken = getAppData(AppData.TOKEN);
 
-    return !isExpiredToken && hasUserData && hasToken;
+    return Boolean(!isExpiredToken && hasUserData && hasToken);
   }
 
   return false;

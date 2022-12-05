@@ -1,7 +1,16 @@
+@import "../../styles/constants";
+
 .logo {
   width: 100px;
+  height: 34px;
   background-image: url('../../assets/logo.png');
   background-position: left;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+@media (max-width: $tablet) {
+	.logo {
+		display: none;
+	}
 }
