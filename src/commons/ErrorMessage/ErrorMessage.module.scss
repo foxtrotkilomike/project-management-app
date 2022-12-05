@@ -1,0 +1,9 @@
+@import '../../styles/constants';
+
+.errorMessage {
+  width: 100%;
+  margin: $margin-md 0;
+  font-size: $font-size-sm;
+  text-align: center;
+  color: $color-error;
+}

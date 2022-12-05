@@ -1,0 +1,19 @@
+@import '../../styles/constants';
+@import '../../styles/templates';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.errorCaption {
+  @extend %font-caption-italic;
+}

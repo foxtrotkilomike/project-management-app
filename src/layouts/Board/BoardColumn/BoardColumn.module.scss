@@ -1,0 +1,83 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/templates';
+
+.column {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-main-light;
+  width: $width-column;
+  padding: $padding-md;
+  border-radius: $border-radius-sm;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-bold;
+  margin-right: $margin-lg;
+  max-height: 100%;
+  &:last-child {
+    margin-right: 0;
+  }
+  &__header {
+    @extend %flex-space-between;
+    align-items: center;
+    font-size: $font-size-lg;
+    margin-bottom: $margin-md;
+  }
+  &__title {
+    font-size: inherit;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    flex-grow: 1;
+  }
+  &__badge {
+    @extend %flex-center;
+    padding: 0 $padding-sm;
+    font-size: $font-size-sm;
+    background-color: rgba($color-main, 0.2);
+    border-radius: $border-radius-sm;
+    align-self: stretch;
+    margin-left: $margin-sm;
+  }
+  &__tasksWrapper {
+    padding: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 0;
+    min-height: $margin-md;
+  }
+  &__footer {
+    margin-top: $padding-md;
+  }
+  &__controls {
+    display: flex;
+    align-self: flex-start;
+  }
+  &__add {
+    width: 100%;
+    padding: $padding-sm;
+    font-size: $font-size-md;
+    font-weight: inherit;
+  }
+  &__delete {
+    background-color: rgba($color-main, 0.2);
+    border: none;
+    margin-left: $margin-xxs;
+  }
+}
+.header__wrapper {
+  overflow-x: hidden;
+  padding: 0 0 $padding-xs;
+}
+
+input.column__title {
+  &:focus {
+    border: none;
+    border-radius: 0;
+    border-bottom: $border-width-sm solid $color-shadow;
+    box-shadow: none;
+    padding-left: 0;
+    background-color: transparent;
+  }
+}
+
+button.column__title {
+  background-color: none;
+}

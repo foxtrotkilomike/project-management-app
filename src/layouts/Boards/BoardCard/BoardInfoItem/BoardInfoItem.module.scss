@@ -1,0 +1,17 @@
+@import '../../../../styles/constants.scss';
+
+.infoItem {
+  color: $color-shadow;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  display: flex;
+  align-items: center;
+
+  &__dot {
+    margin: 0 10px;
+    width: 5px;
+    height: 5px;
+    background-color: $color-shadow;
+    border-radius: 50%;
+  }
+}

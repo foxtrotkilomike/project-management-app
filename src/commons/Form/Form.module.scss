@@ -1,0 +1,41 @@
+@import '../../styles/constants.scss';
+
+.formWrapper {
+  background-color: transparent;
+  width: 100%;
+}
+.control {
+  position: relative;
+  padding-bottom: $padding-l;
+  margin-bottom: $margin-sm;
+
+  &_fullWidth {
+    width: 20em;
+
+    @media screen and (max-width: $mobile-m) {
+      width: auto;
+    }
+  }
+}
+.error {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.buttons {
+  margin-top: $margin-xl;
+  display: flex;
+  justify-content: space-around;
+  gap: $gap-md;
+
+  >button {
+    padding: $padding-sm $padding-xl;
+
+    @media screen and (max-width: $mobile-m) {
+      width: auto;
+      padding: $padding-xs $padding-md;
+      gap: $gap-xs;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import '../../../styles/constants.scss';
+
+.boardCard {
+  font-family: $font-family-primary;
+  width: calc((100% - 2rem) / 2);
+  border: $color-border-active solid $border-width-md;
+  margin-bottom: 2rem;
+  color: $color-text;
+  @media screen and (max-width: $board-cards-break-point){
+    width: 100%;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__content {
+    padding: $padding-lg;
+    padding-bottom: $padding-xl;
+  }
+  &__info {
+    margin-left: $margin-md;
+  }
+}
+
+.button {
+  background-color: rgba($color-danger, .1);
+  color: $color-text;
+  margin-left: $margin-md;
+  &:active {
+    color: $color-text-light!important;
+  }
+  &:hover {
+    background-color: rgba($color-danger, .4);
+  }
+}

@@ -1,0 +1,17 @@
+@import './constants';
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+%font-caption-italic {
+  font-style: italic;
+  color: $color-shadow;
+}

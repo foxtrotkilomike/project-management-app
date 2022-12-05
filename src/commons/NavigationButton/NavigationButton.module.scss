@@ -1,0 +1,11 @@
+@import '../../styles/constants';
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: $gap-sm;
+
+  &__icon {
+    width: 1.25rem;
+  }
+}
