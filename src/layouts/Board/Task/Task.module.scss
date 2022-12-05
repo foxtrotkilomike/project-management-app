@@ -32,6 +32,7 @@
     align-self: flex-start;
     transition: all ease 0.3s;
     background-color: transparent;
+    @extend %flex-center;
   }
 }
 
