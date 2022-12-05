@@ -7,13 +7,14 @@ import ConfirmationModal from '../../../commons/ConfirmationModal';
 import { confirmationModalText } from '../../../config/data';
 import DeleteButton from '../../../assets/svg/close.svg';
 import { deleteTask } from '../../../services/tasks/tasksService';
+import { TasksResponse } from '../../../services/tasks/types';
 
 export const Task = (props: ITask): JSX.Element => {
-  const { title, description, _id: id, index } = props;
+  const { title, boardId, columnId, description, _id: id, index } = props;
   const [isModalActive, hideModal, showModal] = useModalState(false);
 
   const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
-
+  console.log(props);
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
   ) => {
@@ -27,7 +28,8 @@ export const Task = (props: ITask): JSX.Element => {
   };
 
   const removeTask = () => {
-    deleteTask();
+    deleteTask(boardId, columnId, id);
+    closeConfirmModal();
   };
 
   return (
@@ -74,9 +76,6 @@ export const Task = (props: ITask): JSX.Element => {
   );
 };
 
-export interface ITask {
-  _id: string;
-  title: string;
-  description: string;
+export interface ITask extends TasksResponse {
   index: number;
 }

@@ -67,18 +67,7 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
                 className={classes.column__tasksWrapper}
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-              >
-                <Task
-                  key={'id'}
-                  title="Title long lonf title njhb hhgg f bjn "
-                  description="description"
-                  _id="id"
-                  index={1}
-                />
-                <Task key={'id2'} title="Title" description="description" _id="2id" index={2} />
-                {renderTasks}
-                {provided.placeholder}
-              </ul>
+              ></ul>
             )}
           </Droppable>
           <div className={classes.column__footer}>
