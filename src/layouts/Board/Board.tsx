@@ -21,7 +21,7 @@ import { toastMessages } from '../../config/data';
 
 export const Board = (): JSX.Element => {
   const boardId = usePathnameEnding();
-  const [board] = useState<BoardsResponse | null>(null);
+  const [board, setBoard] = useState<BoardsResponse | null>(null);
   const [columns, setColumns] = useState<ColumnModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,6 +34,7 @@ export const Board = (): JSX.Element => {
         toast.error(toastMessages.error.unknown);
         setIsLoading(false);
       } else {
+        setBoard(board);
         const columns = await getColumns(boardId);
 
         if ('code' in columns) {
