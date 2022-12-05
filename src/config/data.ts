@@ -253,7 +253,6 @@ const profilePageConfig: ProfilePageData = {
   form: {
     submitButtonText: 'Save',
     deleteProfileButtonText: 'Delete profile',
-    deleteConfirmationMessage: 'Do you really want to delete your profile?',
   },
 };
 
@@ -285,6 +284,11 @@ const toastMessages = {
   },
 };
 
+const confirmationModalText = {
+  signOut: 'Confirm your sign out',
+  deleteProfile: 'Do you really want to delete your profile?',
+};
+
 export {
   buttonsText,
   confirmationModalButtonsText,
@@ -298,4 +302,5 @@ export {
   profilePageConfig,
   AppData,
   toastMessages,
+  confirmationModalText,
 };
