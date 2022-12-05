@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import classes from './Header.module.scss';
+import classNames from 'classnames';
+import { useState } from 'react';
 import { selectData } from '../../config/data';
 import { useHeaderColor } from '../../hooks/useHeaderColor';
 import { HeaderButtons } from './HeaderButtons';
@@ -8,19 +9,18 @@ import Select from '../../commons/Select';
 import BurgerMenu from './BurgerMenu';
 import Logo from '../../commons/Logo';
 import Container from '../../commons/Container';
-import classNames from 'classnames';
+import { PUBLIC_HEADER_COLOR } from '../../config/constants';
 
 export const Header = (): JSX.Element => {
-  const PUBLIC_HEADER_COLOR = '#fce9df';
   const [isBurgerActive, setIsBurgerActive] = useState(false);
   const isPrivateRoute = usePrivateRoute();
   const headerClassName = classNames(classes.root, {
     [classes.headerSticky]: isPrivateRoute,
   });
-  const classNav = classNames(classes.buttonsContainer, {
+  const navClassName = classNames(classes.buttonsContainer, {
     [classes.buttonsContainer_active]: isBurgerActive,
   });
-  const languageSelectData = selectData[0];
+  const languageSelectData = selectData.language;
   const privateHeaderColor = useHeaderColor();
   const color = isPrivateRoute ? privateHeaderColor : PUBLIC_HEADER_COLOR;
 
@@ -35,7 +35,7 @@ export const Header = (): JSX.Element => {
             onClick={() => setIsBurgerActive(false)}
           />
           <Logo />
-          <div className={classNav}>
+          <div className={navClassName}>
             <HeaderButtons setIsBurgerActive={setIsBurgerActive} />
           </div>
           <Select {...languageSelectData} activeOptionIndex={0} />

@@ -141,15 +141,15 @@ const loginPromptData: LoginPrompt = {
   },
 };
 
-const selectData: SelectProps[] = [
-  {
+const selectData: Record<string, SelectProps> = {
+  language: {
     labelType: 'icon',
     ariaLabel: 'Language',
     options: ['EN', 'RU'],
     activeOptionIndex: 0,
     icon: GlobeIcon,
   },
-];
+};
 
 const apiErrors: Record<string, ApiError> = {
   serverIsNotResponding: {
