@@ -305,6 +305,7 @@ const confirmationModalText = {
   signOut: 'Confirm your sign out',
   deleteProfile: 'Do you really want to delete your profile?',
   deleteBoard: 'Delete the board?',
+  deleteColumn: 'Delete the column?',
   deleteTask: 'Delete the task?',
 };
 

@@ -28,23 +28,6 @@
     font-weight: $font-weight-bold;
     margin-bottom: 0;
     flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    &:hover {
-      @extend %flex-center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: $padding-md;
-      background-color: $color-main-light;
-      z-index: 3;
-      width: 100%;
-      height: fit-content;
-      white-space: break-spaces;
-      text-align: center;
-      border-radius: $border-radius-sm;
-    }
   }
   &__badge {
     @extend %flex-center;
@@ -65,6 +48,10 @@
   &__footer {
     margin-top: $padding-md;
   }
+  &__controls {
+    display: flex;
+    align-self: flex-start;
+  }
   &__add {
     width: 100%;
     padding: $padding-sm;
@@ -76,4 +63,23 @@
     border: none;
     margin-left: $margin-xxs;
   }
+}
+.header__wrapper {
+  overflow-x: hidden;
+  padding: 0 0 $padding-xs;
+}
+
+input.column__title {
+  &:focus {
+    border: none;
+    border-radius: 0;
+    border-bottom: $border-width-sm solid $color-shadow;
+    box-shadow: none;
+    padding-left: 0;
+    background-color: transparent;
+  }
+}
+
+button.column__title {
+  background-color: none;
 }
