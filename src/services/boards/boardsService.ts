@@ -1,7 +1,8 @@
-import axios, { Endpoints } from '../api';
+import axios from '../api';
 import { ApiError } from '../../config/types';
 import { Board, BoardsResponse } from './types';
 import { handleApiErrors } from '../handleApiErrors';
+import Endpoints from '../endpoints';
 
 const endpoint = Endpoints.boards;
 

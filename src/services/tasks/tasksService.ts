@@ -1,7 +1,8 @@
-import axios, { Endpoints } from '../api';
+import axios from '../api';
 import { ApiError } from '../../config/types';
 import { CreatedTask, TasksResponse, UpdatedSetTask, UpdatedTask } from './types';
 import { handleApiErrors } from '../handleApiErrors';
+import Endpoints from '../endpoints';
 
 const boardsEndpoint = Endpoints.boards.base;
 const { base: columnsBaseEndpoint } = Endpoints.columns;
