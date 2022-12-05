@@ -46,6 +46,7 @@ const loginFormData: LoginForm = {
         name: 'userName',
         placeholder: 'Name',
         autoFocus: true,
+        autoComplete: 'given-name',
         registerOptions: {
           required: { value: true, message: 'Name is a required field' },
         },
@@ -223,6 +224,7 @@ const creationFormData: CreationFormData = {
         name: 'userName',
         placeholder: 'Name',
         autoFocus: true,
+        autoComplete: 'given-name',
         registerOptions: {
           required: { value: true, message: 'Name is a required field' },
         },
