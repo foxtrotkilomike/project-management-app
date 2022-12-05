@@ -10,7 +10,7 @@
   @extend %flex-space-between;
   cursor: grab;
   &:last-child {
-    margin-bottom: 0;
+    margin-bottom: $margin-xs;
   }
   &__content {
     cursor: inherit;
