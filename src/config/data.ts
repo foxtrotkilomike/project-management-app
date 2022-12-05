@@ -267,10 +267,10 @@ enum AppData {
 
 const toastMessages = {
   success: {
-    login: 'Logged in successfully',
-    logout: 'Logged out successfully',
-    profileUpdate: 'Profile updated successfully',
-    profileDelete: 'Profile deleted successfully',
+    login: 'Logged in',
+    logout: 'Logged out',
+    profileUpdate: 'Profile updated',
+    profileDelete: 'Profile deleted',
     boardLoaded: 'Board loaded',
     boardRemoved: 'Board removed',
     boardCreated: 'Board created',
@@ -280,7 +280,7 @@ const toastMessages = {
     columnRemoved: 'Column removed',
   },
   error: {
-    profileUpdate: 'Login already exits',
+    profileUpdate: 'Login already exists',
     unknown: 'Some error occurred, please try again later',
   },
 };
