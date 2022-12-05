@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import { MAX_HEADER_OPACITY, PUBLIC_HEADER_COLOR } from '../config/constants';
 
 export const useHeaderColor = () => {
-  const PUBLIC_HEADER_COLOR = '#fce9df';
-  const MAX_HEADER_OPACITY = 0.3;
   const [color, setColor] = useState(PUBLIC_HEADER_COLOR);
 
   const listenScroll = useCallback(() => {

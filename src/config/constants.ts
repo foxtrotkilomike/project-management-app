@@ -19,6 +19,7 @@ const MILLISECONDS_IN_SECOND = 1000;
 const BACK_ONE_PAGE = -1;
 
 const PUBLIC_HEADER_COLOR = '#fce9df';
+const MAX_HEADER_OPACITY = 0.3;
 
 export {
   ResponseStatus,
@@ -27,4 +28,5 @@ export {
   MILLISECONDS_IN_SECOND,
   BACK_ONE_PAGE,
   PUBLIC_HEADER_COLOR,
+  MAX_HEADER_OPACITY,
 };
