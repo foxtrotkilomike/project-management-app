@@ -16,12 +16,12 @@ export const AuthorizedUserButtons = ({
   };
 
   const navigateProfileEdit = () => {
-    navigate(routes.PROFILE);
+    navigate(routes.PROFILE_EDIT);
     setIsBurgerActive(false);
   };
 
   const navigateMainPage = () => {
-    navigate(routes.MAIN);
+    navigate(routes.BOARDS);
     setIsBurgerActive(false);
   };
 
