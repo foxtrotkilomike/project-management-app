@@ -11,9 +11,10 @@ export const fillColumnWithTasks = async (column: ColumnsResponse): Promise<Colu
       tasks: [],
     };
   } else {
+    const ordered = res.sort((a, b) => a.order - b.order);
     return {
       ...column,
-      tasks: res,
+      tasks: ordered,
     };
   }
 };
