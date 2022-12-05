@@ -14,9 +14,8 @@ import toast from 'react-hot-toast';
 export const Task = (props: ITask): JSX.Element => {
   const { title, boardId, columnId, description, _id: id, index, setColumns } = props;
   const [isModalActive, hideModal, showModal] = useModalState(false);
-
   const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
-  console.log(props);
+
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
   ) => {
@@ -32,6 +31,7 @@ export const Task = (props: ITask): JSX.Element => {
   const removeTaskFromColumn = (columnId: string) => {
     setColumns((columns) => {
       const updatedColumnIndex = columns.findIndex((column) => column._id === columnId);
+
       if (updatedColumnIndex !== -1) {
         const updatedColumns = [...columns];
         updatedColumns[updatedColumnIndex].tasks = updatedColumns[updatedColumnIndex].tasks.filter(
@@ -46,6 +46,7 @@ export const Task = (props: ITask): JSX.Element => {
   const removeTask = async () => {
     closeConfirmModal();
     const res = await deleteTask(boardId, columnId, id);
+
     if ('code' in res) {
       toast.error(toastMessages.error.unknown);
     } else {
