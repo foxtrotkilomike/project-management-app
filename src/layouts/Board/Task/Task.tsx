@@ -4,13 +4,15 @@ import classes from './Task.module.scss';
 import { Draggable } from 'react-beautiful-dnd';
 import { useModalState } from '../../../hooks/useModalState';
 import ConfirmationModal from '../../../commons/ConfirmationModal';
-import { confirmationModalText } from '../../../config/data';
+import { confirmationModalText, toastMessages } from '../../../config/data';
 import DeleteButton from '../../../assets/svg/close.svg';
 import { deleteTask } from '../../../services/tasks/tasksService';
 import { TasksResponse } from '../../../services/tasks/types';
+import { ColumnModel } from '../../../helpers/fillColumnWithTasks';
+import toast from 'react-hot-toast';
 
 export const Task = (props: ITask): JSX.Element => {
-  const { title, boardId, columnId, description, _id: id, index } = props;
+  const { title, boardId, columnId, description, _id: id, index, setColumns } = props;
   const [isModalActive, hideModal, showModal] = useModalState(false);
 
   const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
@@ -27,9 +29,29 @@ export const Task = (props: ITask): JSX.Element => {
     }
   };
 
-  const removeTask = () => {
-    deleteTask(boardId, columnId, id);
+  const removeTaskFromColumn = (columnId: string) => {
+    setColumns((columns) => {
+      const updatedColumnIndex = columns.findIndex((column) => column._id === columnId);
+      if (updatedColumnIndex !== -1) {
+        const updatedColumns = [...columns];
+        updatedColumns[updatedColumnIndex].tasks = updatedColumns[updatedColumnIndex].tasks.filter(
+          (task) => task._id !== id
+        );
+        return updatedColumns;
+      }
+      return columns;
+    });
+  };
+
+  const removeTask = async () => {
     closeConfirmModal();
+    const res = await deleteTask(boardId, columnId, id);
+    if ('code' in res) {
+      toast.error(toastMessages.error.unknown);
+    } else {
+      removeTaskFromColumn(columnId);
+      toast.success(toastMessages.success.taskRemoved);
+    }
   };
 
   return (
@@ -78,4 +100,5 @@ export const Task = (props: ITask): JSX.Element => {
 
 export interface ITask extends TasksResponse {
   index: number;
+  setColumns: React.Dispatch<React.SetStateAction<ColumnModel[]>>;
 }

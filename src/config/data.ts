@@ -295,6 +295,7 @@ const toastMessages = {
     columnReordered: 'Columns reordered',
     columnRemoved: 'Column removed',
     taskCreated: 'Task created',
+    taskRemoved: 'Task removed',
   },
   error: {
     profileUpdate: 'Login already exists',

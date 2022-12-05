@@ -36,7 +36,9 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuthContext();
 
-  const renderTasks = tasks.map((task) => <Task key={task._id} {...task} index={task.order} />);
+  const renderTasks = tasks.map((task) => (
+    <Task key={task._id} {...task} index={task.order} setColumns={setColumns} />
+  ));
 
   const onRemove = (id: string) => {
     onColumnRemove(id);
@@ -119,7 +121,10 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
                 className={classes.column__tasksWrapper}
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-              ></ul>
+              >
+                {renderTasks}
+                {provided.placeholder}
+              </ul>
             )}
           </Droppable>
           <div className={classes.column__footer}>
