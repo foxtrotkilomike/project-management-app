@@ -18,6 +18,12 @@ export const EditInPlace = (props: EditInPlaceProp): JSX.Element => {
     setIsEdited(true);
   };
 
+  const onKeyDown = ({ key }: React.KeyboardEvent) => {
+    if (key === 'Enter') {
+      save();
+    }
+  };
+
   useEffect(() => {
     if (isEdited) {
       inputRef.current?.focus();
@@ -30,6 +36,7 @@ export const EditInPlace = (props: EditInPlaceProp): JSX.Element => {
         ref={inputRef}
         className={classes}
         onBlur={save}
+        onKeyDown={onKeyDown}
         defaultValue={value}
       ></Form.Control>
     );
