@@ -1,5 +1,5 @@
 import { DraggableLocation } from 'react-beautiful-dnd';
-import { ColumnModel } from '../layouts/Board/Board';
+import { ColumnModel } from './fillColumnWithTasks';
 
 export function reorderList<T>(
   list: T[],
