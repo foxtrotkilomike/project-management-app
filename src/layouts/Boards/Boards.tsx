@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import Container from '../../commons/Container';
-import { createBoard, deleteBoardById, getAllBoards } from '../../services/boards/boardsService';
-import { BoardsResponse } from '../../services/boards/types';
+import {
+  createBoard,
+  deleteBoardById,
+  getBoardsByUserId,
+} from '../../services/boards/boardsService';
+import { BoardFilled, BoardsResponse } from '../../services/boards/types';
 import BoardCard from './BoardCard';
 import classes from './Boards.module.scss';
 import Modal from '../../commons/Modal';
 import Form from '../../commons/Form';
-import { creationFormData, toastMessages } from '../../config/data';
+import { confirmationModalText, creationFormData, toastMessages } from '../../config/data';
 import { useAuthContext } from '../../contexts/auth/authContext';
 import Spinner from '../../commons/Spinner';
 import { useNavigate } from 'react-router-dom';
@@ -14,33 +18,55 @@ import toast from 'react-hot-toast';
 import { FormInputNames } from '../../config/types';
 import { routes } from '../../config/routes';
 import { useModalState } from '../../hooks/useModalState';
+import { getUserById } from '../../services/users/userService';
+import ConfirmationModal from '../../commons/ConfirmationModal';
 
 export const Boards = (): JSX.Element => {
-  const [boards, setBoards] = useState<BoardsResponse[]>([]);
+  const [boards, setBoards] = useState<BoardFilled[]>([]);
   const [isModalActive, closeModal, showModal] = useModalState(false);
+  const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [removedBoardId, setRemovedBoardId] = useState('');
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
   useEffect(() => {
-    getAllBoards().then((result) => {
+    getBoardsByUserId(user._id).then((result) => {
       setIsLoading(false);
       if ('code' in result) {
         toast.error(toastMessages.error.unknown);
       } else {
         toast.success(toastMessages.success.boardsLoaded);
-        setBoards(result);
+        getBoardsOwnerNames(result).then((boards) => setBoards(boards));
       }
     });
   }, []);
 
-  const removeBoard = (id: string) => {
-    deleteBoardById(id).then((res) => {
+  const getBoardsOwnerNames = (boardsResponse: BoardsResponse[]) => {
+    return Promise.all(boardsResponse.map(async (board) => setBoardOwnerName(board)));
+  };
+
+  const setBoardOwnerName = async (board: BoardsResponse) => {
+    const userResponse = await getUserById(board.owner);
+    if (!('code' in userResponse)) {
+      return { ...board, ownerName: userResponse.name };
+    }
+    return { ...board, ownerName: 'unknown' };
+  };
+
+  const handleRemoveBoardClick = (id: string) => {
+    showConfirmModal();
+    setRemovedBoardId(id);
+  };
+
+  const removeBoard = () => {
+    deleteBoardById(removedBoardId).then((res) => {
       if ('code' in res) {
         toast.error(toastMessages.error.unknown);
       } else {
+        closeConfirmModal();
         toast.success(toastMessages.success.boardRemoved);
-        const newBoards = [...boards].filter((board) => board._id !== id);
+        const newBoards = [...boards].filter((board) => board._id !== removedBoardId);
         setBoards(newBoards);
       }
     });
@@ -52,9 +78,9 @@ export const Boards = (): JSX.Element => {
 
   const renderBoards = () =>
     boards.map((board) => {
-      const { owner, users, _id: id, title } = board;
+      const { ownerName, users, _id: id, title } = board;
       const metaData = [
-        { name: 'owner', value: owner },
+        { name: 'owner', value: ownerName },
         { name: 'users number', value: users.length },
       ];
       return (
@@ -63,7 +89,7 @@ export const Boards = (): JSX.Element => {
           id={id}
           title={title}
           metaData={metaData}
-          onRemove={removeBoard}
+          onRemove={handleRemoveBoardClick}
           onClick={goToBoardPage}
         />
       );
@@ -71,19 +97,21 @@ export const Boards = (): JSX.Element => {
 
   const createBoardCard = (data: FormInputNames) => {
     const newBoard = {
-      owner: user.login,
+      owner: user._id,
       title: data.title,
       users: [],
     };
 
-    createBoard(newBoard).then((res) => {
-      if ('code' in res) {
+    createBoard(newBoard).then((boardResponse) => {
+      if ('code' in boardResponse) {
         toast.error(toastMessages.error.unknown);
       } else {
         toast.success(toastMessages.success.boardCreated);
-        const newBoards = [...boards, res];
-        setBoards(newBoards);
-        closeModal();
+        setBoardOwnerName(boardResponse).then((createdBoard) => {
+          const newBoards = [...boards, createdBoard];
+          setBoards(newBoards);
+          closeModal();
+        });
       }
     });
   };
@@ -112,6 +140,13 @@ export const Boards = (): JSX.Element => {
             onCancel={closeModal}
           ></Form>
         </Modal>
+        <ConfirmationModal
+          title={confirmationModalText.deleteBoard}
+          onHide={closeConfirmModal}
+          isActive={isConfirmModalActive}
+          handleCancelClick={closeConfirmModal}
+          handleConfirmationClick={removeBoard}
+        />
       </div>
     </Container>
   );

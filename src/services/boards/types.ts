@@ -8,4 +8,8 @@ interface BoardsResponse extends Board {
   _id: string;
 }
 
-export type { Board, BoardsResponse };
+interface BoardFilled extends BoardsResponse {
+  ownerName: string;
+}
+
+export type { Board, BoardsResponse, BoardFilled };
