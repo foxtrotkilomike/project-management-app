@@ -5,6 +5,7 @@ export const BoardInfoItem = (props: BoardInfoItemProps): JSX.Element => {
   return (
     <div className={classes.infoItem}>
       <span className={classes.infoItem__text}>{name}</span>
+      <span className={classes.infoItem__dot} />
       <span className={classes.infoItem__quantity}>{value}</span>
     </div>
   );
