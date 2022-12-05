@@ -10,10 +10,13 @@ import { useModalState } from '../../../hooks/useModalState';
 import { useEffect, useState } from 'react';
 import { EditInPlace } from './EditInPlace';
 import { updateColumnById } from '../../../services/columns/columnsService';
+import ConfirmationModal from '../../../commons/ConfirmationModal';
+import { confirmationModalText } from '../../../config/data';
 
 export const BoardColumn = (props: IColumnProps): JSX.Element => {
   const { _id: id, index, boardId, title, order, tasks, onRemove: onColumnRemove } = props;
   const [isModalActive, closeModal, openModal] = useModalState(false);
+  const [isConfirmModalActive, closeConfirmModal, openConfirmModal] = useModalState(false);
   const [titleValue, setTitleValue] = useState(title);
   const renderTasks = tasks.map((task) => <Task key={task._id} {...task} index={task.order} />);
 
@@ -53,7 +56,7 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
             </div>
             <div className={classes.column__controls}>
               <div className={classes.column__badge}>{tasks.length}</div>
-              <Button className={classes.column__delete} onClick={() => onRemove(id)}>
+              <Button className={classes.column__delete} onClick={openConfirmModal}>
                 <img src={TrashcanIcon} alt="trashcan" />
               </Button>
             </div>
@@ -83,6 +86,13 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
           >
             {/* TODO ADD FORM FOR ADDING A NEW TASK */}
           </Modal>
+          <ConfirmationModal
+            title={confirmationModalText.deleteColumn}
+            onHide={closeConfirmModal}
+            isActive={isConfirmModalActive}
+            handleCancelClick={closeConfirmModal}
+            handleConfirmationClick={() => onRemove(id)}
+          />
         </li>
       )}
     </Draggable>
