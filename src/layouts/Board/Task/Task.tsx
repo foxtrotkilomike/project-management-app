@@ -3,10 +3,17 @@ import TaskIcon from '../../../commons/Modal/TaskIcon';
 import classes from './Task.module.scss';
 import { Draggable } from 'react-beautiful-dnd';
 import { useModalState } from '../../../hooks/useModalState';
+import ConfirmationModal from '../../../commons/ConfirmationModal';
+import { confirmationModalText } from '../../../config/data';
+import DeleteButton from '../../../assets/svg/close.svg';
+import { deleteTask } from '../../../services/tasks/tasksService';
 
 export const Task = (props: ITask): JSX.Element => {
   const { title, description, _id: id, index } = props;
   const [isModalActive, hideModal, showModal] = useModalState(false);
+
+  const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
+
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
   ) => {
@@ -17,6 +24,10 @@ export const Task = (props: ITask): JSX.Element => {
     } else {
       showModal();
     }
+  };
+
+  const removeTask = () => {
+    deleteTask();
   };
 
   return (
@@ -37,11 +48,26 @@ export const Task = (props: ITask): JSX.Element => {
           >
             <h4 className={classes.task__title}>{title}</h4>
           </div>
+          <button className={classes.task__delete} onClick={showConfirmModal}>
+            <img src={DeleteButton} alt="Delete" />
+          </button>
           {isModalActive && (
             <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
               <p> {description}</p>
             </Modal>
           )}
+          {isModalActive && (
+            <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
+              <p> {description}</p>
+            </Modal>
+          )}
+          <ConfirmationModal
+            title={confirmationModalText.deleteTask}
+            onHide={closeConfirmModal}
+            isActive={isConfirmModalActive}
+            handleCancelClick={closeConfirmModal}
+            handleConfirmationClick={removeTask}
+          />
         </li>
       )}
     </Draggable>
