@@ -45,7 +45,8 @@ export const Board = (): JSX.Element => {
             columns.map(async (column) => await fillColumnWithTasks(column))
           );
           toast.success(toastMessages.success.boardLoaded);
-          setColumns(columnModels);
+          const ordered = columnModels.sort((a, b) => a.order - b.order);
+          setColumns(ordered);
           setIsLoading(false);
         }
       }
