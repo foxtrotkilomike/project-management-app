@@ -45,6 +45,7 @@ const loginFormData: LoginForm = {
         type: 'text',
         name: 'userName',
         placeholder: 'Name',
+        autoFocus: true,
         registerOptions: {
           required: { value: true, message: 'Name is a required field' },
         },
@@ -98,6 +99,7 @@ const loginFormData: LoginForm = {
         name: 'login',
         placeholder: 'Login',
         autoComplete: 'username',
+        autoFocus: true,
         registerOptions: {
           required: { value: true, message: 'Login is a required field' },
         },
@@ -170,6 +172,7 @@ const creationFormData: CreationFormData = {
         type: 'text',
         name: 'title',
         placeholder: 'Title',
+        autoFocus: true,
         registerOptions: {
           required: { value: true, message: 'Title is a required field' },
         },
@@ -205,6 +208,7 @@ const creationFormData: CreationFormData = {
         type: 'text',
         name: 'title',
         placeholder: 'Title',
+        autoFocus: true,
         registerOptions: {
           required: { value: true, message: 'Title is a required field' },
         },
@@ -218,6 +222,7 @@ const creationFormData: CreationFormData = {
         type: 'text',
         name: 'userName',
         placeholder: 'Name',
+        autoFocus: true,
         registerOptions: {
           required: { value: true, message: 'Name is a required field' },
         },
