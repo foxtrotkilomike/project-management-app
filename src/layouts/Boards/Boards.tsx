@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import Container from '../../commons/Container';
-import { createBoard, deleteBoardById, getAllBoards } from '../../services/boards/boardsService';
-import { BoardsResponse } from '../../services/boards/types';
+import {
+  createBoard,
+  deleteBoardById,
+  getBoardsByUserId,
+} from '../../services/boards/boardsService';
+import { BoardFilled, BoardsResponse } from '../../services/boards/types';
 import BoardCard from './BoardCard';
 import classes from './Boards.module.scss';
 import Modal from '../../commons/Modal';
@@ -14,25 +18,38 @@ import toast from 'react-hot-toast';
 import { FormInputNames } from '../../config/types';
 import { routes } from '../../config/routes';
 import { useModalState } from '../../hooks/useModalState';
+import { getUserById } from '../../services/users/userService';
 
 export const Boards = (): JSX.Element => {
-  const [boards, setBoards] = useState<BoardsResponse[]>([]);
+  const [boards, setBoards] = useState<BoardFilled[]>([]);
   const [isModalActive, closeModal, showModal] = useModalState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
   useEffect(() => {
-    getAllBoards().then((result) => {
+    getBoardsByUserId(user._id).then((result) => {
       setIsLoading(false);
       if ('code' in result) {
         toast.error(toastMessages.error.unknown);
       } else {
         toast.success(toastMessages.success.boardsLoaded);
-        setBoards(result);
+        getBoardsOwnerNames(result).then((boards) => setBoards(boards));
       }
     });
   }, []);
+
+  const getBoardsOwnerNames = (boardsResponse: BoardsResponse[]) => {
+    return Promise.all(boardsResponse.map(async (board) => setBoardOwnerName(board)));
+  };
+
+  const setBoardOwnerName = async (board: BoardsResponse) => {
+    const userResponse = await getUserById(board.owner);
+    if (!('code' in userResponse)) {
+      return { ...board, ownerName: userResponse.name };
+    }
+    return { ...board, ownerName: 'unknown' };
+  };
 
   const removeBoard = (id: string) => {
     deleteBoardById(id).then((res) => {
@@ -52,9 +69,9 @@ export const Boards = (): JSX.Element => {
 
   const renderBoards = () =>
     boards.map((board) => {
-      const { owner, users, _id: id, title } = board;
+      const { ownerName, users, _id: id, title } = board;
       const metaData = [
-        { name: 'owner', value: owner },
+        { name: 'owner', value: ownerName },
         { name: 'users number', value: users.length },
       ];
       return (
@@ -71,19 +88,21 @@ export const Boards = (): JSX.Element => {
 
   const createBoardCard = (data: FormInputNames) => {
     const newBoard = {
-      owner: user.login,
+      owner: user._id,
       title: data.title,
       users: [],
     };
 
-    createBoard(newBoard).then((res) => {
-      if ('code' in res) {
+    createBoard(newBoard).then((boardResponse) => {
+      if ('code' in boardResponse) {
         toast.error(toastMessages.error.unknown);
       } else {
         toast.success(toastMessages.success.boardCreated);
-        const newBoards = [...boards, res];
-        setBoards(newBoards);
-        closeModal();
+        setBoardOwnerName(boardResponse).then((createdBoard) => {
+          const newBoards = [...boards, createdBoard];
+          setBoards(newBoards);
+          closeModal();
+        });
       }
     });
   };
