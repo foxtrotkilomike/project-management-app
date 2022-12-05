@@ -80,11 +80,6 @@ export const Task = (props: ITask): JSX.Element => {
               <p> {description}</p>
             </Modal>
           )}
-          {isModalActive && (
-            <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
-              <p> {description}</p>
-            </Modal>
-          )}
           <ConfirmationModal
             title={confirmationModalText.deleteTask}
             onHide={closeConfirmModal}
