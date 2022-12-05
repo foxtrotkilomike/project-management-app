@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import Modal from '../../../commons/Modal';
 import TaskIcon from '../../../commons/Modal/TaskIcon';
 import Task from '../Task';
+import Form from '../../../commons/Form';
 import classes from './BoardColumn.module.scss';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { TasksResponse } from '../../../services/tasks/types';
@@ -11,13 +12,30 @@ import { useEffect, useState } from 'react';
 import { EditInPlace } from './EditInPlace';
 import { updateColumnById } from '../../../services/columns/columnsService';
 import ConfirmationModal from '../../../commons/ConfirmationModal';
-import { confirmationModalText } from '../../../config/data';
+import { confirmationModalText, creationFormData, toastMessages } from '../../../config/data';
+import { FormInputNames } from '../../../config/types';
+import { createTask } from '../../../services/tasks/tasksService';
+import { useAuthContext } from '../../../contexts/auth/authContext';
+import toast from 'react-hot-toast';
+import { ColumnModel } from '../../../helpers/fillColumnWithTasks';
 
 export const BoardColumn = (props: IColumnProps): JSX.Element => {
-  const { _id: id, index, boardId, title, order, tasks, onRemove: onColumnRemove } = props;
+  const {
+    _id: id,
+    index,
+    boardId,
+    title,
+    order,
+    tasks,
+    onRemove: onColumnRemove,
+    setColumns,
+  } = props;
   const [isModalActive, closeModal, openModal] = useModalState(false);
   const [isConfirmModalActive, closeConfirmModal, openConfirmModal] = useModalState(false);
   const [titleValue, setTitleValue] = useState(title);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuthContext();
+
   const renderTasks = tasks.map((task) => <Task key={task._id} {...task} index={task.order} />);
 
   const onRemove = (id: string) => {
@@ -35,6 +53,40 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
   useEffect(() => {
     updateColumn(titleValue);
   }, [titleValue]);
+
+  const addTaskToColumn = (task: TasksResponse) => {
+    setColumns((columns) => {
+      const updatedColumnIndex = columns.findIndex((column) => column._id === id);
+      if (updatedColumnIndex !== -1) {
+        const updatedColumns = [...columns];
+        updatedColumns[updatedColumnIndex].tasks.push(task);
+
+        return updatedColumns;
+      }
+
+      return columns;
+    });
+  };
+
+  const addTask = (data: FormInputNames) => {
+    setIsLoading(true);
+    const { title, description } = data;
+    const order = tasks.length;
+    const userId = user._id;
+    createTask(boardId, id, { title, order, description, userId, users: [] }).then((response) => {
+      if (response) {
+        if ('code' in response) {
+          toast.error(toastMessages.error.unknown);
+          setIsLoading(false);
+        } else {
+          addTaskToColumn(response);
+          toast.success(toastMessages.success.taskCreated);
+          setIsLoading(false);
+        }
+      }
+    });
+    closeModal();
+  };
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -81,7 +133,7 @@ export const BoardColumn = (props: IColumnProps): JSX.Element => {
             onHide={closeModal}
             isActive={isModalActive}
           >
-            {/* TODO ADD FORM FOR ADDING A NEW TASK */}
+            <Form {...creationFormData.task} onSubmit={addTask} onCancel={closeModal} />
           </Modal>
           <ConfirmationModal
             title={confirmationModalText.deleteColumn}
@@ -104,4 +156,5 @@ export interface IColumnProps {
   order: number;
   onRemove: (id: string) => void;
   boardId: string;
+  setColumns: React.Dispatch<React.SetStateAction<ColumnModel[]>>;
 }

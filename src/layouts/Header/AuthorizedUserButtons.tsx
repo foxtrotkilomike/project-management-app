@@ -55,7 +55,7 @@ export const AuthorizedUserButtons = ({
 
   const createBoard = (data: FormInputNames) => {
     const newBoard = {
-      owner: user.login,
+      owner: user._id,
       title: data.title,
       users: [],
     };
