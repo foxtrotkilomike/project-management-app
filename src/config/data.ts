@@ -11,7 +11,7 @@ import bootstrapImg from '../assets/svg/technologies/bootstrap.svg';
 import formImg from '../assets/svg/technologies/form.svg';
 import dndImg from '../assets/svg/technologies/dnd.svg';
 import stasImg from '../assets/team/stas.jpg';
-import fillImg from '../assets/team/fill.jpg';
+import philImg from '../assets/team/phil.jpg';
 import alinaImg from '../assets/team/alina.jpg';
 
 const buttonsText = {
@@ -349,15 +349,16 @@ const developersList = [
     id: 0,
     name: 'Stanislav Kravchuk',
     imgSrc: stasImg,
-    descr: 'Created adaptive header & burger menu, welcome page, loading spinner',
+    descr:
+      'Configured project, implemented forms, created adaptive header & burger menu, welcome page, loading spinner',
     link: 'https://github.com/kravchuk-st',
   },
   {
     id: 1,
     name: 'Philipp Khromov',
-    imgSrc: fillImg,
+    imgSrc: philImg,
     descr:
-      'Implemented API services, routing, sign-in & sign-up, edit profile logic, configured project, managed development process',
+      'Implemented API services, routing, sign-in & sign-up, edit profile logic, managed development process',
     link: 'https://github.com/foxtrotkilomike',
   },
   {

@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  // justify-content: center;
   align-items: center;
 }
 
@@ -75,7 +74,7 @@
   max-width: 250px;
   display: flex;
   flex-direction: column;
-  row-gap: $gap-xl;
+  row-gap: $gap-sm;
 
   &:nth-child(2) .developerImg {
     object-position: 50% -25px;
@@ -102,7 +101,51 @@
   }
 }
 
+.developerTitle {
+  font-weight: $font-weight-semi-bold;
+}
+
 .developerText {
   font-weight: $font-weight-semi-bold;
-  text-align: left;
+  text-align: justify;
+}
+
+@media (max-width: $tablet) {
+  .title {
+    margin-top: 40px;
+    font-size: $font-size-xxl;
+  }
+
+  .subtitle {
+    margin-top: 30px;
+    font-size: $font-size-lg;
+  }
+
+  .text {
+    margin-top: 50px;
+    font-weight: $font-weight-bold;
+  }
+
+  .technologyLink {
+    font-size: $font-size-md;
+  
+    img  {
+      width: auto;
+      height: 45px;
+    }
+  }
+
+  .teamTitle {
+    font-size: $font-size-xxl;
+  }
+
+  .developersList {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: $mobile-m) {
+  .technologiesList {
+    flex-direction: column;
+  }
 }

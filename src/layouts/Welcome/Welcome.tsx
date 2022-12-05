@@ -20,6 +20,7 @@ export const Welcome = ({}: Props): JSX.Element => {
         <a href={item.link} className={classes.developerLink} target="_blank" rel="noreferrer">
           <img className={classes.developerImg} src={item.imgSrc} alt={item.name} />
         </a>
+        <h4 className={classes.developerTitle}>{item.name}</h4>
         <p className={classes.developerText}>{item.descr}</p>
       </li>
     ));
