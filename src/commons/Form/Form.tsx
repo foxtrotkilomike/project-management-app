@@ -19,19 +19,21 @@ export const Form = (props: IFormProps) => {
   } = useForm<FormInputNames>();
 
   const getControlProps = (field: IFormField) => {
-    const { type, name, placeholder, registerOptions, rows } = field;
+    const { type, name, placeholder, registerOptions, rows, autoFocus = false } = field;
     return type === 'textarea'
       ? {
           as: 'textarea' as ElementType,
           rows,
           placeholder,
           isInvalid: !!errors[name],
+          autoFocus,
           ...register(name, registerOptions),
         }
       : {
           type: type,
           placeholder,
           isInvalid: !!errors[name],
+          autoFocus,
           ...register(name, registerOptions),
         };
   };

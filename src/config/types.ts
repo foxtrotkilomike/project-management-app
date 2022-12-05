@@ -15,6 +15,7 @@ interface FormInput {
   name: keyof LoginFormInputs;
   placeholder?: string;
   autoComplete?: string;
+  autoFocus?: boolean;
   registerOptions: RegisterOptions;
 }
 
