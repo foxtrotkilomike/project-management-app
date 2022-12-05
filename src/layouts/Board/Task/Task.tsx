@@ -3,10 +3,19 @@ import TaskIcon from '../../../commons/Modal/TaskIcon';
 import classes from './Task.module.scss';
 import { Draggable } from 'react-beautiful-dnd';
 import { useModalState } from '../../../hooks/useModalState';
+import ConfirmationModal from '../../../commons/ConfirmationModal';
+import { confirmationModalText, toastMessages } from '../../../config/data';
+import DeleteButton from '../../../assets/svg/close.svg';
+import { deleteTask } from '../../../services/tasks/tasksService';
+import { TasksResponse } from '../../../services/tasks/types';
+import { ColumnModel } from '../../../helpers/fillColumnWithTasks';
+import toast from 'react-hot-toast';
 
 export const Task = (props: ITask): JSX.Element => {
-  const { title, description, _id: id, index } = props;
+  const { title, boardId, columnId, description, _id: id, index, setColumns } = props;
   const [isModalActive, hideModal, showModal] = useModalState(false);
+  const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
+
   const openModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>
   ) => {
@@ -16,6 +25,33 @@ export const Task = (props: ITask): JSX.Element => {
       }
     } else {
       showModal();
+    }
+  };
+
+  const removeTaskFromColumn = (columnId: string) => {
+    setColumns((columns) => {
+      const updatedColumnIndex = columns.findIndex((column) => column._id === columnId);
+
+      if (updatedColumnIndex !== -1) {
+        const updatedColumns = [...columns];
+        updatedColumns[updatedColumnIndex].tasks = updatedColumns[updatedColumnIndex].tasks.filter(
+          (task) => task._id !== id
+        );
+        return updatedColumns;
+      }
+      return columns;
+    });
+  };
+
+  const removeTask = async () => {
+    closeConfirmModal();
+    const res = await deleteTask(boardId, columnId, id);
+
+    if ('code' in res) {
+      toast.error(toastMessages.error.unknown);
+    } else {
+      removeTaskFromColumn(columnId);
+      toast.success(toastMessages.success.taskRemoved);
     }
   };
 
@@ -37,20 +73,28 @@ export const Task = (props: ITask): JSX.Element => {
           >
             <h4 className={classes.task__title}>{title}</h4>
           </div>
+          <button className={classes.task__delete} onClick={showConfirmModal}>
+            <img src={DeleteButton} alt="Delete" />
+          </button>
           {isModalActive && (
             <Modal isActive={isModalActive} onHide={hideModal} title={title} icon={<TaskIcon />}>
               <p> {description}</p>
             </Modal>
           )}
+          <ConfirmationModal
+            title={confirmationModalText.deleteTask}
+            onHide={closeConfirmModal}
+            isActive={isConfirmModalActive}
+            handleCancelClick={closeConfirmModal}
+            handleConfirmationClick={removeTask}
+          />
         </li>
       )}
     </Draggable>
   );
 };
 
-export interface ITask {
-  _id: string;
-  title: string;
-  description: string;
+export interface ITask extends TasksResponse {
   index: number;
+  setColumns: React.Dispatch<React.SetStateAction<ColumnModel[]>>;
 }

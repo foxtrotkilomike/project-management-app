@@ -295,6 +295,7 @@ const toastMessages = {
     columnReordered: 'Columns reordered',
     columnRemoved: 'Column removed',
     taskCreated: 'Task created',
+    taskRemoved: 'Task removed',
   },
   error: {
     profileUpdate: 'Login already exists',
@@ -307,6 +308,7 @@ const confirmationModalText = {
   deleteProfile: 'Do you really want to delete your profile?',
   deleteBoard: 'Delete the board?',
   deleteColumn: 'Delete the column?',
+  deleteTask: 'Delete the task?',
 };
 
 const technologiesList = [
