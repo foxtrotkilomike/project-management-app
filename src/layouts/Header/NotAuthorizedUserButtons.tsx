@@ -3,32 +3,33 @@ import { Button } from 'react-bootstrap';
 import { buttonsText } from '../../config/data';
 import { routes } from '../../config/routes';
 
-export const NotAuthorizedUserButtons = ({ setIsBurgerActive }: Props): JSX.Element => {
+export const NotAuthorizedUserButtons = ({
+  setIsBurgerActive,
+}: NotAuthorizedUserButtonsProps): JSX.Element => {
   const navigate = useNavigate();
+
+  const navigateSignUp = () => {
+    navigate(routes.SIGN_UP);
+    setIsBurgerActive(false);
+  };
+
+  const navigateSignIn = () => {
+    navigate(routes.SIGN_IN);
+    setIsBurgerActive(false);
+  };
+
   return (
     <>
-      <Button
-        variant="header-primary"
-        onClick={() => {
-          navigate(routes.SIGN_UP);
-          setIsBurgerActive(false);
-        }}
-      >
+      <Button variant="header-primary" onClick={navigateSignUp}>
         {buttonsText.signUp}
       </Button>
-      <Button
-        variant="header-secondary"
-        onClick={() => {
-          navigate(routes.SIGN_IN);
-          setIsBurgerActive(false);
-        }}
-      >
+      <Button variant="header-secondary" onClick={navigateSignIn}>
         {buttonsText.signIn}
       </Button>
     </>
   );
 };
 
-type Props = {
+type NotAuthorizedUserButtonsProps = {
   setIsBurgerActive: (isBurgerActive: boolean) => void;
 };

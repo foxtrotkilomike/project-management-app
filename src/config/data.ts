@@ -141,15 +141,15 @@ const loginPromptData: LoginPrompt = {
   },
 };
 
-const selectData: SelectProps[] = [
-  {
+const selectData: Record<string, SelectProps> = {
+  language: {
     labelType: 'icon',
     ariaLabel: 'Language',
     options: ['EN', 'RU'],
     activeOptionIndex: 0,
     icon: GlobeIcon,
   },
-];
+};
 
 const apiErrors: Record<string, ApiError> = {
   serverIsNotResponding: {
@@ -253,7 +253,6 @@ const profilePageConfig: ProfilePageData = {
   form: {
     submitButtonText: 'Save',
     deleteProfileButtonText: 'Delete profile',
-    deleteConfirmationMessage: 'Do you really want to delete your profile?',
   },
 };
 
@@ -267,10 +266,10 @@ enum AppData {
 
 const toastMessages = {
   success: {
-    login: 'Logged in successfully',
-    logout: 'Logged out successfully',
-    profileUpdate: 'Profile updated successfully',
-    profileDelete: 'Profile deleted successfully',
+    login: 'Logged in',
+    logout: 'Logged out',
+    profileUpdate: 'Profile updated',
+    profileDelete: 'Profile deleted',
     boardLoaded: 'Board loaded',
     boardRemoved: 'Board removed',
     boardCreated: 'Board created',
@@ -280,9 +279,14 @@ const toastMessages = {
     columnRemoved: 'Column removed',
   },
   error: {
-    profileUpdate: 'Login already exits',
+    profileUpdate: 'Login already exists',
     unknown: 'Some error occurred, please try again later',
   },
+};
+
+const confirmationModalText = {
+  signOut: 'Confirm your sign out',
+  deleteProfile: 'Do you really want to delete your profile?',
 };
 
 export {
@@ -298,4 +302,5 @@ export {
   profilePageConfig,
   AppData,
   toastMessages,
+  confirmationModalText,
 };

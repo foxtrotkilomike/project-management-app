@@ -1,7 +1,8 @@
-import axios, { Endpoints } from '../api';
+import axios from '../api';
 import { ApiError } from '../../config/types';
 import { Column, ColumnsResponse, CreatedColumn, UpdatedOrderColumn } from './types';
 import { handleApiErrors } from '../handleApiErrors';
+import Endpoints from '../endpoints';
 
 const boardsEndpoint = Endpoints.boards.base;
 const { base: columnsBaseEndpoint, set: columnsSetEndpoint } = Endpoints.columns;

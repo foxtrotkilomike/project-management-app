@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { ErrorOption, FieldPath } from 'react-hook-form';
 
-import { authInstance, Endpoints } from './api';
+import { authInstance } from './api';
 import { LoginFormInputs, LoginFormType, SignInData, SignUpData } from '../config/types';
 import { MILLISECONDS_IN_SECOND, ResponseStatus } from '../config/constants';
 import { AppData, loginFormData } from '../config/data';
 import { getAppData } from '../helpers/handleAppData';
+import Endpoints from './endpoints';
 
 const postAuthData = (data: SignUpData | SignInData, type: LoginFormType) => {
   const { base: baseUrl, signUp, signIn } = Endpoints.auth;

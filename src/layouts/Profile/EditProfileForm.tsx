@@ -8,14 +8,14 @@ import { deleteUserById, updateUserById } from '../../services/users/userService
 import clearUserData from '../../helpers/clearUserData';
 
 import Form from '../../commons/Form';
-import { AppData, creationFormData, toastMessages } from '../../config/data';
+import { AppData, confirmationModalText, creationFormData, toastMessages } from '../../config/data';
 import { UserResponse } from '../../services/users/types';
 import { routes } from '../../config/routes';
 import { useModalState } from '../../hooks/useModalState';
 import ConfirmationModal from '../../commons/ConfirmationModal';
 
 const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
-  const { submitButtonText, deleteProfileButtonText, deleteConfirmationMessage } = props;
+  const { submitButtonText, deleteProfileButtonText } = props;
   const { setLoadingStatus } = useLoadingContext();
   const [isModalActive, closeModal, openModal] = useModalState();
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
         fullPage
       />
       <ConfirmationModal
-        title={deleteConfirmationMessage}
+        title={confirmationModalText.deleteProfile}
         onHide={closeModal}
         isActive={isModalActive}
         handleCancelClick={closeModal}
@@ -98,7 +98,6 @@ const EditProfileForm = (props: EditProfileFormProps): JSX.Element => {
 export type EditProfileFormProps = {
   submitButtonText: string;
   deleteProfileButtonText: string;
-  deleteConfirmationMessage: string;
 };
 
 export default EditProfileForm;

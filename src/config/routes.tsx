@@ -70,6 +70,7 @@ export const routes = {
   SIGN_UP: '/signup',
   SIGN_IN: '/signin',
   PROFILE: '/profile',
+  PROFILE_EDIT: '/profile/edit',
 };
 
 export const privateRoutes = [routes.BOARDS, routes.BOARD, routes.PROFILE].map((path) =>
