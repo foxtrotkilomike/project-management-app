@@ -10,7 +10,7 @@ import BoardCard from './BoardCard';
 import classes from './Boards.module.scss';
 import Modal from '../../commons/Modal';
 import Form from '../../commons/Form';
-import { creationFormData, toastMessages } from '../../config/data';
+import { confirmationModalText, creationFormData, toastMessages } from '../../config/data';
 import { useAuthContext } from '../../contexts/auth/authContext';
 import Spinner from '../../commons/Spinner';
 import { useNavigate } from 'react-router-dom';
@@ -19,11 +19,14 @@ import { FormInputNames } from '../../config/types';
 import { routes } from '../../config/routes';
 import { useModalState } from '../../hooks/useModalState';
 import { getUserById } from '../../services/users/userService';
+import ConfirmationModal from '../../commons/ConfirmationModal';
 
 export const Boards = (): JSX.Element => {
   const [boards, setBoards] = useState<BoardFilled[]>([]);
   const [isModalActive, closeModal, showModal] = useModalState(false);
+  const [isConfirmModalActive, closeConfirmModal, showConfirmModal] = useModalState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [removedBoardId, setRemovedBoardId] = useState('');
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
@@ -51,13 +54,19 @@ export const Boards = (): JSX.Element => {
     return { ...board, ownerName: 'unknown' };
   };
 
-  const removeBoard = (id: string) => {
-    deleteBoardById(id).then((res) => {
+  const handleRemoveBoardClick = (id: string) => {
+    showConfirmModal();
+    setRemovedBoardId(id);
+  };
+
+  const removeBoard = () => {
+    deleteBoardById(removedBoardId).then((res) => {
       if ('code' in res) {
         toast.error(toastMessages.error.unknown);
       } else {
+        closeConfirmModal();
         toast.success(toastMessages.success.boardRemoved);
-        const newBoards = [...boards].filter((board) => board._id !== id);
+        const newBoards = [...boards].filter((board) => board._id !== removedBoardId);
         setBoards(newBoards);
       }
     });
@@ -80,7 +89,7 @@ export const Boards = (): JSX.Element => {
           id={id}
           title={title}
           metaData={metaData}
-          onRemove={removeBoard}
+          onRemove={handleRemoveBoardClick}
           onClick={goToBoardPage}
         />
       );
@@ -131,6 +140,13 @@ export const Boards = (): JSX.Element => {
             onCancel={closeModal}
           ></Form>
         </Modal>
+        <ConfirmationModal
+          title={confirmationModalText.deleteBoard}
+          onHide={closeConfirmModal}
+          isActive={isConfirmModalActive}
+          handleCancelClick={closeConfirmModal}
+          handleConfirmationClick={removeBoard}
+        />
       </div>
     </Container>
   );

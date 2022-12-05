@@ -294,6 +294,7 @@ const toastMessages = {
 const confirmationModalText = {
   signOut: 'Confirm your sign out',
   deleteProfile: 'Do you really want to delete your profile?',
+  deleteBoard: 'Delete the board?',
 };
 
 export {
