@@ -3,6 +3,16 @@ import GlobeIcon from '../assets/svg/globe2.svg';
 import { ApiError, CreationFormData, LoginForm, LoginPrompt } from './types';
 import { MIN_PASSWORD_LENGTH, ResponseStatus } from './constants';
 import { ProfilePageData } from '../layouts/Profile/Profile';
+import reactImg from '../assets/svg/technologies/react.svg';
+import tsImg from '../assets/svg/technologies/ts.svg';
+import routerImg from '../assets/svg/technologies/router.svg';
+import viteImg from '../assets/svg/technologies/vite.svg';
+import bootstrapImg from '../assets/svg/technologies/bootstrap.svg';
+import formImg from '../assets/svg/technologies/form.svg';
+import dndImg from '../assets/svg/technologies/dnd.svg';
+import stasImg from '../assets/team/stas.jpg';
+import fillImg from '../assets/team/fill.jpg';
+import alinaImg from '../assets/team/alina.jpg';
 
 const buttonsText = {
   signUp: 'Sign up',
@@ -289,6 +299,77 @@ const confirmationModalText = {
   deleteProfile: 'Do you really want to delete your profile?',
 };
 
+const technologiesList = [
+  {
+    id: 0,
+    title: 'React',
+    imgSrc: reactImg,
+    link: 'https://beta.reactjs.org/',
+  },
+  {
+    id: 1,
+    title: 'TypeScript',
+    imgSrc: tsImg,
+    link: 'https://www.typescriptlang.org/',
+  },
+  {
+    id: 2,
+    title: 'React Router',
+    imgSrc: routerImg,
+    link: 'https://reactrouter.com/',
+  },
+  {
+    id: 3,
+    title: 'Vite',
+    imgSrc: viteImg,
+    link: 'https://vitejs.dev/',
+  },
+  {
+    id: 4,
+    title: 'React Bootstrap',
+    imgSrc: bootstrapImg,
+    link: 'https://react-bootstrap.github.io/',
+  },
+  {
+    id: 5,
+    title: 'React Hook Form',
+    imgSrc: formImg,
+    link: 'https://react-hook-form.com/',
+  },
+  {
+    id: 6,
+    title: 'React Beautiful DnD',
+    imgSrc: dndImg,
+    link: 'https://github.com/atlassian/react-beautiful-dnd',
+  },
+];
+
+const developersList = [
+  {
+    id: 0,
+    name: 'Stanislav Kravchuk',
+    imgSrc: stasImg,
+    descr: 'Created adaptive header & burger menu, welcome page, loading spinner',
+    link: 'https://github.com/kravchuk-st',
+  },
+  {
+    id: 1,
+    name: 'Philipp Khromov',
+    imgSrc: fillImg,
+    descr:
+      'Implemented API services, routing, sign-in & sign-up, edit profile logic, configured project, managed development process',
+    link: 'https://github.com/foxtrotkilomike',
+  },
+  {
+    id: 2,
+    name: 'Alina Khasanova',
+    imgSrc: alinaImg,
+    descr:
+      'Designed and implemented boards page, board page functionality (drag & drop), custom modal windows',
+    link: 'https://github.com/malinka775',
+  },
+];
+
 export {
   buttonsText,
   confirmationModalButtonsText,
@@ -303,4 +384,6 @@ export {
   AppData,
   toastMessages,
   confirmationModalText,
+  technologiesList,
+  developersList,
 };

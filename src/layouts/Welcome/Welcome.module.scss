@@ -4,6 +4,105 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  // justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-top: 70px;
+  margin-bottom: 0;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-black;
+}
+
+.subtitle {
+  margin-top: 50px;
+  margin-bottom: 0;
+  font-weight: $font-weight-semi-bold;
+  line-height: 1.8;
+}
+
+.text {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-weight: $font-weight-semi-bold;
+  font-style: italic;
+}
+
+.technologiesList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  column-gap: 80px;
+  row-gap: 50px;
+  list-style: none;
+}
+
+.technologyLink {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  font-size: $font-size-lg;
+  color: $color-text;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.teamTitle {
+  margin-top: 80px;
+  margin-bottom: 0;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-black;
+}
+
+.developersList {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: $gap-lg;
+}
+
+.developerItem {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-xl;
+
+  &:nth-child(2) .developerImg {
+    object-position: 50% -25px;
+  }
+}
+
+.developerLink {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+  border: 1px solid $color-main-light;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: border-color $transition-duration-md;
+
+  &:hover {
+    border-color: $color-main;
+  }
+
+  .developerImg {
+    width: 101%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.developerText {
+  font-weight: $font-weight-semi-bold;
+  text-align: left;
 }

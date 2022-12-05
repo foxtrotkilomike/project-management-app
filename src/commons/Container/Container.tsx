@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import classes from './Container.module.scss';
 
 export const Container = (props: ContainerProps): JSX.Element => {
-  const { centered, main, growing, minHeight, children } = props;
+  const { centered, main, growing, minHeight, textAlignCenter, children } = props;
   const className = classNames({
     [classes.centered]: centered,
     [classes.main]: main,
     [classes.growing]: growing,
+    [classes.textCenter]: textAlignCenter,
   });
 
   const style = minHeight ? { minHeight: `${minHeight}px` } : {};
@@ -25,5 +26,6 @@ type ContainerProps = {
   main?: boolean;
   growing?: boolean;
   minHeight?: number;
+  textAlignCenter?: boolean;
   children: React.ReactNode;
 };
