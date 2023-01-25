@@ -3,7 +3,7 @@ import { getAppData } from '../helpers/handleAppData';
 import { AppData } from '../config/data';
 
 const AxiosConfig = {
-  baseURL: 'https://pm-app-backend.onrender.com',
+  baseURL: 'https://pm-app-backend-production.up.railway.app',
   timeout: 60000,
 };
 
