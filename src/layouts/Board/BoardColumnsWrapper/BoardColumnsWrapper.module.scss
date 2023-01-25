@@ -1,0 +1,17 @@
+@import '../../../styles/constants.scss';
+@import "../../../styles/mixins";
+
+.columnsWrapper {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  height: 100%;
+  padding-bottom: $padding-sm;
+  &__add {
+    background-color: $color-bg-light;
+    background-color: transparent;
+    @include plus-button($add-btn-size, $color-border-main-light, $border-width-md, $color-hover: $color-border-active);
+  }
+}

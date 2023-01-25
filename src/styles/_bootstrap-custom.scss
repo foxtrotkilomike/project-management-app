@@ -1,0 +1,82 @@
+// Bootstrap custom component variants
+@import "constants";
+
+.btn-outline-main {
+  @include button-outline-variant($color-border-main, $color-border-main-light, transparent, $color-border-main-light);
+  border-width: $border-width-sm;
+}
+
+.btn-primary {
+  @include button-variant($color-main, $color-main, $color-text-light, $color-main-hover, $color-main-hover, $color-text-light);
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-header-primary {
+  @include button-variant($color-main, $color-main, $color-text-light, $color-main-hover, $color-main-hover, $color-text-light);
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-header-secondary {
+  font-weight: $font-weight-semi-bold;
+}
+
+.btn-header-secondary:hover {
+  color: $color-main;
+}
+
+@media (max-width: $tablet) {
+  .btn-header-primary,
+  .btn-header-secondary {
+    @include button-variant(transparent, transparent, $color-text);
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-xxl;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
+}
+
+.btn-nav {
+  @include button-variant(transparent, transparent, $color-text, $color-main-light, $color-main-light, $color-text);
+}
+
+.btn-danger {
+  @include button-variant($color-danger, $color-danger, $color-text-light, $color-danger-hover, $color-danger-hover, $color-text-light, $color-danger, $color-danger);
+  font-weight: $font-weight-semi-bold;
+  text-transform: uppercase;
+}
+.btn-success {
+  @include button-variant($color-success, $color-success, $color-text-light, $color-success-hover, $color-success-hover, $color-text-light, $color-success, $color-success);
+  font-weight: $font-weight-semi-bold;
+  text-transform: uppercase;
+}
+
+.dropdown-toggle::after {
+  @include caret-down;
+}
+
+.dropdown-item.active {
+  font-weight: $font-weight-bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  --bs-link-color: #ec7b3c;
+  --bs-link-hover-color: #f09a6a;
+}
+
+.modal-backdrop {
+  --bs-backdrop-zindex: 900;
+}
+
+.modal {
+  --bs-modal-zindex: 950;
+}
+
+.card {
+  position: static;
+}

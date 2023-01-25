@@ -1,0 +1,18 @@
+@import "../../styles/constants";
+
+.toggleButton {
+  margin-left: $margin-xl;
+  padding-right: $padding-md !important;
+  padding-left: $padding-md !important;
+
+  &:hover .toggleButtonIcon {
+    filter: $filter-hover-gray;
+  }
+}
+
+.toggleButtonIcon {
+  position: relative;
+  top: -2px;
+  width: 20px;
+  transition: filter $transition-duration-sm ease-in-out;
+}

@@ -1,0 +1,32 @@
+enum ResponseStatus {
+  'UNKNOWN_ERROR' = 0,
+  'BAD_REQUEST' = 400,
+  'NOT_AUTHORIZED' = 401,
+  'USER_ALREADY_EXIST' = 409,
+  'INTERNAL_SERVER_ERROR' = 500,
+  'UNHANDLED_REJECTION' = 503,
+}
+
+enum BreakPoints {
+  'MOBILE_S' = 320,
+  'MOBILE_M' = 425,
+  'TABLET' = 768,
+  'DESKTOP' = 1280,
+}
+
+const MIN_PASSWORD_LENGTH = 8;
+const MILLISECONDS_IN_SECOND = 1000;
+const BACK_ONE_PAGE = -1;
+
+const PUBLIC_HEADER_COLOR = '#fce9df';
+const MAX_HEADER_OPACITY = 0.3;
+
+export {
+  ResponseStatus,
+  BreakPoints,
+  MIN_PASSWORD_LENGTH,
+  MILLISECONDS_IN_SECOND,
+  BACK_ONE_PAGE,
+  PUBLIC_HEADER_COLOR,
+  MAX_HEADER_OPACITY,
+};

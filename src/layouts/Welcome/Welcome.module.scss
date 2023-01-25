@@ -1,0 +1,151 @@
+@import "../../styles/constants";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  align-items: center;
+}
+
+.title {
+  margin-top: 70px;
+  margin-bottom: 0;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-black;
+}
+
+.subtitle {
+  margin-top: 50px;
+  margin-bottom: 0;
+  font-weight: $font-weight-semi-bold;
+  line-height: 1.8;
+}
+
+.text {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-weight: $font-weight-semi-bold;
+  font-style: italic;
+}
+
+.technologiesList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 80px;
+  row-gap: 50px;
+  list-style: none;
+}
+
+.technologyLink {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  font-size: $font-size-lg;
+  color: $color-text;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.teamTitle {
+  margin-top: 80px;
+  margin-bottom: 0;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-black;
+}
+
+.developersList {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: $gap-lg;
+}
+
+.developerItem {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-sm;
+
+  &:nth-child(2) .developerImg {
+    object-position: 50% -25px;
+  }
+}
+
+.developerLink {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+  border: 1px solid $color-main-light;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: border-color $transition-duration-md;
+
+  &:hover {
+    border-color: $color-main;
+  }
+
+  .developerImg {
+    width: 101%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.developerTitle {
+  font-weight: $font-weight-semi-bold;
+}
+
+.developerText {
+  font-weight: $font-weight-semi-bold;
+  text-align: justify;
+}
+
+@media (max-width: $tablet) {
+  .title {
+    margin-top: 40px;
+    font-size: $font-size-xxl;
+  }
+
+  .subtitle {
+    margin-top: 30px;
+    font-size: $font-size-lg;
+  }
+
+  .text {
+    margin-top: 50px;
+    font-weight: $font-weight-bold;
+  }
+
+  .technologyLink {
+    font-size: $font-size-md;
+  
+    img  {
+      width: auto;
+      height: 45px;
+    }
+  }
+
+  .teamTitle {
+    font-size: $font-size-xxl;
+  }
+
+  .developersList {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: $mobile-m) {
+  .technologiesList {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,151 @@
+@import "../../styles/constants";
+@import "../../styles/templates";
+
+.root {
+  background-color: $color-main-light;
+}
+
+.headerSticky {
+  position: fixed;
+  top: 0;
+	width: 100%;
+
+	& + * {
+		padding-top: 78px !important;
+	}
+}
+
+.headerContent {
+  @extend %flex-space-between;
+  align-items: center;
+  padding: $padding-lg;
+}
+
+.burger {
+	margin-right: 25px;
+	padding: 0;
+	width: 45px;
+	height: 26px;
+	position: relative;
+	z-index: 20;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.burger__line {
+	width: 100%;
+	height: 3px;
+	display: block;
+	position: absolute;
+	left: 23px;
+	background-color: $color-main;
+}
+
+.burger .burger__line:nth-child(1) {
+	top: 1px;
+	transform: translateX(-50%) translateY(0);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s, transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87);
+}
+
+.burger .burger__line:nth-child(2) {
+	top: 13px;
+	opacity: 1;
+	transform: translateX(-50%);
+}
+
+.burger .burger__line:nth-child(3) {
+	top: 25px;
+	transform: translateX(-50%) translateY(0);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s,transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87);
+}
+
+.burger_open .burger__line:nth-child(1) {
+	top: 50%;          
+	transform: translateX(-50%) translateY(0) rotate(45deg);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87), transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s;
+}
+
+.burger_open .burger__line:nth-child(2) {
+	opacity: 0;
+}
+
+.burger_open .burger__line:nth-child(3) {
+	top: 50%;
+	transform: translateX(-50%) translateY(0) rotate(-45deg);
+	transition: top .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) ,transform .3s cubic-bezier(0.21, 0.83, 0.26, 0.87) .3s;
+}
+
+.burger:hover .burger__line {
+	background: $color-main-hover;
+}
+
+.buttonsContainer {
+	margin-left: auto;
+  display: flex;
+  gap: $gap-sm;
+}
+
+.navBackground {
+	display: none;
+}
+
+@media (min-width: 769px) {
+	.burger {
+		display: none;
+	}
+
+	.signOutBtn {
+		padding-right: 35px;
+		background-image: url("../../assets/svg/sign-out.svg");
+		background-size: 20px;
+		background-position: center right 5px;
+		background-repeat: no-repeat;
+		will-change: background-image;
+		transition: color $transition-duration-sm, background-image $transition-duration-sm;
+	}
+
+	.signOutBtn:hover {
+		background-image: url("../../assets/svg/sign-out-hover.svg");
+	}
+}
+
+@media (max-width: 768px) {
+	.burger_open + .navBackground {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		width: 100%;
+		height: 100vh;
+		background-color: $color-spinner-light;
+	}
+
+	.buttonsContainer {
+		padding: 0;
+    width: 80%;
+    height: 101vh;
+    position: fixed;
+    z-index: 15;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    background: $color-bg-light;
+		border-right: 1px solid $color-overlay;
+    transition: left $transition-duration-md, opacity $transition-duration-md;
+
+		&_active {
+			left: 0;
+    	opacity: 1;
+		}
+	}
+
+	.signOutBtn {
+		margin-top: 2rem;
+	}
+}
