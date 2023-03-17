@@ -34,6 +34,7 @@ _Project Management App_ is an application which helps a team of developers to t
   - "Create board", "Edit Profile", "Main page", and "Sign out" for logged-in users
 - custom 404 page
 - custom scrollbars
+- user-friendly toast notifications
 - adaptive & responsive layout, burger menu
 
 ## Build & start the app
